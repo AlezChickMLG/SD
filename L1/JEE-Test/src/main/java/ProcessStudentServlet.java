@@ -47,5 +47,4 @@ public class ProcessStudentServlet extends HttpServlet {
         request.setAttribute("anNastere", anNastere);
         request.getRequestDispatcher("./info-student.jsp").forward(request, response);
     }
-
 }
