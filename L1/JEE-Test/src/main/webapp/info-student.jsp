@@ -30,17 +30,24 @@
 			%></li>
 		</ul>
 
-		<h3>Formular student</h3>
-        		Introduceti datele despre student:
-        		<form action="./process-student" method="post">
-        			Nume: <input type="text" name="nume" />
+				<h3>Formular student</h3>
+        		Actualizare student:
+        		<form action="./read-student" method="post">
+        			Nume vechi: <input type="text" name="numeVechi" />
         			<br />
-        			Prenume: <input type="text" name="prenume" />
+        			Prenume vechi: <input type="text" name="prenumeVechi" />
         			<br />
-        			Varsta: <input type="number" name="varsta" />
-        			<br />
-        			<br />
-        			<button type="submit" name="submit">Trimite</button>
+                    <br />
+                    <br />
+
+        			Nume nou: <input type="text" name="numeNou" />
+                    <br />
+                    Prenume nou: <input type="text" name="prenumeNou" />
+                    <br />
+                    Varsta noua: <input type="number" name="varstaNoua" />
+                    <br />
+                    <br />
+                    <button type="submit" name="submit">Trimite</button>
         		</form>
 	</body>
 </html>

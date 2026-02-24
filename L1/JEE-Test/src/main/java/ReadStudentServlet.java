@@ -10,13 +10,23 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.Year;
 
 public class ReadStudentServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // deserializare student din fisierul XML de pe disc
-        Path studentPath = AppConfig.getStudentsPath().resolve(Paths.get("Popescu Ion/student.xml"));
+        String nume = request.getParameter("nume");
+        String prenume = request.getParameter("prenume");
+
+        if (nume == null || prenume == null) {
+            response.sendError(400, "Parametri lipsa");
+            return;
+        }
+
+        String path = nume + '_' + prenume;
+
+        Path studentPath = AppConfig.getStudentsPath().resolve(Paths.get(path + "/student.xml"));
         File file = studentPath.toFile();
 
         if (!file.exists()) {
@@ -35,13 +45,14 @@ public class ReadStudentServlet extends HttpServlet {
         request.getRequestDispatcher("./info-student.jsp").forward(request, response);
     }
 
-    @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // se citesc parametrii din cererea de tip POST
-        String nume = request.getParameter("nume");
-        String prenume = request.getParameter("prenume");
-        int varsta = Integer.parseInt(request.getParameter("varsta"));
+        String numeVechi = request.getParameter("numeVechi");
+        String prenumeVechi = request.getParameter("prenumeVechi");
+        String numeNou = request.getParameter("numeNou");
+        String prenumeNou = request.getParameter("prenumeNou");
+        int varsta = Integer.parseInt(request.getParameter("varstaNoua"));
 
         /*
         procesarea datelor - calcularea anului nasterii
@@ -54,20 +65,32 @@ public class ReadStudentServlet extends HttpServlet {
 
         // creare bean si populare cu date
         StudentBean bean = new StudentBean();
-        bean.setNume(nume);
-        bean.setPrenume(prenume);
+        bean.setNume(numeNou);
+        bean.setPrenume(prenumeNou);
         bean.setVarsta(varsta);
 
-        // serializare bean sub forma de string XML
-        Path studentPath = AppConfig.getStudentsPath().resolve(Paths.get("Popescu Ion/student.xml"));
+        //Redenumire xml vechi
+        String oldPath = numeVechi + '_' + prenumeVechi;
+        String newPath = numeNou + '_' + prenumeNou;
+
+        Path oldStudentPath = AppConfig.getStudentsPath().resolve(Paths.get(oldPath + "/student.xml"));
+        Path studentPath = AppConfig.getStudentsPath().resolve(Paths.get(newPath + "/student.xml"));
+
+        if (!Files.exists(oldStudentPath)) {
+            response.sendError(404, "Studentul" + prenumeVechi + " " + numeVechi + "nu exista");
+            return;
+        }
+
         Files.createDirectories(studentPath.getParent());
+        Files.move(oldStudentPath, studentPath, StandardCopyOption.REPLACE_EXISTING);
         mapper.writeValue(studentPath.toFile(), bean);
 
         // se trimit datele primite si anul nasterii catre o alta pagina JSP pentru afisare
-        request.setAttribute("nume", nume);
-        request.setAttribute("prenume", prenume);
+        request.setAttribute("nume", numeNou);
+        request.setAttribute("prenume", prenumeNou);
         request.setAttribute("varsta", varsta);
         request.setAttribute("anNastere", anNastere);
-        request.getRequestDispatcher("./info-student.jsp").forward(request, response);
+
+        request.getRequestDispatcher("info-student.jsp").forward(request, response);
     }
 }

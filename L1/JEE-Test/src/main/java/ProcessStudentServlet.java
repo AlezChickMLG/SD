@@ -35,8 +35,10 @@ public class ProcessStudentServlet extends HttpServlet {
         bean.setPrenume(prenume);
         bean.setVarsta(varsta);
 
+        String path = nume + '_' + prenume;
+
         // serializare bean sub forma de string XML
-        Path studentPath = AppConfig.getStudentsPath().resolve(Paths.get("Popescu Ion/student.xml"));
+        Path studentPath = AppConfig.getStudentsPath().resolve(Paths.get(path + "/student.xml"));
         Files.createDirectories(studentPath.getParent());
         mapper.writeValue(studentPath.toFile(), bean);
 
