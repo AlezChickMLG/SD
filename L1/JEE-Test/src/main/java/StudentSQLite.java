@@ -20,7 +20,8 @@ public class StudentSQLite {
                     "ID INTEGER PRIMARY KEY AUTOINCREMENT,"+
                     "NUME TEXT," +
                     "PRENUME TEXT," +
-                    "VARSTA INTEGER)");
+                    "VARSTA INTEGER," +
+                    "MEDIE REAL)");
 
             System.out.println("Tabel creat");
         }
@@ -30,7 +31,7 @@ public class StudentSQLite {
         String url = "jdbc:sqlite:students.db";
 
         String checkSql = "SELECT * FROM STUDENTS WHERE NUME = ? AND PRENUME = ?";
-        String insertSql = "INSERT INTO STUDENTS (NUME, PRENUME, VARSTA) VALUES (?, ?, ?)";
+        String insertSql = "INSERT INTO STUDENTS (NUME, PRENUME, VARSTA, MEDIE) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DriverManager.getConnection(url);
              PreparedStatement checkStmt = conn.prepareStatement(checkSql)) {
@@ -47,6 +48,7 @@ public class StudentSQLite {
                     insertStmt.setString(1, student.getNume());
                     insertStmt.setString(2, student.getPrenume());
                     insertStmt.setInt(3, student.getVarsta());
+                    insertStmt.setDouble(4, student.getMedie());
 
                     insertStmt.executeUpdate();
                     return true;
@@ -92,12 +94,42 @@ public class StudentSQLite {
                 String nume = rs.getString("NUME");
                 String prenume = rs.getString("PRENUME");
                 int varsta = rs.getInt("VARSTA");
+                double medie = rs.getDouble("MEDIE");
 
                 System.out.println("[APP] ID: " + id);
                 System.out.println("[APP] Nume: " + nume);
                 System.out.println("[APP] Prenume: " + prenume);
                 System.out.println("[APP] Varsta: " + varsta);
+                System.out.println("[APP] Medie: " + medie);
             }
+        }
+    }
+
+    public static StudentBean get(String nume, String prenume) throws Exception{
+        String url = "jdbc:sqlite:students.db";
+        String sql = "SELECT * FROM STUDENTS WHERE NUME = ? AND PRENUME = ?";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             stmt.setString(1, nume);
+             stmt.setString(2, prenume);
+
+             ResultSet rs = stmt.executeQuery();
+
+             if (rs.next()) {
+                 int varsta = rs.getInt("varsta");
+                 double medie = rs.getDouble("medie");
+
+                 StudentBean student = new StudentBean();
+                 student.setMedie(medie);
+                 student.setVarsta(varsta);
+                 student.setNume(nume);
+                 student.setPrenume(prenume);
+
+                 return student;
+             }
+
+             return null;
         }
     }
 }

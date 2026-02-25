@@ -11,6 +11,7 @@
 		<jsp:setProperty name="studentBean" property="nume" value='<%= request.getAttribute("nume") %>'/>
 		<jsp:setProperty name="studentBean" property="prenume" value='<%= request.getAttribute("prenume") %>'/>
 		<jsp:setProperty name="studentBean" property="varsta" value='<%= request.getAttribute("varsta") %>'/>
+        <jsp:setProperty name="studentBean" property="medie" value='<%= request.getAttribute("medie") %>'/>
 
 		<!-- folosirea bean-ului pentru afisarea informatiilor -->
 		<p>Urmatoarele informatii au fost introduse:</p>
@@ -18,6 +19,7 @@
 			<li>Nume: <%=request.getAttribute("nume")%></li>
 			<li>Prenume: <jsp:getProperty name="studentBean" property="prenume" /></li>
 			<li>Varsta: <jsp:getProperty name="studentBean" property="varsta" /></li>
+            <li>Medie: <jsp:getProperty name="studentBean" property="medie" /></li>
 
 			<!-- anul nasterii nu face parte din bean, il afisam separat (daca exista) -->
 			<li>Anul nasterii: <%
@@ -45,6 +47,8 @@
                     Prenume nou: <input type="text" name="prenumeNou" />
                     <br />
                     Varsta noua: <input type="number" name="varstaNoua" />
+                    <br />
+                    Medie noua: <input type="number" name="medieNoua" />
                     <br />
                     <br />
                     <button type="submit" name="submit">Trimite</button>

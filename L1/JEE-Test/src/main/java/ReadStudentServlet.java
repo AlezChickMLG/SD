@@ -24,22 +24,31 @@ public class ReadStudentServlet extends HttpServlet {
             return;
         }
 
-        String path = nume + '_' + prenume;
-
-        Path studentPath = AppConfig.getStudentsPath().resolve(Paths.get(path + "/student.xml"));
-        File file = studentPath.toFile();
-
-        if (!file.exists()) {
-            response.sendError(404, "Nu a fost gasit niciun student serializat pe disc!");
-            return;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            System.out.println("SQLite driver loaded");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
 
-        XmlMapper xmlMapper = new XmlMapper();
-        StudentBean bean = xmlMapper.readValue(file, StudentBean.class);
+        StudentBean bean;
+
+        try {
+            StudentSQLite.createTable();
+            bean = StudentSQLite.get(nume, prenume);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        if (bean == null) {
+            response.sendError(404, "Nu exista studentul respectiv");
+            return;
+        }
 
         request.setAttribute("nume", bean.getNume());
         request.setAttribute("prenume", bean.getPrenume());
         request.setAttribute("varsta", bean.getVarsta());
+        request.setAttribute("medie", bean.getMedie());
 
         // redirectionare date catre pagina de afisare a informatiilor studentului
         request.getRequestDispatcher("./info-student.jsp").forward(request, response);
@@ -54,6 +63,7 @@ public class ReadStudentServlet extends HttpServlet {
         String numeNou = request.getParameter("numeNou");
         String prenumeNou = request.getParameter("prenumeNou");
         int varsta = Integer.parseInt(request.getParameter("varstaNoua"));
+        double medie = Double.parseDouble(request.getParameter("medieNoua"));
 
         int anCurent = Year.now().getValue();
         int anNastere = anCurent - varsta;
@@ -63,6 +73,7 @@ public class ReadStudentServlet extends HttpServlet {
         newBean.setNume(numeNou);
         newBean.setPrenume(prenumeNou);
         newBean.setVarsta(varsta);
+        newBean.setMedie(medie);
 
         StudentBean oldBean = new StudentBean();
         oldBean.setNume(numeVechi);
@@ -87,6 +98,7 @@ public class ReadStudentServlet extends HttpServlet {
         request.setAttribute("nume", numeNou);
         request.setAttribute("prenume", prenumeNou);
         request.setAttribute("varsta", varsta);
+        request.setAttribute("medie", medie);
         request.setAttribute("anNastere", anNastere);
 
         request.getRequestDispatcher("info-student.jsp").forward(request, response);

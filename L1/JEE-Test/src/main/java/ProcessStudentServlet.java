@@ -19,6 +19,7 @@ public class ProcessStudentServlet extends HttpServlet {
         String nume = request.getParameter("nume");
         String prenume = request.getParameter("prenume");
         int varsta = Integer.parseInt(request.getParameter("varsta"));
+        double medie = Double.parseDouble(request.getParameter("medie"));
 
         int anCurent = Year.now().getValue();
         int anNastere = anCurent - varsta;
@@ -28,6 +29,7 @@ public class ProcessStudentServlet extends HttpServlet {
         bean.setNume(nume);
         bean.setPrenume(prenume);
         bean.setVarsta(varsta);
+        bean.setMedie(medie);
 
         try {
             Class.forName("org.sqlite.JDBC");
@@ -48,6 +50,7 @@ public class ProcessStudentServlet extends HttpServlet {
         request.setAttribute("nume", nume);
         request.setAttribute("prenume", prenume);
         request.setAttribute("varsta", varsta);
+        request.setAttribute("medie", medie);
         request.setAttribute("anNastere", anNastere);
         request.getRequestDispatcher("./info-student.jsp").forward(request, response);
     }

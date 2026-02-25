@@ -4,6 +4,7 @@ public class StudentBean implements java.io.Serializable {
     private String nume = null;
     private String prenume = null;
     private int varsta = 0;
+    private double medie = 0;
 
     public StudentBean() {
     }
@@ -30,5 +31,13 @@ public class StudentBean implements java.io.Serializable {
 
     public void setVarsta(int varsta) {
         this.varsta = varsta;
+    }
+
+    public double getMedie() {
+        return medie;
+    }
+
+    public void setMedie(double medie) {
+        this.medie = medie;
     }
 }
