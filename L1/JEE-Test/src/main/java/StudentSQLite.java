@@ -57,6 +57,29 @@ public class StudentSQLite {
         }
     }
 
+    public static boolean remove(StudentBean student) throws SQLException {
+        String url = "jdbc:sqlite:students.db";
+        String removeSql = "DELETE FROM STUDENTS WHERE NUME = ? AND PRENUME = ?";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement stmt = conn.prepareStatement(removeSql)) {
+
+            stmt.setString(1, student.getNume());
+            stmt.setString(2, student.getPrenume());
+
+            int affected = stmt.executeUpdate();
+            if (affected != 0) {
+                System.out.println("Studentul " + student.getNume() + " " + student.getPrenume() + " a fost sters");
+            }
+
+            else {
+                System.out.println("Nu s-a putat sterge studentul " + student.getNume() + " " + student.getPrenume());
+            }
+
+            return affected > 0;
+        }
+    }
+
     public static void showAll() throws SQLException {
         String url = "jdbc:sqlite:students.db";
 
