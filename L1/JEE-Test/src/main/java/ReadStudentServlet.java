@@ -45,6 +45,54 @@ public class ReadStudentServlet extends HttpServlet {
         request.getRequestDispatcher("./info-student.jsp").forward(request, response);
     }
 
+    //doPostXML
+    /*public void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // se citesc parametrii din cererea de tip POST
+        String numeVechi = request.getParameter("numeVechi");
+        String prenumeVechi = request.getParameter("prenumeVechi");
+        String numeNou = request.getParameter("numeNou");
+        String prenumeNou = request.getParameter("prenumeNou");
+        int varsta = Integer.parseInt(request.getParameter("varstaNoua"));
+
+        int anCurent = Year.now().getValue();
+        int anNastere = anCurent - varsta;
+
+        // initializare serializator Jackson
+        XmlMapper mapper = new XmlMapper();
+
+        // creare bean si populare cu date
+        StudentBean bean = new StudentBean();
+        bean.setNume(numeNou);
+        bean.setPrenume(prenumeNou);
+        bean.setVarsta(varsta);
+
+        //Redenumire xml vechi
+        String oldPath = numeVechi + '_' + prenumeVechi;
+        String newPath = numeNou + '_' + prenumeNou;
+
+        Path oldStudentPath = AppConfig.getStudentsPath().resolve(Paths.get(oldPath + "/student.xml"));
+        Path studentPath = AppConfig.getStudentsPath().resolve(Paths.get(newPath + "/student.xml"));
+
+        if (!Files.exists(oldStudentPath)) {
+            response.sendError(404, "Studentul" + prenumeVechi + " " + numeVechi + "nu exista");
+            return;
+        }
+
+        Files.createDirectories(studentPath.getParent());
+        Files.move(oldStudentPath, studentPath, StandardCopyOption.REPLACE_EXISTING);
+        mapper.writeValue(studentPath.toFile(), bean);
+
+        // se trimit datele primite si anul nasterii catre o alta pagina JSP pentru afisare
+        request.setAttribute("nume", numeNou);
+        request.setAttribute("prenume", prenumeNou);
+        request.setAttribute("varsta", varsta);
+        request.setAttribute("anNastere", anNastere);
+
+        request.getRequestDispatcher("info-student.jsp").forward(request, response);
+    }*/
+
+    @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // se citesc parametrii din cererea de tip POST
@@ -54,9 +102,6 @@ public class ReadStudentServlet extends HttpServlet {
         String prenumeNou = request.getParameter("prenumeNou");
         int varsta = Integer.parseInt(request.getParameter("varstaNoua"));
 
-        /*
-        procesarea datelor - calcularea anului nasterii
-         */
         int anCurent = Year.now().getValue();
         int anNastere = anCurent - varsta;
 
