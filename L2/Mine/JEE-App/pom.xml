@@ -19,6 +19,32 @@
                <groupId>org.apache.maven.plugins</groupId>
                <artifactId>maven-site-plugin</artifactId>
             </plugin>
+            <plugin>
+               <groupId>org.codehaus.cargo</groupId>
+               <artifactId>cargo-maven2-plugin</artifactId>
+               <version>1.8.5</version>
+               <configuration>
+                  <container>
+                     <containerId>glassfish5x</containerId>
+                     <!--              <type>installed</type>-->
+                     <!-- Path to directory where glassfish is installed -->
+                     <!--              <home>/home/student/opt/glassfish5</home>-->
+                  </container>
+                  <configuration>
+                     <!--              <type>existing</type>-->
+                     <!-- Path to domains directory -->
+                     <!--              <home>/home/student/opt/glassfish5/glassfish/domains</home>-->
+                     <properties>
+                        <!-- Domain name where application will be deployed. -->
+                        <cargo.glassfish.domain.name>domain1</cargo.glassfish.domain.name>
+                        <!-- Glassfish user to authenticate -->
+                        <cargo.remote.username>admin</cargo.remote.username>
+                        <!-- Glassfish password to authenticate -->
+                        <cargo.remote.password></cargo.remote.password>
+                     </properties>
+                  </configuration>
+               </configuration>
+            </plugin>
          </plugins>
       </pluginManagement>
    </build>
