@@ -96,7 +96,7 @@ public class ReadStudentServlet extends HttpServlet {
 
         // se trimit datele primite si anul nasterii catre o alta pagina JSP pentru afisare
         request.setAttribute("nume", numeNou);
-        request.setAttribute("prenume", prenumeNou);
+        request.setAttribute("prenume" , prenumeNou);
         request.setAttribute("varsta", varsta);
         request.setAttribute("medie", medie);
         request.setAttribute("anNastere", anNastere);
