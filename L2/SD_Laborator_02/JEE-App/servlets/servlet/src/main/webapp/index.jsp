@@ -28,6 +28,10 @@
 		<h3>Baza de date cu studenti</h3>
 		<a href="./formular.jsp">Adaugare student</a>
 		<br />
+		<a href="./formularStergere.jsp">Stergere student</a>
+     	<br />
+     	<a href="./formularUpdate.jsp">Actualizare student</a>
+     	<br />
 		<a href="./fetch-student-list">Afisare lista studenti</a>
 	</body>
 </html>

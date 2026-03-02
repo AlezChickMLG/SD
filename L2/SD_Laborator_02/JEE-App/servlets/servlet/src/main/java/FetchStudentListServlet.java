@@ -15,7 +15,7 @@ public class FetchStudentListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // pregatire EntityManager
-        EntityManagerFactory factory =   Persistence.createEntityManagerFactory("bazaDeDateSQLite");
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("bazaDeDateSQLite");
         EntityManager em = factory.createEntityManager();
 
         StringBuilder responseText = new StringBuilder();
