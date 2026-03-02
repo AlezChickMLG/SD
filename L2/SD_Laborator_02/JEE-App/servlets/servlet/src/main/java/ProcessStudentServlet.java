@@ -16,6 +16,7 @@ public class ProcessStudentServlet extends HttpServlet {
         // se citesc parametrii din cererea de tip POST
         String nume = request.getParameter("nume");
         String prenume = request.getParameter("prenume");
+        float medie = Float.parseFloat(request.getParameter("medie"));
         int varsta = Integer.parseInt(request.getParameter("varsta"));
 
         // pregatire EntityManager
@@ -27,6 +28,7 @@ public class ProcessStudentServlet extends HttpServlet {
         student.setNume(nume);
         student.setPrenume(prenume);
         student.setVarsta(varsta);
+        student.setMedie(medie);
 
         // adaugare entitate in baza de date (operatiune de persistenta)
         // se face intr-o tranzactie

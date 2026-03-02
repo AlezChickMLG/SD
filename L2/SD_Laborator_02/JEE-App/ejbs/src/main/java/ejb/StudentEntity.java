@@ -12,6 +12,7 @@ public class StudentEntity {
     private String nume;
     private String prenume;
     private int varsta;
+    private float medie;
 
     public StudentEntity() {
     }
@@ -46,5 +47,13 @@ public class StudentEntity {
 
     public void setVarsta(int varsta) {
         this.varsta = varsta;
+    }
+
+    public void setMedie(float medie) {
+        this.medie = medie;
+    }
+
+    public float getMedie() {
+        return medie;
     }
 }

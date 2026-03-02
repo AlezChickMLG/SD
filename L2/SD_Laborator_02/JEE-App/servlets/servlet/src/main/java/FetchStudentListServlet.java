@@ -20,7 +20,7 @@ public class FetchStudentListServlet extends HttpServlet {
 
         StringBuilder responseText = new StringBuilder();
         responseText.append("<h2>Lista studenti</h2>");
-        responseText.append("<table border='1'><thead><tr><th>ID</th><th>Nume</th><th>Prenume</th><th>Varsta</th></thead>");
+        responseText.append("<table border='1'><thead><tr><th>ID</th><th>Nume</th><th>Prenume</th><th>Varsta</th><th>Medie</th></thead>");
         responseText.append("<tbody>");
 
         // preluare date studenti din baza de date
@@ -30,7 +30,8 @@ public class FetchStudentListServlet extends HttpServlet {
             // se creeaza cate un rand de tabel HTML pentru fiecare student gasit
             responseText.append("<tr><td>" + student.getId() + "</td><td>" +
                     student.getNume() + "</td><td>" + student.getPrenume() +
-                    "</td><td>" + student.getVarsta() + "</td></tr>");
+                    "</td><td>" + student.getVarsta() + "</td><td>" + student.getMedie() +
+                    "</td></tr>");
         }
 
         responseText.append("</tbody></table><br /><br /><a href='./'>Inapoi la meniul principal</a>");

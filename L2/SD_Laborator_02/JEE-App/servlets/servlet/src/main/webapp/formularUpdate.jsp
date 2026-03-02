@@ -18,6 +18,8 @@
 			Prenume nou: <input type="text" name="prenumeNou" />
 			<br />
 			Varsta: <input type="number" name="varsta" />
+			<br />
+            Medie: <input type="number" name="medie" />
 			<button type="submit" name="submit">Actualizare</button>
 		</form>
 	</body>
