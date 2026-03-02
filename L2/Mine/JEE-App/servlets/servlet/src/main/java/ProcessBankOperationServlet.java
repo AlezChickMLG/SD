@@ -32,6 +32,7 @@ public class ProcessBankOperationServlet extends HttpServlet {
                 // dupa preluarea bean-ului prin JNDI, obiectul se stocheaza in sesiune pentru a fi refolosit ulterior
                 // cererile urmatoare vor utiliza obiectul remote stocat in sesiune
                 request.getSession().setAttribute("bankAccountBean", bankAccount);
+                System.out.println("S-a gasit instanta pentru bean");
             } catch (NamingException e) {
                 e.printStackTrace();
                 return;

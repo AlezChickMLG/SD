@@ -6,11 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="6bd2d3f9-8697-4f95-9ff0-6ccba41503e1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ejbs/src/main/resources/META-INF/ejb-jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ejbs/src/main/resources/META-INF/ejb-jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servlets/servlet/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/servlets/servlet/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejbs/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ejbs/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servlets/servlet/src/main/java/ProcessBankOperationServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/servlets/servlet/src/main/java/ProcessBankOperationServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/servlets/servlet/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/servlets/servlet/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/servlets/servlet/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/servlets/servlet/src/main/webapp/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JEE-Client/.idea/libraries/gf_client.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JEE-Client/.idea/libraries/gf_client.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

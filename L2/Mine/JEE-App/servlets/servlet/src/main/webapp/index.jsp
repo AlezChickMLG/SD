@@ -1,4 +1,4 @@
-%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <html>
 <head>
 <title>Meniu principal</title>
@@ -25,5 +25,10 @@ Introduceti suma: <input type="number" name="amount"
 <button type="submit">Efectuare</button>
 </fieldset>
 </form>
+<hr />
+<h3>Baza de date cu studenti</h3>
+<a href="./formular.jsp">Adaugare student</a>
+<br />
+<a href="./fetch-student-list">Afisare lista studenti</a>
 </body>
 </html>
