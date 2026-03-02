@@ -3,4 +3,12 @@
         "http://java.sun.com/dtd/web-app_2_3.dtd" >
 <web-app>
     <display-name>Web Component App</display-name>
+    <servlet>
+        <servlet-name>ProcessBankOperation</servlet-name>
+        <servlet-class>ProcessBankOperationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProcessBankOperation</servlet-name>
+        <url-pattern>/process-bank-operation</url-pattern>
+    </servlet-mapping>
 </web-app>

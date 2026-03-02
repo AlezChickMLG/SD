@@ -5,40 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6bd2d3f9-8697-4f95-9ff0-6ccba41503e1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ear/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ejbs/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ejbs/src/main/resources/META-INF/ejb-jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/primary-source/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/logging/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/servlets/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/servlets/servlet/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/servlets/servlet/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/servlets/servlet/src/main/webapp/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JEE/JEE-App/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JEE/JEE-App/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JEE/JEE-App/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JEE/JEE-App/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JEE/JEE-App/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JEE/JEE-App/ear/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JEE/JEE-App/ejbs/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JEE/JEE-App/ejbs/src/main/java/ejb/StatelessSessionBeanImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JEE/JEE-App/ejbs/src/main/java/interfaces/StatelessSessionBeanRemote.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JEE/JEE-App/ejbs/src/main/resources/META-INF/ejb-jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JEE/JEE-App/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JEE/JEE-App/primary-source/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JEE/JEE-App/projects/logging/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JEE/JEE-App/projects/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JEE/JEE-App/servlets/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JEE/JEE-App/servlets/servlet/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JEE/JEE-App/servlets/servlet/src/main/webapp/WEB-INF/web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JEE/JEE-App/servlets/servlet/src/main/webapp/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ejbs/src/main/resources/META-INF/ejb-jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ejbs/src/main/resources/META-INF/ejb-jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servlets/servlet/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/servlets/servlet/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servlets/servlet/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/servlets/servlet/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servlets/servlet/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/servlets/servlet/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEE-Client/.idea/libraries/gf_client.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JEE-Client/.idea/libraries/gf_client.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,9 +28,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="3ALrRevuXL1zM9kaUYIWkYvZFAR" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -73,6 +45,7 @@
     "Maven.project [compile].executor": "Run",
     "Maven.project [deploy].executor": "Run",
     "Maven.project [package].executor": "Run",
+    "Maven.project [verify].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",

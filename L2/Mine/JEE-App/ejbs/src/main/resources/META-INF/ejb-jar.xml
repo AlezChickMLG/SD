@@ -12,5 +12,13 @@ http://java.sun.com/xml/ns/javaee/ejb-jar_3_0.xsd"
             <ejb-class>ejb.StatelessSessionBeanImpl</ejb-class>
             <session-type>Stateless</session-type>
         </session>
+        <session>
+            <ejb-name>BankAccountBean</ejb-name>
+            <mapped-name>bankaccount</mapped-name>
+            <business-local>interfaces.BankAccountBeanRemote</business-local>
+            <business-remote>interfaces.BankAccountBeanRemote</business-remote>
+            <ejb-class>ejb.BankAccountBeanImpl</ejb-class>
+            <session-type>Stateful</session-type>
+        </session>
     </enterprise-beans>
 </ejb-jar>
