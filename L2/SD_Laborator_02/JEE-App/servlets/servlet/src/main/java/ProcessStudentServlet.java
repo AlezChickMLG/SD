@@ -43,5 +43,8 @@ public class ProcessStudentServlet extends HttpServlet {
         response.setContentType("text/html");
         response.getWriter().println("Datele au fost adaugate in baza de date." +
                 "<br /><br /><a href='./'>Inapoi la meniul principal</a>");
+
+        ThreadMonitor thread = new ThreadMonitor();
+        thread.start();
     }
 }

@@ -13,7 +13,6 @@
 			<br />
 			Varsta: <input type="number" name="varsta" />
 			<br />
-			<br />
 			<button type="submit" name="submit">Trimite</button>
 		</form>
 	</body>
