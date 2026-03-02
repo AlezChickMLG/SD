@@ -6,10 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6bd2d3f9-8697-4f95-9ff0-6ccba41503e1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ejbs/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ejbs/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servlets/servlet/src/main/java/ProcessBankOperationServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/servlets/servlet/src/main/java/ProcessBankOperationServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servlets/servlet/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/servlets/servlet/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servlets/servlet/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/servlets/servlet/src/main/webapp/index.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +47,8 @@
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true"
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/alex26/Documents/Laboratoare Materii/Sem2/SD/L2/SD_Laborator_02/JEE-App"
   }
 }]]></component>
   <component name="RunManager">
