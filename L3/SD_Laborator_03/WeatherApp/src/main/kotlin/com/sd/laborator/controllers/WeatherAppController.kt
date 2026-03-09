@@ -1,5 +1,6 @@
 package com.sd.laborator.controllers
 
+import com.sd.laborator.interfaces.BlacklistFilterInterface
 import com.sd.laborator.interfaces.LocationSearchInterface
 import com.sd.laborator.interfaces.WeatherForecastInterface
 import com.sd.laborator.pojo.WeatherForecastData
@@ -19,14 +20,22 @@ class cwWeatherAppController {
     @Autowired
     private lateinit var weatherForecastService: WeatherForecastInterface
 
+    @Autowired
+    private lateinit var blacklistFilterService: BlacklistFilterInterface
+
     @RequestMapping("/getforecast/{location}", method = [RequestMethod.GET])
     @ResponseBody
     fun getForecast(@PathVariable location: String): String {
         // se incearca preluarea WOEID-ului locaţiei primite in URL
+        if (blacklistFilterService.isBlacklisted(location)) {
+            return "Locatia este pe lista de blacklist"
+        }
+
         val locationId = locationSearchService.getLocationId(location)
             ?: return "Nu s-au putut gasi date meteo pentru cuvintele cheie \"$location\"!"
 
         val rawForecastData: WeatherForecastData = weatherForecastService.getForecastData(locationId)
+
 
         // fiind obiect POJO, funcţia toString() este suprascrisă pentru o afişare mai prietenoasă
         return rawForecastData.toString()
