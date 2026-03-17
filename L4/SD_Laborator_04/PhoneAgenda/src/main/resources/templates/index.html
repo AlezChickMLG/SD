@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>StartPage</title>
+    <script src="js/script.js" defer></script>
+</head>
+<body>
+<main>
+    <form>
+        Informatii generale:
+        <br>
+        <fieldset>
+            ID: <label for = "nr_id">
+            <input type="text" id="nr_id" name="nume">
+        </label>
+            <br>
+            Nume: <label for = "nume">
+            <input type="text" id="nume" name="nume">
+        </label>
+            <br>
+            Prenume: <label for = "prenume">
+            <input type="text" id="prenume" name="prenume">
+        </label>
+            <br>
+            Nr. telefon: <label for = "nr_tel">
+            <input type="number" id="nr_tel" name="nr_tel">
+        </label>
+            <br>
+        </fieldset>
+    </form>
+    <button onclick="post()">Post</button>
+</main>
+</body>
+</html>
