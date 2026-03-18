@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b5212e08-1ab5-47b7-9ad9-fecfc1a178a8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/WeatherApp_Chaining/WeatherApp.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/kotlin/org/example/HelloTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/exempluGradle.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/kotlinc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/src/main/kotlin/com/sd/laborator/Hello.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/src/main/kotlin/com/sd/laborator/HelloController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/src/main/kotlin/com/sd/laborator/HelloService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/src/main/kotlin/com/sd/laborator/Hello.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/src/main/kotlin/com/sd/laborator/HelloController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/src/main/kotlin/com/sd/laborator/HelloService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/src/test/kotlin/com/sd/laborator/HelloTest.kt" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="3B4RNsRHWuV4QnrRPLmcae9me0A" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "Maven.Cheltuieli [clean].executor": "Run",
+    "Maven.Cheltuieli [compile].executor": "Run",
+    "Maven.demo [clean].executor": "Run",
+    "Maven.demo [compile].executor": "Run",
+    "Maven.demo [package].executor": "Run",
+    "Maven.demo [test].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.MainApplication.executor": "Run",
+    "Spring Boot.PageController.executor": "Run",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/alex26/Documents/Laboratoare Materii/Sem2/SD/L4/SD_Laborator_04/Cheltuieli",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/static" />
+      <recent name="$PROJECT_DIR$/src/main/resources/static/css" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="MainApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
+      <module name="Cheltuieli" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.MainApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.MainApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.30387.90" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b5212e08-1ab5-47b7-9ad9-fecfc1a178a8" name="Changes" comment="" />
+      <created>1773746320713</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1773746320713</updated>
+    </task>
+    <servers />
+  </component>
+</project>

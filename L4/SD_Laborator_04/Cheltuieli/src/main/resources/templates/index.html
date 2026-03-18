@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ro" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>StartPage</title>
+    <link rel="stylesheet" href="css/stil.css">
+    <script src="js/script.js" defer></script>
+</head>
+<body>
+<main>
+    <form>
+        <br>
+        <fieldset id="login">
+            User: <label for = "user_login">
+            <input type="text" id="user_login" name="user_login">
+        </label>
+            <br>
+            Parola: <label for = "parola_login">
+            <input type="password" id="parola_login" name="parola_login">
+        </label>
+        </fieldset>
+    </form>
+    <br>
+    <div id="loginButton">
+        <button onclick="login()">Log in</button>
+    </div>
+    <br><br><br>
+    <form>
+        <br>
+        <fieldset id="register">
+            User: <label for = "user_register">
+            <input type="text" id="user_register" name="user_register">
+        </label>
+            <br>
+            Parola: <label for = "parola_register">
+            <input type="password" id="parola_register" name="parola_register">
+        </label>
+        </fieldset>
+    </form>
+    <br>
+    <div id="registerButton">
+        <button onclick="register()">Register</button>
+    </div>
+</main>
+</body>
+</html>

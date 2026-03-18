@@ -1,0 +1,24 @@
+body {
+    background-color: #f8eacf;
+    font-family: "Delius", cursive;
+}
+
+#login {
+    text-align: center;
+    font-size: 20px;
+    border: none;
+}
+
+#loginButton {
+    text-align: center;
+}
+
+#register {
+    text-align: center;
+    font-size: 20px;
+    border: none;
+}
+
+#registerButton {
+    text-align: center;
+}
