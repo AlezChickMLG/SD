@@ -1,5 +1,6 @@
 package org.example.controllers
 
+import org.example.encryption.PasswordHashing
 import org.example.repository.AccountDatabaseManager
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -26,13 +27,11 @@ class PageController {
 }
 
 @RestController
-class LoginController {
-    @Autowired
-    private lateinit var loginService: LoginService
-
-    @Autowired
-    private lateinit var accountDatabaseManager: AccountDatabaseManager
-
+class LoginController (
+    private val loginService: LoginService,
+    private val accountDatabaseManager: AccountDatabaseManager,
+    private val passwordHashing: PasswordHashing
+) {
     @PostMapping(value = ["/login"])
     fun login(@RequestBody account: Account): ResponseEntity<Account> {
         if (loginService.validateLogin(account.username, account.password)) {
@@ -43,11 +42,14 @@ class LoginController {
 
     @PostMapping(value = ["/register"])
     fun register(@RequestBody account: Account): ResponseEntity<Account> {
-        println("register ${account.username}")
         if (accountDatabaseManager.getAccount(account.username) == null) {
-            println("Cont negasit")
-            val response = accountDatabaseManager.createAccount(account.username, account.password)
-            println("Raspuns: ${response}")
+            val salt = passwordHashing.generateRandomSalt()
+            val hash = passwordHashing.generateHash(account.password, salt)
+
+            val response = accountDatabaseManager.createAccount(account.username, hash, salt.toHexString())
+            account.password = hash
+            account.salt = salt.toHexString()
+
             if (response)
                 return ResponseEntity(account, HttpStatus.CREATED)
             return ResponseEntity(account, HttpStatus.BAD_REQUEST)

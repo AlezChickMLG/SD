@@ -5,17 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5212e08-1ab5-47b7-9ad9-fecfc1a178a8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/WeatherApp_Chaining/WeatherApp.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/kotlin/org/example/HelloTest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/compiler.xml" beforeDir="false" />
@@ -52,6 +41,14 @@
       <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/src/main/kotlin/com/sd/laborator/HelloController.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/src/main/kotlin/com/sd/laborator/HelloService.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/src/test/kotlin/com/sd/laborator/HelloTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cheltuieli.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/example/controllers/LoginController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/example/controllers/LoginController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/example/pojo/Account.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/example/pojo/Account.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/example/repository/AccountDatabaseManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/example/repository/AccountDatabaseManager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/example/services/LoginService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/example/services/LoginService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/schema.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/script.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,6 +106,9 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/static" />
       <recent name="$PROJECT_DIR$/src/main/resources/static/css" />
+    </key>
+    <key name="K2MoveDeclarationsDialog.RECENT_PACKAGE_KEY">
+      <recent name="org.example.encryption" />
     </key>
   </component>
   <component name="RunManager">

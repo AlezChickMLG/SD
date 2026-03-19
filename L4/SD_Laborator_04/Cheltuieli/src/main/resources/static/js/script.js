@@ -4,7 +4,8 @@ async function login() {
 
     let responseBody = {
         username: user,
-        password: password
+        password: password,
+        salt: ""
     };
 
     let response = await fetch("/login", {
@@ -30,7 +31,8 @@ async function register() {
 
     let responseBody = {
         username: user,
-        password: password
+        password: password,
+        salt: ""
     };
 
     let response = await fetch("/register", {
