@@ -10,6 +10,6 @@ open class AccountManager (
     private var accountDatabaseManager: AccountDatabaseManager
 ) {
     fun search(username: String): Account? {
-        return accountDatabaseManager.getAccount(username)
+        return accountDatabaseManager.getAccountEncrypted(username)
     }
 }

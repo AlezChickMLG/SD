@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS account (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username TEXT NOT NULL UNIQUE,
+        hashedUsername TEXT NOT NULL UNIQUE,
+        encryptedUsername TEXT NOT NULL UNIQUE,
         password TEXT NOT NULL,
         salt TEXT NOT NULL
 );

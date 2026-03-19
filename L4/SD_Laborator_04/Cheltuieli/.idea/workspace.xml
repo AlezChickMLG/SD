@@ -44,11 +44,12 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cheltuieli.db" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/example/controllers/LoginController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/example/controllers/LoginController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/example/pojo/Account.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/example/pojo/Account.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/example/encryption/AesObject.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/example/encryption/AesObject.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/example/encryption/passwordHashing.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/example/encryption/passwordHashing.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/example/repository/AccountDatabaseManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/example/repository/AccountDatabaseManager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/example/services/AccountManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/example/services/AccountManager.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/example/services/LoginService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/example/services/LoginService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/schema.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/schema.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,8 +94,8 @@
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/alex26/Documents/Laboratoare Materii/Sem2/SD/L4/SD_Laborator_04/Cheltuieli",
     "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+    "project.structure.proportion": "0.15527344",
+    "project.structure.side.proportion": "0.2"
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [

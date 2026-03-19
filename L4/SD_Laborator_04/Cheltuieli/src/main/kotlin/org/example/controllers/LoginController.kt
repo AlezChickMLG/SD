@@ -1,6 +1,7 @@
 package org.example.controllers
 
 import org.example.encryption.PasswordHashing
+import org.example.org.example.encryption.AesService
 import org.example.repository.AccountDatabaseManager
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -30,11 +31,13 @@ class PageController {
 class LoginController (
     private val loginService: LoginService,
     private val accountDatabaseManager: AccountDatabaseManager,
-    private val passwordHashing: PasswordHashing
+    private val passwordHashing: PasswordHashing,
+    private val aesService: AesService
 ) {
     @PostMapping(value = ["/login"])
     fun login(@RequestBody account: Account): ResponseEntity<Account> {
-        if (loginService.validateLogin(account.username, account.password)) {
+        println("[Login]:\nusername: ${account.username}\npassword: ${account.password}\n")
+        if (loginService.validateLogin(account)) {
             return ResponseEntity(account, HttpStatus.OK)
         }
         return ResponseEntity(HttpStatus.NOT_FOUND)
@@ -42,7 +45,9 @@ class LoginController (
 
     @PostMapping(value = ["/register"])
     fun register(@RequestBody account: Account): ResponseEntity<Account> {
-        if (accountDatabaseManager.getAccount(account.username) == null) {
+        println("[Register]:\nusername: ${account.username}\npassword: ${account.password}\n")
+        if (accountDatabaseManager.getAccountEncrypted(account.username) == null) {
+            println("[Inside-if]: Cont negasit\n")
             val salt = passwordHashing.generateRandomSalt()
             val hash = passwordHashing.generateHash(account.password, salt)
 
@@ -54,7 +59,7 @@ class LoginController (
                 return ResponseEntity(account, HttpStatus.CREATED)
             return ResponseEntity(account, HttpStatus.BAD_REQUEST)
         }
-
+        println("[Outside-if]: Cont gasit\n")
         return ResponseEntity(account, HttpStatus.BAD_REQUEST)
     }
 }
