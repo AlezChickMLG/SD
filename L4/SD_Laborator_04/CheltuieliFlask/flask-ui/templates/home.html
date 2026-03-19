@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ro" xmlns="http://www.w3.org/1999/html">
+<html lang="ro">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
@@ -7,11 +7,25 @@
 </head>
 <body>
 <main>
+
     <p>Hello {{ username }}</p>
-    {% for key, value in data.items() %}
-        <p>{{ key }} - {{ value }}</p>
+
+    {% for key, value in data.items() if key != "username" %}
+        <div style="margin-bottom: 15px; border:1px solid #ccc; padding:10px; width:300px;">
+
+            <p><strong>{{ key }}</strong>: {{ value }}</p>
+
+            <form method="POST" action="{{ url_for('update_budget') }}">
+                <input type="hidden" name="category" value="{{ key }}">
+
+                <input type="number" step="1" name="amount" placeholder="Suma">
+
+                <button type="submit" name="action" value="add">+</button>
+                <button type="submit" name="action" value="subtract">-</button>
+            </form>
+
+        </div>
     {% endfor %}
-    <br><br>
 
 </main>
 </body>

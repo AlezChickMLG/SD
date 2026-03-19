@@ -10,7 +10,7 @@ app.secret_key = "secret_key"
 def index():
     return render_template("index.html")
 
-@app.route(f"/home", methods=["GET"])
+@app.route("/home", methods=["GET"])
 def home():
     if "username" not in session:
         return redirect("/")
@@ -24,6 +24,29 @@ def home():
     data = response.json()
 
     return render_template("home.html", data=data)
+
+@app.route(f"/home/update", methods=["POST"])
+def update_budget():
+    category = request.form["category"]
+    amount = request.form["amount"]
+    action = request.form["action"]
+    username = session["username"]
+
+    print(f"[{username}]:\ncategory: {category}\namount: {amount}\naction: {action}\n")
+
+    payload = {
+        "category": category,
+        "amount": amount,
+        "action": action
+    }
+
+    response = requests.post(f"{SPRING_API}/home/update/{username}", json=payload, verify=False)
+
+    if response.status_code == 200:
+        return "Operatie cu succes"
+
+    else:
+        return "Operatie esuata"
 
 @app.route("/register", methods=["POST"])
 def register_post():

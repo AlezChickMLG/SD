@@ -95,4 +95,37 @@ open class AccountDatabaseManager (
             null
         }
     }
+
+    fun updateBugetAccount(bugetAccount: BugetAccount): Boolean {
+        val sql = """
+        UPDATE buget
+        SET 
+            bugetTotal = ?,
+            intretinere = ?,
+            mancare = ?,
+            distractie = ?,
+            scoala = ?,
+            personale = ?
+        WHERE hashedUsername = ?
+    """.trimIndent()
+
+        val hashedUsername = passwordHashing.sha256(bugetAccount.username)
+
+        return try {
+            val result = jdbcTemplate.update(
+                sql,
+                bugetAccount.bugetTotal,
+                bugetAccount.intretinere,
+                bugetAccount.mancare,
+                bugetAccount.distractie,
+                bugetAccount.scoala,
+                bugetAccount.personale,
+                hashedUsername
+            )
+            result == 1
+        } catch (e: DataAccessException) {
+            println("Eroare la actualizarea contului de buget: $e")
+            false
+        }
+    }
 }

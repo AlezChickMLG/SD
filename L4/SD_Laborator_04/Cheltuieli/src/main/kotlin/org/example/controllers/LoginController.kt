@@ -3,6 +3,7 @@ package org.example.controllers
 import org.example.encryption.PasswordHashing
 import org.example.org.example.encryption.AesService
 import org.example.org.example.pojo.BugetAccount
+import org.example.org.example.pojo.UpdatePayload
 import org.example.repository.AccountDatabaseManager
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -69,5 +70,37 @@ class LoginController (
     fun home(@PathVariable username: String): ResponseEntity<BugetAccount> {
         val bugetAccount: BugetAccount = accountManager.loadBugetAccount(username)
         return ResponseEntity(bugetAccount, HttpStatus.OK)
+    }
+
+    @PostMapping(value = ["/home/update/{username}"])
+    fun updateBudget(@PathVariable username: String, @RequestBody updatePayload: UpdatePayload): ResponseEntity<BugetAccount> {
+        val bugetAccount: BugetAccount = accountManager.loadBugetAccount(username)
+        if (updatePayload.action == "add") {
+            when (updatePayload.category) {
+                "bugetTotal" -> bugetAccount.bugetTotal += updatePayload.amount
+                "mancare" -> bugetAccount.mancare += updatePayload.amount
+                "distractie" -> bugetAccount.distractie += updatePayload.amount
+                "intretinere" -> bugetAccount.intretinere += updatePayload.amount
+                "scoala" -> bugetAccount.scoala += updatePayload.amount
+                "personale" -> bugetAccount.personale += updatePayload.amount
+            }
+        }
+
+        else if (updatePayload.action == "subtract") {
+            when (updatePayload.category) {
+                "bugetTotal" -> bugetAccount.bugetTotal -= updatePayload.amount
+                "mancare" -> bugetAccount.mancare -= updatePayload.amount
+                "distractie" -> bugetAccount.distractie -= updatePayload.amount
+                "intretinere" -> bugetAccount.intretinere -= updatePayload.amount
+                "scoala" -> bugetAccount.scoala -= updatePayload.amount
+                "personale" -> bugetAccount.personale -= updatePayload.amount
+            }
+        }
+
+        val result = accountDatabaseManager.updateBugetAccount(bugetAccount)
+        if (result) {
+            return ResponseEntity(bugetAccount, HttpStatus.OK)
+        }
+        return ResponseEntity(bugetAccount, HttpStatus.BAD_REQUEST)
     }
 }

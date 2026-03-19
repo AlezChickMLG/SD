@@ -5,9 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5212e08-1ab5-47b7-9ad9-fecfc1a178a8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../CheltuieliFlask/flask-ui/static/css/stil.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CheltuieliFlask/flask-ui/templates/home.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CheltuieliFlask/flask-ui/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/compiler.xml" beforeDir="false" />
@@ -45,13 +42,13 @@
       <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/src/main/kotlin/com/sd/laborator/HelloService.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/src/test/kotlin/com/sd/laborator/HelloTest.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cheltuieli.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cheltuieli.db" beforeDir="false" afterPath="$PROJECT_DIR$/cheltuieli.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/example/controllers/LoginController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/example/controllers/LoginController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/example/pojo/Buget.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/example/pojo/BugetAccount.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/example/pojo/BugetAccount.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/example/pojo/BugetAccount.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/example/repository/AccountDatabaseManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/example/repository/AccountDatabaseManager.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/example/services/AccountManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/example/services/AccountManager.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/example/services/BugetManager.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CheltuieliFlask/flask-ui/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/../CheltuieliFlask/flask-ui/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CheltuieliFlask/flask-ui/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/../CheltuieliFlask/flask-ui/templates/home.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
