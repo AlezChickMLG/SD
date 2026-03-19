@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>StartPage</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stil.css') }}">
+</head>
+<body>
+<main>
+    <form method="POST" action="{{ url_for('login_post') }}">
+        <fieldset id="login">
+            <legend>Login</legend>
+            User:
+            <input type="text" name="user_login" required>
+            <br>
+            Parola:
+            <input type="password" name="parola_login" required>
+            <br><br>
+            <button type="submit">Log in</button>
+        </fieldset>
+    </form>
+    <br><br>
+    <!-- REGISTER -->
+    <form method="POST" action="{{ url_for('register_post') }}">
+        <fieldset id="register">
+            <legend>Register</legend>
+            User:
+            <input type="text" name="user_register" required>
+            <br>
+            Parola:
+            <input type="password" name="parola_register" required>
+            <br><br>
+            <button type="submit">Register</button>
+        </fieldset>
+    </form>
+
+</main>
+</body>
+</html>

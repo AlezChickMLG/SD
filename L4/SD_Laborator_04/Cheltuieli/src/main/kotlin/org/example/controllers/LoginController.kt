@@ -2,19 +2,20 @@ package org.example.controllers
 
 import org.example.encryption.PasswordHashing
 import org.example.org.example.encryption.AesService
+import org.example.org.example.pojo.BugetAccount
 import org.example.repository.AccountDatabaseManager
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import org.example.pojo.Account
+import org.example.services.AccountManager
 import org.example.services.LoginService
+import org.springframework.web.bind.annotation.PathVariable
 
-@Controller
+/*@Controller
 class PageController {
     @GetMapping(value = ["/"])
     fun index(): String {
@@ -25,14 +26,15 @@ class PageController {
     fun home(): String {
         return "home"
     }
-}
+}*/
 
 @RestController
 class LoginController (
     private val loginService: LoginService,
+    private val accountManager: AccountManager,
     private val accountDatabaseManager: AccountDatabaseManager,
     private val passwordHashing: PasswordHashing,
-    private val aesService: AesService
+    private val aesService: AesService,
 ) {
     @PostMapping(value = ["/login"])
     fun login(@RequestBody account: Account): ResponseEntity<Account> {
@@ -61,5 +63,11 @@ class LoginController (
         }
         println("[Outside-if]: Cont gasit\n")
         return ResponseEntity(account, HttpStatus.BAD_REQUEST)
+    }
+
+    @GetMapping(value = ["/home/{username}"])
+    fun home(@PathVariable username: String): ResponseEntity<BugetAccount> {
+        val bugetAccount: BugetAccount = accountManager.loadBugetAccount(username)
+        return ResponseEntity(bugetAccount, HttpStatus.OK)
     }
 }

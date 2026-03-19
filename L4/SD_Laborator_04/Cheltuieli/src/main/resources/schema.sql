@@ -7,13 +7,14 @@ CREATE TABLE IF NOT EXISTS account (
 );
 
 CREATE TABLE IF NOT EXISTS buget (
-    user_id INTEGER PRIMARY KEY,
-    intretinere REAL NOT NULL,
-    mancare REAL NOT NULL,
-    distractie REAL NOT NULL,
-    scoala REAL NOT NULL,
-    personale REAL NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES account(id)
+    hashedUsername TEXT PRIMARY KEY,
+    bugetTotal REAL,
+    intretinere REAL,
+    mancare REAL,
+    distractie REAL,
+    scoala REAL,
+    personale REAL,
+    FOREIGN KEY (hashedUsername) REFERENCES account(hashedUsername)
 );
 
 PRAGMA foreign_keys = ON;

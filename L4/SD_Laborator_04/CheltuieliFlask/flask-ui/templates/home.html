@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ro" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stil.css') }}">
+</head>
+<body>
+<main>
+    <p>Hello {{ username }}</p>
+    {% for key, value in data.items() %}
+        <p>{{ key }} - {{ value }}</p>
+    {% endfor %}
+    <br><br>
+
+</main>
+</body>
+</html>

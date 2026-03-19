@@ -2,6 +2,7 @@ package org.example.repository
 
 import org.example.encryption.PasswordHashing
 import org.example.org.example.encryption.AesService
+import org.example.org.example.pojo.BugetAccount
 import org.example.pojo.Account
 import org.springframework.dao.DataAccessException
 import org.springframework.jdbc.core.JdbcTemplate
@@ -49,6 +50,49 @@ open class AccountDatabaseManager (
         } catch (e: DataAccessException) {
             println("Eroare la crearea contului: $e")
             false
+        }
+    }
+
+    fun storeBugetAccount(bugetAccount: BugetAccount): Boolean {
+        val sql = "INSERT INTO buget (hashedUsername, bugetTotal, intretinere, " +
+                "mancare, distractie, scoala, personale) VALUES (?, ?, ?, ?, ?, ?, ?)"
+
+        val hashedUsername = passwordHashing.sha256(bugetAccount.username)
+        println("[storeBugetAccount]: hashedUsername[${bugetAccount.username}]: $hashedUsername\n")
+
+        return try {
+            val result = jdbcTemplate.update(sql, hashedUsername, bugetAccount.bugetTotal,
+                bugetAccount.intretinere, bugetAccount.mancare, bugetAccount.distractie,
+                bugetAccount.scoala, bugetAccount.personale)
+            result == 1
+        } catch (e: DataAccessException) {
+            println("Eroare la stocarea contului de buget: $e")
+            false
+        }
+    }
+
+    fun getBugetAccount(username: String): BugetAccount? {
+        val sql = "SELECT * FROM buget WHERE hashedUsername = ?"
+
+        val hashedUsername = passwordHashing.sha256(username)
+        println("[getBugetAccount]: hashedUsername[$username]: $hashedUsername\n")
+
+        return try {
+             val result = jdbcTemplate.queryForObject<BugetAccount>(sql, arrayOf(hashedUsername)) { rs, _ ->
+                BugetAccount(
+                    username = username,
+                    bugetTotal = rs.getDouble("bugetTotal"),
+                    intretinere = rs.getDouble("intretinere"),
+                    mancare = rs.getDouble("mancare"),
+                    distractie = rs.getDouble("distractie"),
+                    scoala = rs.getDouble("scoala"),
+                    personale = rs.getDouble("personale")
+                )
+            }
+            result
+        } catch (e: DataAccessException) {
+            println("Eroare la gasirea contului de buget: $e")
+            null
         }
     }
 }
