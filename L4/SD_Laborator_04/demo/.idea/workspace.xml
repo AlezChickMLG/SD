@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b5212e08-1ab5-47b7-9ad9-fecfc1a178a8" name="Changes" comment="">
+    <list default="true" id="bfc77453-4a80-430e-b9a9-a6e490135434" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/compiler.xml" beforeDir="false" />
@@ -41,8 +41,8 @@
       <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/src/main/kotlin/com/sd/laborator/HelloController.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/src/main/kotlin/com/sd/laborator/HelloService.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/src/test/kotlin/com/sd/laborator/HelloTest.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cheltuieli.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cheltuieli/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Cheltuieli/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cheltuieli/cheltuieli.db" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +52,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Kotlin Interface" />
+        <option value="package-info" />
+        <option value="Kotlin File" />
         <option value="Kotlin Class" />
       </list>
     </option>
@@ -59,72 +62,49 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 8
-}</component>
-  <component name="ProjectId" id="3B4RNsRHWuV4QnrRPLmcae9me0A" />
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="3BfdpgmalwCjKcFfnlVlHKVnLmL" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.Cheltuieli [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.Cheltuieli [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.demo [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.demo [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.demo [package].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.demo [test].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.MainApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.PageController.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/alex26/Documents/Laboratoare Materii/Sem2/SD/L4/SD_Laborator_04/Cheltuieli&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15527344&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;sqlite&quot;
-    ]
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/alex26/Documents/Laboratoare Materii/Sem2/SD/L6/demo"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources/static" />
-      <recent name="$PROJECT_DIR$/src/main/resources/static/css" />
-    </key>
     <key name="K2MoveDeclarationsDialog.RECENT_PACKAGE_KEY">
-      <recent name="org.example.encryption" />
+      <recent name="BeerApp" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="MainApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
-      <module name="Cheltuieli" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.MainApplication" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="BeerApp" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Spring Boot.MainApplication" />
-      </list>
-    </recent_temporary>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="BeerApp" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -135,23 +115,12 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b5212e08-1ab5-47b7-9ad9-fecfc1a178a8" name="Changes" comment="" />
-      <created>1773746320713</created>
+      <changelist id="bfc77453-4a80-430e-b9a9-a6e490135434" name="Changes" comment="" />
+      <created>1774884245748</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1773746320713</updated>
+      <updated>1774884245748</updated>
     </task>
     <servers />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
 </project>
