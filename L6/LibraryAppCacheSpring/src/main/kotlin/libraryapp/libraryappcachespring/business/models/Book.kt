@@ -1,5 +1,5 @@
 package libraryapp.libraryappcachespring.business.models
-z
+
 class Book(private var data: Content) {
     var name: String?
         get() {
@@ -43,5 +43,9 @@ class Book(private var data: Content) {
 
     fun publishedBy(publisher: String): Boolean {
         return data.publisher.equals(publisher)
+    }
+
+    override fun toString(): String {
+        return data.toString()
     }
 }

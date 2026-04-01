@@ -1,6 +1,7 @@
 package libraryapp.libraryappspring.presentation.controllers
 
 import libraryapp.libraryappspring.business.interfaces.ILibraryPrinterService
+import libraryapp.libraryappspring.business.interfaces.ILibraryService
 import libraryapp.libraryappspring.business.models.Book
 import libraryapp.libraryappspring.business.services.LibraryService
 import org.springframework.beans.factory.annotation.Autowired
@@ -16,7 +17,7 @@ class LibraryPrinterController {
     private lateinit var _libraryPrinterService: ILibraryPrinterService
 
     @Autowired
-    private lateinit var _libraryService: LibraryService
+    private lateinit var _libraryService: ILibraryService
 
     @RequestMapping("/print", method = [RequestMethod.GET])
     @ResponseBody

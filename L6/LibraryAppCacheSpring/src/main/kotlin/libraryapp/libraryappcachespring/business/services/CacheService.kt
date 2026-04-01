@@ -1,6 +1,6 @@
 package libraryapp.libraryappcachespring.business.services
 
-import libraryapp.libraryappcachespring.business.interfaces.ICacheService
+import libraryapp.libraryappcachespring.business.interfaces.cacheInterfaces.ICacheService
 import libraryapp.libraryappcachespring.business.models.Cache
 import libraryapp.libraryappcachespring.persistence.repository.CacheRepository
 import org.springframework.stereotype.Service

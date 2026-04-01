@@ -5,4 +5,8 @@ data class Content(
     var text: String?,
     var name: String?,
     var publisher: String?
-)
+) {
+    override fun toString(): String {
+        return "author:$author~text:$text~name:$name~publisher:$publisher"
+    }
+}

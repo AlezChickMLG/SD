@@ -37,22 +37,18 @@ class CacheRepository (
                         " WHERE query = ?", cache.timestamp, cache.result, cache.query
             )
         } catch (e: DataAccessException) {
-            println("[createTable] Error: $e")
+            println("[updateCache] Error: $e")
         }
     }
 
     override fun addCache(cache: Cache) {
-        val now = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("HH:mm:ss")
-        val timestamp = now.format(formatter).split(":").joinToString("").toInt()
-
         try {
             jdbcTemplate.update(
                 "INSERT INTO CACHE(timestamp, query, result) VALUES (?, ?, ?)",
                 cache.timestamp, cache.query, cache.result
             )
         } catch (e: DataAccessException) {
-            println("[createTable] Error: $e")
+            println("[addCache] Error: $e")
         }
     }
 
@@ -60,7 +56,7 @@ class CacheRepository (
         try {
             jdbcTemplate.update("DELETE FROM CACHE WHERE query = ?", cache.query)
         } catch (e: DataAccessException) {
-            println("[createTable] Error: $e")
+            println("[deleteCache] Error: $e")
         }
     }
 
@@ -71,7 +67,7 @@ class CacheRepository (
                         "WHERE query = ?", rowMapper, query
             )
         } catch (e: DataAccessException) {
-            println("[createTable] Error: $e")
+            println("[${this::class::simpleName}] Error: $e")
         }
 
         return null
@@ -81,7 +77,7 @@ class CacheRepository (
         try {
             return jdbcTemplate.query("SELECT * FROM CACHE", rowMapper)
         } catch (e: DataAccessException) {
-            println("[createTable] Error: $e")
+            println("[${this::class::simpleName}] Error: $e")
         }
 
         return null

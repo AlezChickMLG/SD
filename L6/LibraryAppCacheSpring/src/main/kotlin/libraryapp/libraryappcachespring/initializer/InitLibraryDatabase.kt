@@ -8,7 +8,7 @@ import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
 
 @Component
-class InitDatabase (
+class InitLibraryDatabase (
     private val libraryService: LibraryService,
     private val initialBooks: MutableSet<Book> = mutableSetOf(
         Book(

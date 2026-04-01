@@ -1,4 +1,4 @@
-package libraryapp.libraryappcachespring.business.interfaces
+package libraryapp.libraryappcachespring.business.interfaces.cacheInterfaces
 
 import libraryapp.libraryappcachespring.business.models.Cache
 
