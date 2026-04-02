@@ -1,5 +1,9 @@
 import os
 import sys
+import time
+from abc import update_abstractmethods
+from threading import Thread
+
 import requests
 import qdarkstyle
 from requests.exceptions import HTTPError
@@ -7,6 +11,7 @@ from PyQt5.QtWidgets import (QWidget, QApplication, QFileDialog,
 QMessageBox)
 from PyQt5 import QtCore
 from PyQt5.uic import loadUi
+from rabbitMQ import RabbitMQ
 
 def debug_trace(ui=None):
     from pdb import set_trace
@@ -24,39 +29,52 @@ class LibraryApp(QWidget):
         self.search_btn.clicked.connect(self.search)
         self.save_as_file_btn.clicked.connect(self.save_as_file)
 
+        self.rabbitMQ = RabbitMQ()
+        self.last_result = None
+
+        Thread(target=self.rabbitMQ.receive_message, daemon=True).start()
+
+        self.timer = QtCore.QTimer(self)
+        self.timer.timeout.connect(self.update_text)
+        self.timer.start(100)
+
     def search(self):
         search_string = self.search_bar.text()
-        url = None
+        command = None
 
         if not search_string:
+            command = "getAllBooks"
             if self.json_rb.isChecked():
-                url = '/print?format=json'
+                command += "~json"
 
             elif self.html_rb.isChecked():
-                url = '/print?format=html'
+                command += "~html"
 
             else:
-                url = '/print?format=raw'
+                command += "~raw"
         else:
-            if self.author_rb.isChecked():
-                url = '/find?author={}'.format(search_string.replace(' ', '%20'))
+            pass
+            # if self.author_rb.isChecked():
+            #     url = '/find?author={}'.format(search_string.replace(' ', '%20'))
+            #
+            # elif self.title_rb.isChecked():
+            #     url = '/find?title={}'.format(search_string.replace(' ', '%20'))
+            #
+            # else:
+            #     url = '/find?publisher={}'.format(search_string.replace(' ', '%20'))
 
-            elif self.title_rb.isChecked():
-                url = '/find?title={}'.format(search_string.replace(' ', '%20'))
-
-            else:
-                url = '/find?publisher={}'.format(search_string.replace(' ', '%20'))
-
-        full_url = "http://localhost:8080" + url
         try:
-            response = requests.get(full_url)
-            self.result.setText(response.content.decode('utf-8'))
-
-        except HTTPError as http_err:
-            print('HTTP error occurred: {}'.format(http_err))
+            self.rabbitMQ.send_message(command)
 
         except Exception as err:
             print('Other error occurred: {}'.format(err))
+
+    def update_text(self):
+        current_result = self.rabbitMQ.result
+
+        if current_result is not None and current_result != self.last_result:
+            self.result.setText(current_result)
+            self.last_result = current_result
 
     def save_as_file(self):
         options = QFileDialog.Options()
