@@ -1,9 +1,11 @@
 package libraryapp.libraryappcachespring.business.services
 
+
 import libraryapp.libraryappcachespring.business.interfaces.cacheInterfaces.IFormatterService
 import libraryapp.libraryappcachespring.business.models.Book
 import libraryapp.libraryappcachespring.business.models.Content
 import org.springframework.stereotype.Service
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 
 @Service
 class FormatterService : IFormatterService {
@@ -28,13 +30,22 @@ class FormatterService : IFormatterService {
             )
         }
 
-
-
         return bookList
     }
 
     override fun fromJSON(json: String): List<Book> {
-        TODO("Not yet implemented")
+        val mapper = jacksonObjectMapper()
+        val root = mapper.readTree(json)
+
+        return root.map { node->
+            Book(
+                Content(name = node.get("Titlu").asText(),
+            author = node.get("Autor").asText(),
+            publisher = node.get("Editura").asText(),
+            text = node.get("Text").asText()
+                )
+            )
+        }
     }
 
     override fun fromRaw(raw: String): List<Book> {

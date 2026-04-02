@@ -15,7 +15,6 @@ class CacheQueryService (
     private val cacheService: ICacheService,
     private val libraryPrinterService: ILibraryPrinterService,
     private val webService: IWebService,
-    private val formatterService: IFormatterService,
     private val apiResultService: IAPIResultService,
     private val deserializerService: IDeserializerService,
     private val timeService: ITimeService
@@ -50,7 +49,11 @@ class CacheQueryService (
                 val result = webService.getPrint(format)
                 if (result != null) {
                     println("Cache too old")
-                    apiResultService.fromHTMLUpdate(result)
+                    when(format) {
+                        "html" -> apiResultService.fromHTMLUpdate(result)
+                        "json" -> apiResultService.fromJSONUpdate(result)
+                        else -> "Not implemented"
+                    }
                     println("Cache updated")
                 }
                 return result
@@ -61,7 +64,11 @@ class CacheQueryService (
             val result = webService.getPrint(format)
             if (result != null) {
                 println("No cache | Non-nullable result")
-                apiResultService.fromHTMLAdd(result)
+                when(format) {
+                    "html" -> apiResultService.fromHTMLAdd(result)
+                    "json" -> apiResultService.fromJSONAdd(result)
+                    else -> "Not implemented"
+                }
                 println("Cache added")
             }
             return result

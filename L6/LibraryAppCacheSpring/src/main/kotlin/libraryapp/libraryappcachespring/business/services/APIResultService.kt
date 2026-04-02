@@ -37,4 +37,30 @@ class APIResultService (
             )
         )
     }
+
+    override fun fromJSONAdd(json: String) {
+        val books = formatterService.fromJSON(json)
+            .joinToString("~~")
+        val query = "getAllBooks"
+        cacheService.addCache(
+            Cache (
+                0,
+                query,
+                books
+            )
+        )
+    }
+
+    override fun fromJSONUpdate(json: String) {
+        val books = formatterService.fromJSON(json)
+            .joinToString("~~")
+        val query = "getAllBooks"
+        cacheService.updateCache(
+            Cache (
+                0,
+                query,
+                books
+            )
+        )
+    }
 }

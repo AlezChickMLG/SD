@@ -40,8 +40,6 @@ class RabbitMQ:
             self.result = result
         except Exception:
             print("wrong data format")
-        finally:
-            ch.stop_consuming()
 
     @retry(pika.exceptions.AMQPConnectionError, delay=5, jitter=(1, 3))
     def receive_message(self):

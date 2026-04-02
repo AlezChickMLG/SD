@@ -5,4 +5,7 @@ import javax.swing.text.html.HTML
 interface IAPIResultService {
     fun fromHTMLAdd(html: String)
     fun fromHTMLUpdate(html: String)
+
+    fun fromJSONAdd(json: String)
+    fun fromJSONUpdate(json: String)
 }
