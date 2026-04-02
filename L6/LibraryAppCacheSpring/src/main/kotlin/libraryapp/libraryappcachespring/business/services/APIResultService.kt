@@ -12,10 +12,9 @@ class APIResultService (
     private val cacheService: ICacheService
 ) : IAPIResultService {
 
-    override fun fromHTMLAdd(html: String) {
+    override fun fromHTMLAdd(html: String, query: String) {
         val books = formatterService.fromHtml(html)
             .joinToString("~~")
-        val query = "getAllBooks"
         cacheService.addCache(
             Cache (
                 0,
@@ -25,10 +24,9 @@ class APIResultService (
         )
     }
 
-    override fun fromHTMLUpdate(html: String) {
+    override fun fromHTMLUpdate(html: String, query: String) {
         val books = formatterService.fromHtml(html)
             .joinToString("~~")
-        val query = "getAllBooks"
         cacheService.updateCache(
             Cache (
                 0,
@@ -38,10 +36,9 @@ class APIResultService (
         )
     }
 
-    override fun fromJSONAdd(json: String) {
+    override fun fromJSONAdd(json: String, query: String) {
         val books = formatterService.fromJSON(json)
             .joinToString("~~")
-        val query = "getAllBooks"
         cacheService.addCache(
             Cache (
                 0,
@@ -51,10 +48,9 @@ class APIResultService (
         )
     }
 
-    override fun fromJSONUpdate(json: String) {
+    override fun fromJSONUpdate(json: String, query: String) {
         val books = formatterService.fromJSON(json)
             .joinToString("~~")
-        val query = "getAllBooks"
         cacheService.updateCache(
             Cache (
                 0,

@@ -24,14 +24,33 @@ class RabbitMQController (
         }
 
         val actualCommand = serializedCommand.first()
-        val format = serializedCommand.last()
 
-        try {
-            val result = when (actualCommand) {
-                "getAllBooks" -> cacheQueryService.getAllBooks(format)
-                else -> null
+        val result = if (actualCommand == "getAllBooks") {
+            cacheQueryService.getAllBooks(serializedCommand.last())
+        }
+
+            else if (actualCommand == "findBook") {
+                val filters = serializedCommand.last().split("=")
+                if (filters.count() != 2) {
+                    println("Eroare de formatare la argumentele findBook")
+                    return
+                }
+
+                else  {
+                    when(filters.first()) {
+                        "author" -> cacheQueryService.findBook(author = filters.last())
+                        "title" -> cacheQueryService.findBook(title = filters.last())
+                        "publisher" -> cacheQueryService.findBook(publisher = filters.last())
+                        else -> null
+                    }
+                }
             }
 
+        else {
+            "Not implemented"
+        }
+
+        try {
             println("result: $result")
             if (result != null) {
                 sendFile(result)

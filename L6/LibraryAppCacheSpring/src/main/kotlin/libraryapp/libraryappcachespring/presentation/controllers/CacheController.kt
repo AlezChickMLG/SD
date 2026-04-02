@@ -4,6 +4,7 @@ import libraryapp.libraryappcachespring.business.interfaces.cacheInterfaces.ICac
 import libraryapp.libraryappcachespring.business.interfaces.cacheInterfaces.IFormatterService
 import libraryapp.libraryappcachespring.business.interfaces.ILibraryPrinterService
 import libraryapp.libraryappcachespring.business.interfaces.cacheInterfaces.IAPIResultService
+import libraryapp.libraryappcachespring.business.interfaces.cacheInterfaces.ICacheQueryService
 import libraryapp.libraryappcachespring.business.interfaces.cacheInterfaces.IDeserializerService
 import libraryapp.libraryappcachespring.business.interfaces.cacheInterfaces.ITimeService
 import libraryapp.libraryappcachespring.business.interfaces.cacheInterfaces.IWebService
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody
 
 @Controller
 class CacheController (
-    private val cacheQueryService: CacheQueryService
+    private val cacheQueryService: ICacheQueryService
 ) {
     @RequestMapping("/print", method = [RequestMethod.GET])
     @ResponseBody
@@ -30,5 +31,16 @@ class CacheController (
         @RequestParam(required = true, value = "format", defaultValue = "html") format: String
     ): String? {
         return cacheQueryService.getAllBooks(format)
+    }
+
+    @RequestMapping("/find", method = [RequestMethod.GET])
+    @ResponseBody
+    fun cacheFind(
+        @RequestParam(required = true, value = "format", defaultValue = "json") format: String,
+        @RequestParam(required = true, value = "author", defaultValue = "") author: String,
+        @RequestParam(required = true, value = "title", defaultValue = "") title: String,
+        @RequestParam(required = true, value = "publisher", defaultValue = "") publisher: String
+    ): String? {
+        return cacheQueryService.findBook(format, author, title, publisher)
     }
 }

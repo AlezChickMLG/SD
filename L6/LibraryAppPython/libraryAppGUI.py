@@ -53,15 +53,16 @@ class LibraryApp(QWidget):
             else:
                 command += "~raw"
         else:
+            command = "findBook"
             pass
-            # if self.author_rb.isChecked():
-            #     url = '/find?author={}'.format(search_string.replace(' ', '%20'))
-            #
-            # elif self.title_rb.isChecked():
-            #     url = '/find?title={}'.format(search_string.replace(' ', '%20'))
-            #
-            # else:
-            #     url = '/find?publisher={}'.format(search_string.replace(' ', '%20'))
+            if self.author_rb.isChecked():
+                command += f"~author={search_string}"
+
+            elif self.title_rb.isChecked():
+                command += f"~title={search_string}"
+
+            else:
+                command += f"~publisher={search_string}"
 
         try:
             self.rabbitMQ.send_message(command)

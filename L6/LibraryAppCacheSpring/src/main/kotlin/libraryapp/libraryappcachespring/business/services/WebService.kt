@@ -20,4 +20,18 @@ class WebService : IWebService {
             .bodyToMono(String::class.java)
             .block()
     }
+
+    override fun getFind(filterName: String, filter: String): String? {
+        if (!listOf("author", "title", "publisher").contains(filterName)) {
+            println("Nu exista $filterName in lista")
+            return null
+        }
+
+        return webClient
+            .get()
+            .uri("http://localhost:8080/find?$filterName=$filter")
+            .retrieve()
+            .bodyToMono(String::class.java)
+            .block()
+    }
 }
