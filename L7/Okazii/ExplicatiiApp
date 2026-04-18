@@ -1,0 +1,22 @@
+Auctioneer port: 1500
+Message processor port: 1600
+Bidding processor port: 1700
+
+Auctioneer -> primeste toti bidderii si trimite mesajele catre MessageProcessorMicroservice pentru procesare
+la finalizare, asteapta ca biddingProcessor sa se conecteze la socketul pentru auctioneer pentru a finaliza licitatia si apoi trimite mesaje la toti licitantii
+
+MessageProcessor -> creeza un socket pentru messageProcessor si asteapta ca auctioneerMicroservice sa se conecteze ca sa trimita mesajele pentru procesare
+	- Dupa ce primeste toate mesajele, se conecteaza la biddingProcessor 
+	- Pune toate mesajele primite de la auctioneer in messsageQueue
+	- OnComplete -> sendProcessedMessages()
+	- aici poroceseaza toate mesajele:
+		- se conecteaza la socketul lui biddingProcessor
+		- le afiseaza lui biddingProcessor
+		
+BiddingProcessor -> creeaza un socket si asteapta conexiunea de la messageProcessor
+	- citeste toate mesajele primite de la messageProcessor
+	- le pune in processedBidsQueue
+	- la final, decide castigatorul licitatie
+	- se conecteaza la socketul lui auctioneer si ii trimite rezultatul
+	
+Bidder -> se conecteaza la auctioneerMicroservice

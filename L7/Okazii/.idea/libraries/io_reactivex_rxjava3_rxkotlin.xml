@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="io.reactivex.rxjava3.rxkotlin" type="repository">
+    <properties maven-id="io.reactivex.rxjava3:rxkotlin:3.0.1" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/io/reactivex/rxjava3/rxkotlin/3.0.1/rxkotlin-3.0.1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/reactivex/rxjava3/rxjava/3.0.6/rxjava-3.0.6.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/reactivestreams/reactive-streams/1.0.3/reactive-streams-1.0.3.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/jetbrains/kotlin/kotlin-stdlib/1.4.10/kotlin-stdlib-1.4.10.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/jetbrains/kotlin/kotlin-stdlib-common/1.4.10/kotlin-stdlib-common-1.4.10.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/jetbrains/annotations/13.0/annotations-13.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

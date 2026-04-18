@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="MessageLibrary2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/MessageLibrary2_jar/MessageLibrary2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
