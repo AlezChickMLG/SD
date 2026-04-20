@@ -70,3 +70,13 @@ class RabbitMQ:
                 routing_key=self.config['commands_routing_key'],
                 body=message
             )
+
+    def send_state(self, message):
+        with pika.BlockingConnection(self.parameters) as connection:
+            channel = connection.channel()
+
+            channel.basic_publish(
+                exchange=self.config['exchange'],
+                routing_key=self.config['state_routing_key'],
+                body=message
+            )

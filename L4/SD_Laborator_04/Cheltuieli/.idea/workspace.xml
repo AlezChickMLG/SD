@@ -5,44 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5212e08-1ab5-47b7-9ad9-fecfc1a178a8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/exempluGradle.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/kotlinc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/runConfigurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/gradle.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/src/main/kotlin/com/sd/laborator/Hello.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/src/main/kotlin/com/sd/laborator/HelloController.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluGradle/src/main/kotlin/com/sd/laborator/HelloService.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/.idea/runConfigurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/src/main/kotlin/com/sd/laborator/Hello.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/src/main/kotlin/com/sd/laborator/HelloController.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/src/main/kotlin/com/sd/laborator/HelloService.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L3/SD_Laborator_03/exempluMaven/src/test/kotlin/com/sd/laborator/HelloTest.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cheltuieli.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L6/LibraryAppCacheSpring/library.db" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L6/LibraryAppCacheSpring/library.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L6/LibraryAppCacheSpring/src/main/kotlin/libraryapp/libraryappcachespring/presentation/controllers/RabbitMQController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L6/LibraryAppCacheSpring/src/main/kotlin/libraryapp/libraryappcachespring/presentation/controllers/RabbitMQController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L6/LibraryAppPython/libraryAppGUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L6/LibraryAppPython/libraryAppGUI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L6/LibraryAppPython/rabbitMQ.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L6/LibraryAppPython/rabbitMQ.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

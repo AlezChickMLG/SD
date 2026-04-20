@@ -2,6 +2,8 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import java.io.BufferedReader
+import java.io.File
+import java.io.FileNotFoundException
 import java.io.InputStreamReader
 import java.net.ServerSocket
 import java.net.Socket
@@ -12,19 +14,39 @@ import kotlin.system.exitProcess
 class AuctioneerMicroservice {
     private var auctioneerSocket: ServerSocket
     private lateinit var messageProcessorSocket: Socket
+    private lateinit var heartbeatSocket: Socket
     private var receiveBidsObservable: Observable<String>
     private val subscriptions = CompositeDisposable()
     private val bidQueue: Queue<Message> = LinkedList<Message>()
     private val bidderConnections: MutableList<Socket> = mutableListOf()
+    private val exceptionLog: MutableList<String> = mutableListOf()
 
     companion object Constants {
         const val MESSAGE_PROCESSOR_HOST = "localhost"
+        const val HEARTBEAT_PORT = 1800
         const val MESSAGE_PROCESSOR_PORT = 1600
         const val AUCTIONEER_PORT = 1500
         const val AUCTION_DURATION: Long = 15_000 // licitatia dureaza 15 secunde
     }
 
+    private fun addToLog(message: String) = exceptionLog.add(message)
+
+    private fun log() {
+        try {
+            val file = File("AuctioneerMicroserviceLog")
+            if (!file.exists())
+                throw FileNotFoundException("Nu a fost gasit log-ul pentru Auctioneer")
+            for (string in exceptionLog)
+                file.appendText(string + "\n")
+            exceptionLog.clear()
+        } catch (e: FileNotFoundException) {
+            println("Eroare: $e")
+        }
+    }
+
     init {
+        connectToHeartbeat()
+
         auctioneerSocket = ServerSocket(AUCTIONEER_PORT)
         auctioneerSocket.setSoTimeout(AUCTION_DURATION.toInt())
         println("AuctioneerMicroservice2 se executa pe portul: ${auctioneerSocket.localPort}")
@@ -65,6 +87,7 @@ class AuctioneerMicroservice {
                         bidderConnection.close()
 
                         emitter.onError(Exception("Eroare: Bidder-ul ${bidderConnection.port} a fost deconectat."))
+                        log()
                     }
                     // se emite ce s-a citit ca si element in fluxul de mesaje
                     emitter.onNext(receivedMessage)
@@ -79,6 +102,11 @@ class AuctioneerMicroservice {
         }
     }
 
+    private fun connectToHeartbeat() {
+        heartbeatSocket = Socket("localhost", HEARTBEAT_PORT)
+        heartbeatSocket.getOutputStream().write("Init:auctioneerMicroservice\n".toByteArray())
+    }
+
     private fun receiveBids() {
         // se incepe prin a primi ofertele de la bidderi
         val receiveBidsSubscription = receiveBidsObservable.subscribeBy(
@@ -86,14 +114,19 @@ class AuctioneerMicroservice {
                 val message = Message.deserialize(it.toByteArray())
                 println(message)
                 bidQueue.add(message)
+                addToLog("Am adaugat mesajul $message")
             },
             onComplete = {
                 // licitatia s-a incheiat
                 // se trimit raspunsurile mai departe catre procesorul de mesaje
                 println("Licitatia s-a incheiat! Se trimit ofertele spre procesare...")
+                addToLog("Licitatia s-a incheiat! Se trimit ofertele spre procesare...")
                 forwardBids()
             },
-            onError = { println("Eroare: $it") }
+            onError = {
+                println("Eroare: $it")
+                addToLog(it.toString())
+            }
         )
         subscriptions.add(receiveBidsSubscription)
     }
@@ -106,9 +139,11 @@ class AuctioneerMicroservice {
                     // trimitere mesaje catre procesorul de mesaje
                     messageProcessorSocket.getOutputStream().write(it.serialize())
                     println("Am trimis mesajul: $it")
+                    addToLog("Am trimis catre MessageProcessor mesajul: $it")
                 },
                 onComplete = {
                     println("Am trimis toate ofertele catre MessageProcessor.")
+                    addToLog("Am trimis toate ofertele catre MessageProcessor.")
                     val bidEndMessage = Message.create(
                         "${messageProcessorSocket.localAddress}:${messageProcessorSocket.localPort}",
                         "final"
@@ -127,7 +162,9 @@ class AuctioneerMicroservice {
             ))
         } catch (e: Exception) {
             println("Nu ma pot conecta la MessageProcessor!")
+            addToLog("Nu ma pot conecta la MessageProcessor!")
             auctioneerSocket.close()
+            log()
             exitProcess(1)
         }
     }
@@ -144,6 +181,7 @@ class AuctioneerMicroservice {
             val result: Message = Message.deserialize(receivedMessage.toByteArray())
             val winningPrice = result.body.split(" ")[1].toInt()
             println("Am primit rezultatul licitatiei de la BiddingProcessor: ${result.sender} a castigat cu pretul: $winningPrice")
+            addToLog("Am primit rezultatul licitatiei de la BiddingProcessor: ${result.sender} a castigat cu pretul: $winningPrice")
 
             // se creeaza mesajele pentru rezultatele licitatiei
             val winningMessage = Message.create(auctioneerSocket.localSocketAddress.toString(),
@@ -162,7 +200,9 @@ class AuctioneerMicroservice {
             }
         } catch (e: Exception) {
             println("Nu ma pot conecta la BiddingProcessor!")
+            addToLog("Nu ma pot conecta la BiddingProcessor!")
             auctioneerSocket.close()
+            log()
             exitProcess(1)
         }
 

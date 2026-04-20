@@ -66,6 +66,7 @@ class LibraryApp(QWidget):
 
         try:
             self.rabbitMQ.send_message(command)
+            self.rabbitMQ.send_state("command sent")
 
         except Exception as err:
             print('Other error occurred: {}'.format(err))

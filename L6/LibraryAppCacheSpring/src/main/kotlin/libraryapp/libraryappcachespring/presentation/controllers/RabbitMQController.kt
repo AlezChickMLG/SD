@@ -61,11 +61,24 @@ class RabbitMQController (
         }
     }
 
+    @RabbitListener(queues = ["\${rabbitmq.state.queue}"])
+    fun receiveState(state: String) {
+        println("[state queue]: $state")
+    }
+
     private fun sendFile(file: String) {
         amqpTemplate.convertAndSend(
             rabbitMQComponent.getExchange(),
             rabbitMQComponent.getFileRoutingKey(),
             file
+        )
+    }
+
+    private fun sendState(state: String) {
+        amqpTemplate.convertAndSend(
+            rabbitMQComponent.getExchange(),
+            rabbitMQComponent.getStateRoutingKey(),
+            state
         )
     }
 }
