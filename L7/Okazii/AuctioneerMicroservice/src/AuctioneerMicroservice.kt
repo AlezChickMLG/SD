@@ -95,6 +95,7 @@ class AuctioneerMicroservice {
                 } catch (e: SocketTimeoutException) {
                     // daca au trecut cele 15 secunde de la pornirea licitatiei, inseamna ca licitatia s-a incheiat
                     // se emite semnalul Complete pentru a incheia fluxul de oferte
+                    startAuctionHeartbeat()
                     emitter.onComplete()
                     break
                 }
@@ -105,6 +106,15 @@ class AuctioneerMicroservice {
     private fun connectToHeartbeat() {
         heartbeatSocket = Socket("localhost", HEARTBEAT_PORT)
         heartbeatSocket.getOutputStream().write("Init:auctioneerMicroservice\n".toByteArray())
+    }
+
+    private fun startAuctionHeartbeat() {
+        heartbeatSocket.getOutputStream().write("Start:\n".toByteArray())
+    }
+
+    private fun endHeartbeatConnection() {
+        heartbeatSocket.getOutputStream().write("End:auctioneerMicroservice\n".toByteArray())
+        heartbeatSocket.close()
     }
 
     private fun receiveBids() {
@@ -212,6 +222,7 @@ class AuctioneerMicroservice {
 
     fun run() {
         receiveBids()
+        endHeartbeatConnection()
     }
 }
 

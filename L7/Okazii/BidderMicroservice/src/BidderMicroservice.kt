@@ -47,14 +47,14 @@ class BidderMicroservice {
 
     init {
         try {
-            connectToHeartbeat()
-
             auctioneerSocket = Socket(AUCTIONEER_HOST, AUCTIONEER_PORT)
             println("M-am conectat la Auctioneer!")
             addToLog("M-am conectat la Auctioneer!")
 
             myIdentity = "[${auctioneerSocket.localPort}]"
             addToLog("Identitatea mea: [${myIdentity}]")
+
+            connectToHeartbeat()
 
 //            name = readLine() ?: ""
 //            phone_number = readLine() ?: ""
@@ -106,7 +106,7 @@ class BidderMicroservice {
             }
 
         } catch (e: Exception) {
-            println("$myIdentity Nu ma pot conecta la Auctioneer!")
+            println("$myIdentity Nu ma pot conecta la Auctioneer!: $e")
 
             addToLog("[${myIdentity}] Nu ma pot conecta la Auctioneer")
             log()
@@ -117,9 +117,13 @@ class BidderMicroservice {
 
     private fun connectToHeartbeat() {
         heartbeatSocket = Socket("localhost", HEARTBEAT_PORT)
-        heartbeatSocket.getOutputStream().write("Init:bidderMicroservice\n".toByteArray())
+        heartbeatSocket.getOutputStream().write("Init:bidderMicroservice-${auctioneerSocket.localPort}\n".toByteArray())
     }
 
+    private fun endHeartbeatConnection() {
+        heartbeatSocket.getOutputStream().write("End:bidderMicroservice-${auctioneerSocket.localPort}\n".toByteArray())
+        heartbeatSocket.close()
+    }
 
     private fun bid() {
         // se genereaza o oferta aleatorie din partea bidderului curent
@@ -165,6 +169,7 @@ class BidderMicroservice {
     fun run() {
         bid()
         waitForResult()
+        endHeartbeatConnection()
     }
 }
 

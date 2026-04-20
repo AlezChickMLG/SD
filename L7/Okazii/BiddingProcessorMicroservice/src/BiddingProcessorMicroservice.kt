@@ -30,7 +30,7 @@ class BiddingProcessorMicroservice {
 
     private fun log() {
         try {
-            val file = File("BiddingProcessorMicroservice")
+            val file = File("BiddingProcessorMicroserviceLog")
             if (!file.exists())
                 throw FileNotFoundException("Nu a fost gasit log-ul pentru BiddingProcessor")
             for (string in exceptionLog)
@@ -101,6 +101,10 @@ class BiddingProcessorMicroservice {
         heartbeatSocket.getOutputStream().write("Init:biddingProcessorMicroservice\n".toByteArray())
     }
 
+    private fun endHeartbeatConnection() {
+        heartbeatSocket.getOutputStream().write("End:biddingProcessorMicroservice\n".toByteArray())
+        heartbeatSocket.close()
+    }
 
     private fun receiveProcessedBids() {
         // se primesc si se adauga in coada ofertele procesate de la MessageProcessorMicroservice
@@ -159,6 +163,7 @@ class BiddingProcessorMicroservice {
 
         // se elibereaza memoria din multimea de Subscriptions
         subscriptions.dispose()
+        endHeartbeatConnection()
     }
 }
 

@@ -32,7 +32,7 @@ class MessageProcessorMicroservice {
 
     private fun log() {
         try {
-            val file = File("MessageProcessorMicroservice")
+            val file = File("MessageProcessorMicroserviceLog")
             if (!file.exists())
                 throw FileNotFoundException("Nu a fost gasit log-ul pentru MessageProcessor")
             for (string in exceptionLog)
@@ -95,6 +95,11 @@ class MessageProcessorMicroservice {
     private fun connectToHeartbeat() {
         heartbeatSocket = Socket("localhost", HEARTBEAT_PORT)
         heartbeatSocket.getOutputStream().write("Init:messageProcessorMicroservice\n".toByteArray())
+    }
+
+    private fun endHeartbeatConnection() {
+        heartbeatSocket.getOutputStream().write("End:messageProcessorMicroservice\n".toByteArray())
+        heartbeatSocket.close()
     }
 
     private fun receiveAndProcessMessages() {
@@ -202,6 +207,7 @@ class MessageProcessorMicroservice {
 
     fun run() {
         receiveAndProcessMessages()
+        endHeartbeatConnection()
     }
 }
 
