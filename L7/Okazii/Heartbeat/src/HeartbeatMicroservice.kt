@@ -8,7 +8,7 @@ import java.io.InputStreamReader
 import java.net.ServerSocket
 import java.net.Socket
 import io.reactivex.rxjava3.schedulers.Schedulers
-import javax.annotation.processing.Messager
+import java.util.concurrent.TimeUnit
 
 class UnknownMessageException(message: String) : Exception(message)
 class NullMessageException(message: String) : Exception(message)
@@ -27,6 +27,7 @@ class HeartbeatMicroservice {
 
     companion object Constants{
         const val HEARTBEAT_PORT = 1800
+        const val PING_TIME_SECONDS = 2
     }
 
     private fun addToLog(message: String) = exceptionLog.add(message)
@@ -89,16 +90,15 @@ class HeartbeatMicroservice {
                         if (messageType == "Init") {
                             processInitMessage(socket, message)
 
-                            println("Se incepe un nou thread pentru ${message.split(":").last()}")
-                            addToLog("Se incepe un nou thread pentru ${message.split(":").last()}")
-                            socketSubscribe(socketObservable(socket))
-                        }
+                            println("Se incepe un nou thread de citire pentru ${message.split(":").last()}")
+                            addToLog("Se incepe un nou thread de citire pentru ${message.split(":").last()}")
 
-//                    else if (message == "Start") {
-//                        if (auctioneerSocket != null && biddingProcessorSocket != null && messageProcessorSocket != null && bidderSockets.isNotEmpty()) {
-//
-//                        }
-//                    }
+                            println("Se incepe un nou thread de scriere pentru ${message.split(":").last()}")
+                            addToLog("Se incepe un nou thread de scriere pentru ${message.split(":").last()}")
+
+                            readSubscribe(readObservable(socket))
+                            writeSubscribe(socket)
+                        }
 
                     } catch (e: Exception) {
                         println("Eroare: $e")
@@ -113,7 +113,7 @@ class HeartbeatMicroservice {
         subscriptions.add(connSubs)
     }
 
-    private fun socketObservable(socket: Socket): Observable<String> {
+    private fun readObservable(socket: Socket): Observable<String> {
         val socketObservableVal = Observable.create<String> { emitter ->
             val reader = BufferedReader(InputStreamReader(socket.inputStream))
 
@@ -133,7 +133,24 @@ class HeartbeatMicroservice {
         return socketObservableVal
     }
 
-    private fun socketSubscribe(socketObs: Observable<String>) {
+    private fun writeSubscribe(socket: Socket) {
+        val writeSocketObservable = Observable
+            .interval(PING_TIME_SECONDS.toLong(), TimeUnit.SECONDS)
+            .subscribeOn(Schedulers.io())
+            .subscribeBy {
+                try {
+                    socket.getOutputStream().write("Ping:heartbeatMicroservice\n".toByteArray())
+                    println("Am trimis un ping catre PORT:${socket.localPort}")
+                    addToLog("Am trimis un ping catre PORT:${socket.localPort}")
+                } catch (e: Exception) {
+                    println("Eroare la trimiterea pingului: $e")
+                    log()
+                }
+            }
+        subscriptions.add(writeSocketObservable)
+    }
+
+    private fun readSubscribe(socketObs: Observable<String>) {
         val sub = socketObs
             .subscribeOn(Schedulers.io())
             .subscribeBy (
@@ -142,6 +159,7 @@ class HeartbeatMicroservice {
                     addToLog(message)
 
                     val messageType = message.split(":").first()
+                    
                     if (messageType == "End")
                         processEndMessage(message)
                 },
@@ -153,52 +171,6 @@ class HeartbeatMicroservice {
                 }
         )
         subscriptions.add(sub)
-    }
-
-    private fun processEndMessage(message: String) {
-        var whichSocket = message.split(":").last()
-        if (whichSocket.contains("-"))
-            whichSocket = whichSocket.split("-").first()
-
-        when (whichSocket) {
-            "auctioneerMicroservice" -> {
-                auctioneerSocket?.close()
-                auctioneerSocket = null
-                println("auctioneerMicroservice s-a terminat")
-                addToLog("auctioneerMicroservice s-a terminat")
-            }
-
-            "biddingProcessorMicroservice" -> {
-                biddingProcessorSocket?.close()
-                biddingProcessorSocket = null
-                println("biddingProcessorMicroservice s-a terminat")
-                addToLog("biddingProcessorMicroservice s-a terminat")
-            }
-
-            "messageProcessorMicroservice" -> {
-                messageProcessorSocket?.close()
-                messageProcessorSocket = null
-                println("messageProcessorMicroservice s-a terminat")
-                addToLog("messageProcessorMicroservice s-a terminat")
-            }
-
-            "bidderMicroservice" -> {
-                try {
-                    val localPort = message.split(":").last().split("-").last().toInt()
-
-                    val bidder = bidderSockets.find { it.second == localPort }
-                        ?: throw IllegalStateException("Bidder inexistent: $localPort")
-
-                    bidder.first.close()
-                    bidderSockets.remove(bidder)
-
-                    println("bidderMicroservice-$localPort s-a terminat")
-                    addToLog("bidderMicroservice-$localPort s-a terminat")
-                } catch (e: Exception) {
-                    println("Eroare la End, BidderMicroservice: $e")
-                }
-            }
-        }
     }
 
     private fun processInitMessage(socket: Socket, message: String) {
@@ -250,8 +222,81 @@ class HeartbeatMicroservice {
         }
     }
 
+    private fun processEndMessage(message: String) {
+        var whichSocket = message.split(":").last()
+        if (whichSocket.contains("-"))
+            whichSocket = whichSocket.split("-").first()
+
+        when (whichSocket) {
+            "auctioneerMicroservice" -> {
+                auctioneerSocket?.close()
+                auctioneerSocket = null
+                println("auctioneerMicroservice s-a terminat")
+                addToLog("auctioneerMicroservice s-a terminat")
+            }
+
+            "biddingProcessorMicroservice" -> {
+                biddingProcessorSocket?.close()
+                biddingProcessorSocket = null
+                println("biddingProcessorMicroservice s-a terminat")
+                addToLog("biddingProcessorMicroservice s-a terminat")
+            }
+
+            "messageProcessorMicroservice" -> {
+                messageProcessorSocket?.close()
+                messageProcessorSocket = null
+                println("messageProcessorMicroservice s-a terminat")
+                addToLog("messageProcessorMicroservice s-a terminat")
+            }
+
+            "bidderMicroservice" -> {
+                try {
+                    val localPort = message.split(":").last().split("-").last().toInt()
+
+                    val bidder = bidderSockets.find { it.second == localPort }
+                        ?: throw IllegalStateException("Bidder inexistent: $localPort")
+
+                    bidder.first.close()
+                    bidderSockets.remove(bidder)
+
+                    println("bidderMicroservice-$localPort s-a terminat")
+                    addToLog("bidderMicroservice-$localPort s-a terminat")
+                } catch (e: Exception) {
+                    println("Eroare la End, BidderMicroservice: $e")
+                }
+            }
+        }
+
+        if (
+            auctioneerSocket == null &&
+            biddingProcessorSocket == null &&
+            messageProcessorSocket == null &&
+            bidderSockets.isEmpty()
+        ) {
+            shutdown()
+        }
+    }
+
+    fun shutdown() {
+        println("Se inchide heartbeatul")
+        addToLog("Se inchide heartbeatul")
+
+        try {
+            auctioneerSocket?.close()
+            biddingProcessorSocket?.close()
+            messageProcessorSocket?.close()
+            bidderSockets.forEach {
+                it.first.close()
+            }
+
+        } catch (e: Exception) {
+            println("Eroare la inchiderea socketurilor")
+        }
+    }
+
     fun run() {
         receiveConnections()
+        subscriptions.dispose()
     }
 }
 
