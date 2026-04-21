@@ -28,6 +28,8 @@ class HeartbeatMicroservice {
 
     private var respondedToPing = false
 
+    private val socketToService = mutableMapOf<Socket, List<String>>()
+
     companion object Constants{
         const val HEARTBEAT_PORT = 1800
         const val PING_TIME_SECONDS = 4
@@ -171,9 +173,33 @@ class HeartbeatMicroservice {
                 },
                 onError = {
                     println("S-a terminat fluxul: $it")
+                    restartService(socket)
                 }
             )
         subscriptions.add(writeSocketObservable)
+    }
+
+    private fun restartService(socket: Socket) {
+        val command = socketToService[socket] ?: run {
+            println("socketul curent nu exista")
+            return
+        }
+
+        socketToService.remove(socket)
+
+        try {
+            ProcessBuilder(command)
+                .directory(File("/home/alex26/Documents/Laboratoare Materii/Sem2/SD/L7/Okazii"))
+                .redirectOutput(ProcessBuilder.Redirect.INHERIT)
+                .redirectError(ProcessBuilder.Redirect.INHERIT)
+                .start()
+            println("Proces restartat: $command")
+            addToLog("Proces restartat: $command")
+        } catch (e: Exception) {
+            println("Eroare la restartul procesului: $e")
+            addToLog("Eroare la restartul procesului: $e")
+            log()
+        }
     }
 
     private fun listenToResponses(readObs: Observable<String>) {
@@ -228,6 +254,7 @@ class HeartbeatMicroservice {
             "auctioneerMicroservice" -> {
                 if (auctioneerSocket == null) {
                     auctioneerSocket = socket
+                    socketToService[socket] = listOf("java", "-jar", "out/artifacts/AuctioneerMicroservice_jar/AuctioneerMicroservice.jar")
                     println("S-a conectat auctioneer")
                     addToLog("A fost actualizat auctioneerSocket")
                 } else {
@@ -239,6 +266,7 @@ class HeartbeatMicroservice {
             "messageProcessorMicroservice" -> {
                 if (messageProcessorSocket == null) {
                     messageProcessorSocket = socket
+                    socketToService[socket] = listOf("java", "-jar", "out/artifacts/MessageProcessorMicroservice_jar/MessageProcessorMicroservice.jar")
                     println("S-a conectat messageProcessor")
                     addToLog("A fost actualizat messageProcessorSocket")
                 } else {
@@ -250,6 +278,7 @@ class HeartbeatMicroservice {
             "biddingProcessorMicroservice" -> {
                 if (biddingProcessorSocket == null) {
                     biddingProcessorSocket = socket
+                    socketToService[socket] = listOf("java", "-jar", "out/artifacts/BiddingProcessorMicroservice_jar/BiddingProcessorMicroservice.jar")
                     println("S-a conectat biddingProcessor")
                     addToLog("A fost actualizat biddingProcessorSocket")
                 } else {
@@ -260,6 +289,7 @@ class HeartbeatMicroservice {
 
             "bidderMicroservice" -> {
                 val localPort = message.split(":").last().split("-").last().toInt()
+                socketToService[socket] = listOf("java", "-jar", "out/artifacts/BidderMicroservice_jar/BidderMicroservice.jar")
 
                 bidderSockets.add(Pair(socket, localPort))
                 println("S-a conectat un bidder:$localPort")
