@@ -185,13 +185,27 @@ class HeartbeatMicroservice {
             return
         }
 
-        socketToService.remove(socket)
-
         try {
-            ProcessBuilder(command)
+            when (socket) {
+                auctioneerSocket -> {
+                    auctioneerSocket!!.close()
+                    auctioneerSocket = null
+                }
+                biddingProcessorSocket -> {
+                    biddingProcessorSocket!!.close()
+                    biddingProcessorSocket = null
+                }
+                messageProcessorSocket -> {
+                    messageProcessorSocket!!.close()
+                    messageProcessorSocket = null
+                }
+                else -> throw IllegalStateException("Nu stiu ce socket este")
+            }
+
+            ProcessBuilder(listOf("gnome-terminal", "--") + command)
                 .directory(File("/home/alex26/Documents/Laboratoare Materii/Sem2/SD/L7/Okazii"))
-                .redirectOutput(ProcessBuilder.Redirect.INHERIT)
-                .redirectError(ProcessBuilder.Redirect.INHERIT)
+//                .redirectOutput(ProcessBuilder.Redirect.INHERIT)
+//                .redirectError(ProcessBuilder.Redirect.INHERIT)
                 .start()
             println("Proces restartat: $command")
             addToLog("Proces restartat: $command")
