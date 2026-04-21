@@ -9,6 +9,7 @@ import java.net.ServerSocket
 import java.net.Socket
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeoutException
 
 class UnknownMessageException(message: String) : Exception(message)
 class NullMessageException(message: String) : Exception(message)
@@ -25,9 +26,11 @@ class HeartbeatMicroservice {
     private var socketObservableList = mutableListOf<Observable<String>>()
     private val subscriptions = CompositeDisposable()
 
+    private var respondedToPing = false
+
     companion object Constants{
         const val HEARTBEAT_PORT = 1800
-        const val PING_TIME_SECONDS = 2
+        const val PING_TIME_SECONDS = 4
     }
 
     private fun addToLog(message: String) = exceptionLog.add(message)
@@ -96,8 +99,11 @@ class HeartbeatMicroservice {
                             println("Se incepe un nou thread de scriere pentru ${message.split(":").last()}")
                             addToLog("Se incepe un nou thread de scriere pentru ${message.split(":").last()}")
 
-                            readSubscribe(readObservable(socket))
+                            val readObs = readObservable(socket).share()
+
+                            readSubscribe(readObs)
                             writeSubscribe(socket)
+                            listenToResponses(readObs)
                         }
 
                     } catch (e: Exception) {
@@ -137,17 +143,57 @@ class HeartbeatMicroservice {
         val writeSocketObservable = Observable
             .interval(PING_TIME_SECONDS.toLong(), TimeUnit.SECONDS)
             .subscribeOn(Schedulers.io())
-            .subscribeBy {
-                try {
-                    socket.getOutputStream().write("Ping:heartbeatMicroservice\n".toByteArray())
-                    println("Am trimis un ping catre PORT:${socket.localPort}")
-                    addToLog("Am trimis un ping catre PORT:${socket.localPort}")
-                } catch (e: Exception) {
-                    println("Eroare la trimiterea pingului: $e")
-                    log()
+            .subscribeBy (
+                onNext = {
+                    try {
+                        socket.getOutputStream().write("Ping:heartbeatMicroservice\n".toByteArray())
+                        println("Am trimis un ping catre PORT:${socket.localPort}")
+                        addToLog("Am trimis un ping catre PORT:${socket.localPort}")
+
+                        Thread.sleep((PING_TIME_SECONDS / 2L) * 1000)
+
+                        if (!respondedToPing) {
+                            println("Socket mort - nu a raspuns in 2 secunde (port: ${socket.port})")
+                            addToLog("Socket mort: ${socket.port}")
+                            throw TimeoutException("Nu a raspuns la timp")
+                            // aici apelezi restartService() când e implementat
+                        } else {
+                            println("Socket viu - a raspuns in timp (port: ${socket.port})")
+                        }
+
+                        respondedToPing = false
+
+                    } catch (e: Exception) {
+                        println("Eroare la trimiterea pingului: $e")
+                        log()
+                        throw e
+                    }
+                },
+                onError = {
+                    println("S-a terminat fluxul: $it")
                 }
-            }
+            )
         subscriptions.add(writeSocketObservable)
+    }
+
+    private fun listenToResponses(readObs: Observable<String>) {
+        val sub = readObs
+            .subscribeOn(Schedulers.io())
+            .subscribeBy(
+                onNext = {
+                    if (it.startsWith("Response")) {
+                        println("Am primit raspuns la ping: $it")
+                        respondedToPing = true
+                    }
+                },
+                onError = {
+                    println("Eroare la shared reader: $it")
+                },
+                onComplete = {
+                    println("Gata")
+                }
+            )
+        subscriptions.add(sub)
     }
 
     private fun readSubscribe(socketObs: Observable<String>) {
@@ -155,7 +201,7 @@ class HeartbeatMicroservice {
             .subscribeOn(Schedulers.io())
             .subscribeBy (
                 onNext = { message ->
-                    println(message)
+                    println("Readul initial: $message")
                     addToLog(message)
 
                     val messageType = message.split(":").first()

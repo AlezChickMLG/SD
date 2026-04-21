@@ -103,8 +103,14 @@ class BiddingProcessorMicroservice {
             val reader = BufferedReader(InputStreamReader(heartbeatSocket.inputStream))
 
             while (!emitter.isDisposed) {
-                val message = reader.readLine()
-                emitter.onNext(message)
+                try {
+                    val message = reader.readLine()
+                    emitter.onNext(message)
+                } catch (e: Exception) {
+                    println("Eroare la citirea mesajelor de la heartbeat")
+                    addToLog("Eroare la citirea mesajelor de la heartbeat")
+                    log()
+                }
             }
             emitter.onComplete()
         }
