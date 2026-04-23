@@ -130,6 +130,7 @@ class BiddingProcessorMicroservice {
                     addToLog("Heartbeat-ul a fost inchis")
                 }
             )
+        subscriptions.add(listenSubscribe)
     }
 
     private fun connectToHeartbeat() {

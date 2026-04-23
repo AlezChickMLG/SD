@@ -1,6 +1,7 @@
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.subscribeBy
+import io.reactivex.rxjava3.schedulers.Schedulers
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileNotFoundException
@@ -46,6 +47,7 @@ class AuctioneerMicroservice {
 
     init {
         connectToHeartbeat()
+        listenToHeartbeat()
 
         auctioneerSocket = ServerSocket(AUCTIONEER_PORT)
         auctioneerSocket.setSoTimeout(AUCTION_DURATION.toInt())
@@ -103,9 +105,48 @@ class AuctioneerMicroservice {
         }
     }
 
+    private fun listenToHeartbeat() {
+        val listenObservable = Observable.create<String> { emitter ->
+            val reader = BufferedReader(InputStreamReader(heartbeatSocket.inputStream))
+
+            while (!emitter.isDisposed) {
+                try {
+                    val message = reader.readLine()
+                    emitter.onNext(message)
+                } catch (e: Exception) {
+                    println("Eroare la citirea mesajelor de la heartbeat")
+                    addToLog("Eroare la citirea mesajelor de la heartbeat")
+                    log()
+                }
+            }
+            emitter.onComplete()
+        }
+
+        val listenSubscribe = listenObservable
+            .subscribeOn(Schedulers.io())
+            .subscribeBy (
+                onNext = {
+                    val messageType = it.split(":").first()
+                    if (messageType == "Ping") {
+                        respondToPing()
+                        println("Am trimis raspuns la pingul heartbeatului")
+                    }
+                },
+                onComplete = {
+                    println("Heartbeat-ul a fost inchis")
+                    addToLog("Heartbeat-ul a fost inchis")
+                }
+            )
+        subscriptions.add(listenSubscribe)
+    }
+
     private fun connectToHeartbeat() {
         heartbeatSocket = Socket("localhost", HEARTBEAT_PORT)
         heartbeatSocket.getOutputStream().write("Init:auctioneerMicroservice\n".toByteArray())
+    }
+
+    private fun respondToPing() {
+        heartbeatSocket.getOutputStream().write("Response:auctioneerMicroservice\n".toByteArray())
     }
 
     private fun startAuctionHeartbeat() {
