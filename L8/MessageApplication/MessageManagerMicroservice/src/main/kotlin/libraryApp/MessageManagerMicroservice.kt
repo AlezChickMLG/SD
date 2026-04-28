@@ -8,7 +8,7 @@ import java.net.Socket
 import kotlin.concurrent.thread
 
 class MessageManagerMicroservice {
-    private val subscribers: HashMap<Int, Socket>
+    private val subscribers: HashMap<String, Socket>
     private lateinit var messageManagerSocket: ServerSocket
 
     companion object Constants {
@@ -19,15 +19,46 @@ class MessageManagerMicroservice {
         subscribers = hashMapOf()
     }
 
-    private fun broadcastMessage(message: String, except: Int) {
+    private fun broadcastMessageToStudents(message: String) {
         subscribers.forEach {
-            it.takeIf { it.key != except }
+            it.takeIf { it.key.startsWith("student") }
                 ?.value?.getOutputStream()?.write((message + "\n").toByteArray())
         }
     }
 
-    private fun respondTo(destination: Int, message: String) {
-        subscribers[destination]?.getOutputStream()?.write((message + "\n").toByteArray())
+    private fun sendMessageToTeacher(message: String) {
+        subscribers.get("teacher")
+            ?.getOutputStream()?.write((message + "\n").toByteArray())
+    }
+
+    private fun respondToTeacher(message: String) {
+        subscribers.get("teacher")?.getOutputStream()?.write((message + "\n").toByteArray())
+    }
+
+    private fun respondToStudent(student: String, message: String) {
+        subscribers.get(student)?.getOutputStream()?.write((message + "\n").toByteArray())
+    }
+
+    private fun processInitMessage(bufferReader: BufferedReader, clientConnection: Socket): String {
+        val initMessage = bufferReader.readLine()
+        println("Init message: $initMessage")
+
+        try {
+            val (messageType, entityType) = initMessage.split(":")
+            if (messageType != "Init")
+                throw IllegalArgumentException("Mesaj ciudat")
+
+            println("Subscriber conectat: ${clientConnection.inetAddress.hostAddress}:${clientConnection.port}: $entityType")
+
+            synchronized(subscribers) {
+                subscribers[entityType] = clientConnection
+            }
+
+            return entityType
+        } catch (e: Exception) {
+            println("Eroare la procesarea mesajului de initializare: $e")
+            return ""
+        }
     }
 
     public fun run() {
@@ -42,14 +73,10 @@ class MessageManagerMicroservice {
 
             // se porneste un thread separat pentru tratarea conexiunii cu clientul
             thread {
-                println("Subscriber conectat: ${clientConnection.inetAddress.hostAddress}:${clientConnection.port}")
-
-                // adaugarea in lista de subscriberi trebuie sa fie atomica!
-                synchronized(subscribers) {
-                    subscribers[clientConnection.port] = clientConnection
-                }
-
                 val bufferReader = BufferedReader(InputStreamReader(clientConnection.inputStream))
+
+                //procesarea subscriberului prin mesajul initial
+                val entityType = processInitMessage(bufferReader, clientConnection)
 
                 while (true) {
                     // se citeste raspunsul de pe socketul TCP
@@ -60,7 +87,7 @@ class MessageManagerMicroservice {
                         // deci subscriber-ul respectiv a fost deconectat
                         println("Subscriber-ul ${clientConnection.port} a fost deconectat.")
                         synchronized(subscribers) {
-                            subscribers.remove(clientConnection.port)
+                            subscribers.remove(entityType)
                         }
                         bufferReader.close()
                         clientConnection.close()
@@ -74,12 +101,16 @@ class MessageManagerMicroservice {
                         "intrebare" -> {
                             // tipul mesajului de tip intrebare este de forma:
                             // intrebare <DESTINATIE_RASPUNS> <CONTINUT_INTREBARE>
-                            broadcastMessage("intrebare ${clientConnection.port} $messageBody", except = clientConnection.port)
+                            when {
+                                entityType == "teacher" -> broadcastMessageToStudents("intrebare teacher $messageBody")
+                                entityType.startsWith("student") -> sendMessageToTeacher("intrebare $entityType $messageBody")
+                            }
                         }
                         "raspuns" -> {
-                            // tipul mesajului de tip raspuns este de forma:
-                            // raspuns <CONTINUT_RASPUNS>
-                            respondTo(messageDestination.toInt(), messageBody)
+                            when {
+                                entityType.startsWith("student") -> respondToTeacher(messageBody)
+                                entityType == "teacher" -> respondToStudent(messageDestination, messageBody)
+                            }
                         }
                     }
                 }

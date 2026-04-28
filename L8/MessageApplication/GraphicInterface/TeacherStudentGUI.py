@@ -28,6 +28,19 @@ def resolve_question(question_text):
     # se adauga raspunsul primit in caseta text din interfata grafica
     response_widget.insert(END, response_text)
 
+def resolve_student_question(port, question_text):
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    try:
+        #conectare la portul pentru gui al studentului
+        sock.connect((HOST, port))
+
+        #Trimitere mesaj de verificare
+        sock.send(bytes(question_text + "\n", "utf-8"))
+    except Exception as e:
+        print("Eroare la conectare: " + str(e))
+
+    response_widget.insert(END, "Am trimis un mesaj studentului")
 
 def ask_question():
     # preluare text intrebare de pe interfata grafica
@@ -37,40 +50,73 @@ def ask_question():
     # astfel, nu se blocheaza interfata grafica!
     threading.Thread(target=resolve_question, args=(question_text,)).start()
 
+def ask_student_question():
+    port = student_port.get()
+    question_text = student_question.get()
+
+    try:
+        port = int(port)
+        resolve_student_question(port, question_text)
+
+    except ValueError as e:
+        response_widget.insert(END, "[Eroare]: Introdu un port valabil")
 
 if __name__ == '__main__':
-    # elementul radacina al interfetei grafice
     root = Tk()
     root.title("Interactiune profesor-studenti")
 
-    # la redimensionarea ferestrei, cadrele se extind pentru a prelua spatiul ramas
     root.columnconfigure(0, weight=1)
     root.rowconfigure(0, weight=1)
 
-    # cadrul care incapsuleaza intregul continut
-    content = ttk.Frame(root)
-
-    # caseta text care afiseaza raspunsurile la intrebari
-    response_widget = Text(content, height=10, width=50)
-
-    # eticheta text din partea dreapta
-    question_label = ttk.Label(content, text="Profesorul intreaba:")
-
-    # caseta de introducere text cu care se preia intrebarea de la utilizator
-    question = ttk.Entry(content, width=50)
-
-    # butoanele din dreapta-jos
-    ask = ttk.Button(content, text="Intreaba", command=ask_question)  # la apasare, se apeleaza functia ask_question
-    exitbtn = ttk.Button(content, text="Iesi", command=root.destroy)  # la apasare, se iese din aplicatie
-
-    # plasarea elementelor in layout-ul de tip grid
+    content = ttk.Frame(root, padding=10)
     content.grid(column=0, row=0)
-    response_widget.grid(column=0, row=0, columnspan=3, rowspan=4)
-    question_label.grid(column=3, row=0, columnspan=2)
-    question.grid(column=3, row=1, columnspan=2)
-    ask.grid(column=3, row=3)
-    exitbtn.grid(column=4, row=3)
 
-    # bucla principala a interfetei grafice care asteapta evenimente de la utilizator
+    # ================= STÂNGA =================
+    response_widget = Text(content, height=15, width=55)
+    response_widget.grid(column=0, row=0, rowspan=8, padx=(0, 20))
+
+    # ================= MIJLOC (Profesor) =================
+    question_label = ttk.Label(content, text="Profesorul intreaba:")
+    question_label.grid(column=1, row=0, columnspan=2, pady=(0, 10))
+
+    question = ttk.Entry(content, width=35)
+    question.grid(column=1, row=1, columnspan=2, pady=(0, 10))
+
+    ask = ttk.Button(content, text="Intreaba", command=ask_question)
+    ask.grid(column=1, row=2, pady=5)
+
+    exitbtn = ttk.Button(content, text="Iesi", command=root.destroy)
+    exitbtn.grid(column=2, row=2, pady=5)
+
+    # ================= DREAPTA (Student) =================
+    student_title = ttk.Label(
+        content,
+        text="Studentul intreaba:",
+        font=("Arial", 10, "bold")
+    )
+    student_title.grid(column=3, row=0, columnspan=2, pady=(0, 15), padx=(30, 0))
+
+    # Port
+    port_label = ttk.Label(content, text="Port:")
+    port_label.grid(column=3, row=1, sticky="w", padx=(30, 5))
+
+    student_port = ttk.Entry(content, width=25)
+    student_port.grid(column=4, row=1, pady=5)
+
+    # Intrebare
+    student_question_label = ttk.Label(content, text="Intrebare:")
+    student_question_label.grid(column=3, row=2, sticky="w", padx=(30, 5))
+
+    student_question = ttk.Entry(content, width=25)
+    student_question.grid(column=4, row=2, pady=5)
+
+    # Buton jos, centrat
+    student_ask = ttk.Button(
+        content,
+        text="Intreaba",
+        command=ask_student_question
+    )
+    student_ask.grid(column=3, row=4, columnspan=2, pady=15)
+
     root.mainloop()
 

@@ -4,61 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c5ad844-054e-4697-9590-d0b24af2c4c2" name="Changes" comment="">
+    <list default="true" id="6c5ad844-054e-4697-9590-d0b24af2c4c2" name="Changes" comment="Lab8 Makefile pentru docker logs">
       <change afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/TImerMicroservice_jar.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/libraries/Heartbeat.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/libraries/TImerMicroservice.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../../L7/Okazii/TImerMicroservice/TImerMicroservice.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/src/main/kotlin/libraryApp/HelloMicroservice.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/src/test/kotlin/libraryApp/HelloTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../HelloClientyPython/.idea/HelloClientyPython.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../GraphicInterface/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../GraphicInterface/.idea/GraphicInterface.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../GraphicInterface/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../GraphicInterface/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../GraphicInterface/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../GraphicInterface/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../GraphicInterface/TeacherStudentGUI.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/src/test/kotlin/libraryApp/HelloTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentMicroservice/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentMicroservice/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentMicroservice/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentMicroservice/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentMicroservice/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentMicroservice/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentMicroservice/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentMicroservice/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentMicroservice/questions_database.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentMicroservice/src/main/kotlin/libraryApp/StudentMicroservice.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentMicroservice/src/test/kotlin/libraryApp/HelloTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/libraryApp/TeacherMicroservice.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/kotlin/libraryApp/HelloTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../dockerLogsScript.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/AuctioneerMicroservice_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/AuctioneerMicroservice_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/BidderMicroservice_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/BidderMicroservice_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/BiddingProcessorMicroservice_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/BiddingProcessorMicroservice_jar.xml" afterDir="false" />
@@ -80,11 +30,24 @@
       <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/MessageLibrary2/src/Main.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/MessageProcessorMicroservice/MessageProcessorMicroservice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/MessageProcessorMicroservice/MessageProcessorMicroservice.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/MessageProcessorMicroservice/src/MessageProcessorMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/MessageProcessorMicroservice/src/MessageProcessorMicroservice.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GraphicInterface/TeacherStudentGUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/../GraphicInterface/TeacherStudentGUI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MessageManagerMicroservice/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StudentMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentMicroservice/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StudentMicroservice/src/main/kotlin/libraryApp/StudentMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentMicroservice/src/main/kotlin/libraryApp/StudentMicroservice.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/libraryApp/TeacherMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/libraryApp/TeacherMicroservice.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+      <option value="repository" />
+    </option>
   </component>
   <component name="EmbeddingIndexingInfo">
     <option name="cachedIndexableFilesCount" value="11" />
@@ -148,6 +111,19 @@
       <option name="presentableId" value="Default" />
       <updated>1777110395040</updated>
     </task>
+    <task id="LOCAL-00001" summary="Lab8 Makefile pentru docker logs">
+      <option name="closed" value="true" />
+      <created>1777391364085</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1777391364085</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Lab8 Makefile pentru docker logs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lab8 Makefile pentru docker logs" />
   </component>
 </project>

@@ -9,43 +9,6 @@
       <change afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/libraries/Heartbeat.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/libraries/TImerMicroservice.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../../L7/Okazii/TImerMicroservice/TImerMicroservice.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/src/main/kotlin/libraryApp/HelloMicroservice.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/src/test/kotlin/libraryApp/HelloTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../HelloClientyPython/.idea/HelloClientyPython.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/kotlin/libraryApp/HelloTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentMicroservice/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentMicroservice/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentMicroservice/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentMicroservice/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentMicroservice/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentMicroservice/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentMicroservice/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentMicroservice/src/main/kotlin/libraryApp/StudentMicroservice.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentMicroservice/src/test/kotlin/libraryApp/HelloTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../TeacherMicroservice/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../TeacherMicroservice/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../TeacherMicroservice/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../TeacherMicroservice/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../TeacherMicroservice/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../TeacherMicroservice/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../TeacherMicroservice/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../TeacherMicroservice/src/main/kotlin/libraryApp/TeacherMicroservice.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../TeacherMicroservice/src/test/kotlin/libraryApp/HelloTest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/AuctioneerMicroservice_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/AuctioneerMicroservice_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/BidderMicroservice_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/BidderMicroservice_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/BiddingProcessorMicroservice_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/BiddingProcessorMicroservice_jar.xml" afterDir="false" />
@@ -67,6 +30,13 @@
       <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/MessageLibrary2/src/Main.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/MessageProcessorMicroservice/MessageProcessorMicroservice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/MessageProcessorMicroservice/MessageProcessorMicroservice.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/MessageProcessorMicroservice/src/MessageProcessorMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/MessageProcessorMicroservice/src/MessageProcessorMicroservice.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GraphicInterface/TeacherStudentGUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/../GraphicInterface/TeacherStudentGUI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StudentMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentMicroservice/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StudentMicroservice/src/main/kotlin/libraryApp/StudentMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentMicroservice/src/main/kotlin/libraryApp/StudentMicroservice.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TeacherMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TeacherMicroservice/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TeacherMicroservice/src/main/kotlin/libraryApp/TeacherMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../TeacherMicroservice/src/main/kotlin/libraryApp/TeacherMicroservice.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

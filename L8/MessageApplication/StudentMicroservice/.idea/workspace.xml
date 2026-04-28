@@ -9,43 +9,6 @@
       <change afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/libraries/Heartbeat.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/libraries/TImerMicroservice.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../../L7/Okazii/TImerMicroservice/TImerMicroservice.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/src/main/kotlin/libraryApp/HelloMicroservice.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../EchoServer/src/test/kotlin/libraryApp/HelloTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../HelloClientyPython/.idea/HelloClientyPython.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/src/test/kotlin/libraryApp/HelloTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/libraryApp/StudentMicroservice.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/kotlin/libraryApp/HelloTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../TeacherMicroservice/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../TeacherMicroservice/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../TeacherMicroservice/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../TeacherMicroservice/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../TeacherMicroservice/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../TeacherMicroservice/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../TeacherMicroservice/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../TeacherMicroservice/src/main/kotlin/libraryApp/TeacherMicroservice.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../TeacherMicroservice/src/test/kotlin/libraryApp/HelloTest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/AuctioneerMicroservice_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/AuctioneerMicroservice_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/BidderMicroservice_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/BidderMicroservice_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/BiddingProcessorMicroservice_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/BiddingProcessorMicroservice_jar.xml" afterDir="false" />
@@ -67,6 +30,13 @@
       <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/MessageLibrary2/src/Main.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/MessageProcessorMicroservice/MessageProcessorMicroservice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/MessageProcessorMicroservice/MessageProcessorMicroservice.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/MessageProcessorMicroservice/src/MessageProcessorMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/MessageProcessorMicroservice/src/MessageProcessorMicroservice.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GraphicInterface/TeacherStudentGUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/../GraphicInterface/TeacherStudentGUI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MessageManagerMicroservice/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/libraryApp/StudentMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/libraryApp/StudentMicroservice.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TeacherMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TeacherMicroservice/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TeacherMicroservice/src/main/kotlin/libraryApp/TeacherMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../TeacherMicroservice/src/main/kotlin/libraryApp/TeacherMicroservice.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +44,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="11" />
+    <option name="cachedIndexableFilesCount" value="13" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">
@@ -104,25 +74,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
-    "Maven.StudentMicroservice [clean].executor": "Run",
-    "Maven.StudentMicroservice [compile].executor": "Run",
-    "Maven.StudentMicroservice [package].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Kotlin.StudentMicroserviceKt.executor&quot;: &quot;Run&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.StudentMicroservice [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.StudentMicroservice [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.StudentMicroservice [package].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.LLMConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>

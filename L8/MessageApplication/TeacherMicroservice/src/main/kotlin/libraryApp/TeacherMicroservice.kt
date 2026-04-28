@@ -21,6 +21,7 @@ class TeacherMicroservice {
     private fun subscribeToMessageManager() {
         try {
             messageManagerSocket = Socket(MESSAGE_MANAGER_HOST, MESSAGE_MANAGER_PORT)
+            sendInitMessage()
             messageManagerSocket.soTimeout = 3000
             println("M-am conectat la MessageManager!")
         } catch (e: Exception) {
@@ -29,7 +30,11 @@ class TeacherMicroservice {
         }
     }
 
-    public fun run() {
+    private fun sendInitMessage() {
+        messageManagerSocket.getOutputStream().write("Init:teacher\n".toByteArray())
+    }
+
+    fun run() {
         // microserviciul se inscrie in lista de "subscribers" de la MessageManager prin conectarea la acesta
         subscribeToMessageManager()
 
@@ -53,8 +58,8 @@ class TeacherMicroservice {
                 val receivedQuestion = clientBufferReader.readLine()
 
                 // intrebarea este redirectionata catre microserviciul MessageManager
-                println("Trimit catre MessageManager: ${"intrebare ${messageManagerSocket.localPort} $receivedQuestion\n"}")
-                messageManagerSocket.getOutputStream().write(("intrebare ${messageManagerSocket.localPort} $receivedQuestion\n").toByteArray())
+                println("Trimit catre MessageManager: ${"intrebare teacher $receivedQuestion\n"}")
+                messageManagerSocket.getOutputStream().write(("intrebare teacher $receivedQuestion\n").toByteArray())
 
                 // se asteapta raspuns de la MessageManager
                 val messageManagerBufferReader = BufferedReader(InputStreamReader(messageManagerSocket.inputStream))
