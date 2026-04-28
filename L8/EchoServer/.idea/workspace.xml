@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="913e022e-4ef6-4493-86f5-c6a01fdd5b6d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/libraryApp/HelloMicroservice.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/kotlin/libraryApp/HelloTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Okazii/.idea/artifacts/TImerMicroservice_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Okazii/.idea/libraries/Heartbeat.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Okazii/.idea/libraries/TImerMicroservice.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Okazii/TImerMicroservice/TImerMicroservice.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Okazii/.idea/artifacts/AuctioneerMicroservice_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Okazii/.idea/artifacts/AuctioneerMicroservice_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Okazii/.idea/artifacts/BidderMicroservice_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Okazii/.idea/artifacts/BidderMicroservice_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Okazii/.idea/artifacts/BiddingProcessorMicroservice_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Okazii/.idea/artifacts/BiddingProcessorMicroservice_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Okazii/.idea/artifacts/Heartbeat_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Okazii/.idea/artifacts/Heartbeat_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Okazii/.idea/artifacts/MessageLibrary2_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Okazii/.idea/artifacts/MessageLibrary_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Okazii/.idea/artifacts/MessageProcessorMicroservice_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Okazii/.idea/artifacts/MessageProcessorMicroservice_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Okazii/.idea/libraries/MessageLibrary2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Okazii/.idea/libraries/MessageLibrary.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Okazii/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Okazii/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Okazii/AuctioneerMicroservice/AuctioneerMicroservice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Okazii/AuctioneerMicroservice/AuctioneerMicroservice.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Okazii/AuctioneerMicroservice/src/AuctioneerMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Okazii/AuctioneerMicroservice/src/AuctioneerMicroservice.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Okazii/BidderMicroservice/BidderMicroservice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Okazii/BidderMicroservice/BidderMicroservice.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Okazii/BidderMicroservice/src/BidderMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Okazii/BidderMicroservice/src/BidderMicroservice.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Okazii/BiddingProcessorMicroservice/BiddingProcessorMicroservice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Okazii/BiddingProcessorMicroservice/BiddingProcessorMicroservice.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Okazii/BiddingProcessorMicroservice/src/BiddingProcessorMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Okazii/BiddingProcessorMicroservice/src/BiddingProcessorMicroservice.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Okazii/Heartbeat/Heartbeat.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Okazii/Heartbeat/Heartbeat.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Okazii/Heartbeat/src/HeartbeatMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Okazii/Heartbeat/src/HeartbeatMicroservice.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Okazii/MessageLibrary2/MessageLibrary2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Okazii/MessageLibrary/MessageLibrary.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Okazii/MessageLibrary2/src/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Okazii/MessageLibrary2/src/Main.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Okazii/MessageProcessorMicroservice/MessageProcessorMicroservice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Okazii/MessageProcessorMicroservice/MessageProcessorMicroservice.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Okazii/MessageProcessorMicroservice/src/MessageProcessorMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Okazii/MessageProcessorMicroservice/src/MessageProcessorMicroservice.kt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="6" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "AlezChickMLG"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/AlezChickMLG/SD",
+    "accountId": "72589f3a-bfb8-48bd-9eac-9380b20786ce"
+  }
+}]]></component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="3CqIPf4diIy2WmJ59xJsL3rq3j6" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "Maven.EchoServer [clean].executor": "Run",
+    "Maven.EchoServer [compile].executor": "Run",
+    "Maven.EchoServer [package].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.30387.90" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="913e022e-4ef6-4493-86f5-c6a01fdd5b6d" name="Changes" comment="" />
+      <created>1777106652559</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1777106652559</updated>
+    </task>
+    <servers />
+  </component>
+</project>
