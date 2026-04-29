@@ -3,7 +3,6 @@
     <output-path>$PROJECT_DIR$/out/artifacts/MessageProcessorMicroservice_jar</output-path>
     <root id="archive" name="MessageProcessorMicroservice.jar">
       <element id="module-output" name="MessageProcessorMicroservice" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/out/artifacts/MessageLibrary2_jar/MessageLibrary2.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/io/reactivex/rxjava3/rxkotlin/3.0.1/rxkotlin-3.0.1.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/io/reactivex/rxjava3/rxjava/3.0.6/rxjava-3.0.6.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/reactivestreams/reactive-streams/1.0.3/reactive-streams-1.0.3.jar" path-in-jar="/" />
@@ -12,6 +11,8 @@
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jetbrains/annotations/13.0/annotations-13.0.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/io/reactivex/rxjava3/rxjava/3.1.8/rxjava-3.1.8.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/reactivestreams/reactive-streams/1.0.4/reactive-streams-1.0.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/out/artifacts/Heartbeat_jar/Heartbeat.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/out/artifacts/TImerMicroservice_jar/TImerMicroservice.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

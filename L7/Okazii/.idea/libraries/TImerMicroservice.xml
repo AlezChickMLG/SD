@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="TImerMicroservice">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/TImerMicroservice_jar/TImerMicroservice.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

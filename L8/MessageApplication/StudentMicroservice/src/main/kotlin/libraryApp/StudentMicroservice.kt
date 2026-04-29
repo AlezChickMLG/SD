@@ -6,7 +6,10 @@ import java.io.InputStreamReader
 import java.lang.Exception
 import java.net.ServerSocket
 import java.net.Socket
+import java.util.concurrent.BlockingQueue
+import java.util.concurrent.LinkedBlockingQueue
 import kotlin.concurrent.thread
+import kotlin.concurrent.timer
 import kotlin.system.exitProcess
 
 class StudentMicroservice {
@@ -21,6 +24,9 @@ class StudentMicroservice {
     //server socket pentru gui pe port: 2000 + ID-ul studentului
     private lateinit var guiSocket: ServerSocket
     private lateinit var guiClient: Socket
+
+    //response queue
+    private val responseQueue: BlockingQueue<String> = LinkedBlockingQueue()
 
     init {
         val databaseLines: List<String> = File("questions_database.txt").readLines()
@@ -83,7 +89,27 @@ class StudentMicroservice {
 
                         println("Intrebare de la GUI: $question")
 
-                        //messageManagerSocket.getOutputStream.write()
+                        thread {
+                            messageManagerSocket.getOutputStream()
+                                .write("intrebare student$studentID $question\n".toByteArray())
+
+                            val currentThread = Thread.currentThread()
+
+                            val timerThread = thread {
+                                try {
+                                    Thread.sleep(3000)
+                                    currentThread.interrupt()
+                                } catch (e: Exception) {}
+                            }
+
+                            try {
+                                val response = responseQueue.take()
+                                println("Am primit raspuns la intrebarea $question\n$response")
+                                timerThread.interrupt()
+                            } catch (e: InterruptedException) {
+                                println("Nu am primit raspuns in timp la intrebarea: $question")
+                            }
+                        }
                     }
                 }
             }
@@ -111,21 +137,14 @@ class StudentMicroservice {
         return null
     }
 
-    public fun run() {
-        // microserviciul se inscrie in lista de "subscribers" de la MessageManager prin conectarea la acesta
-        subscribeToMessageManager()
-        listenToGUI()
-
-        println("StudentMicroservice se executa pe portul: ${messageManagerSocket.localPort}")
-        println("Se asteapta mesaje...")
-
+    private fun listenToRequests() {
         val bufferReader = BufferedReader(InputStreamReader(messageManagerSocket.inputStream))
 
         while (true) {
             // se asteapta intrebari trimise prin intermediarul "MessageManager"
-            val response = bufferReader.readLine()
+            val request = bufferReader.readLine()
 
-            if (response == null) {
+            if (request == null) {
                 // daca se primeste un mesaj gol (NULL), atunci inseamna ca cealalta parte a socket-ului a fost inchisa
                 println("Microserviciul MessageService (${messageManagerSocket.port}) a fost oprit.")
                 bufferReader.close()
@@ -135,23 +154,42 @@ class StudentMicroservice {
 
             // se foloseste un thread separat pentru tratarea intrebarii primite
             thread {
-                val (messageType, messageDestination, messageBody) = response.split(" ", limit = 3)
-
-                when(messageType) {
-                    // tipul mesajului cunoscut de acest microserviciu este de forma:
-                    // intrebare <DESTINATIE_RASPUNS> <CONTINUT_INTREBARE>
-                    "intrebare" -> {
-                        println("Am primit o intrebare de la $messageDestination: \"${messageBody}\"")
-                        var responseToQuestion = respondToQuestion(messageBody)
-                        responseToQuestion?.let {
-                            responseToQuestion = "raspuns $messageDestination $it"
-                            println("Trimit raspunsul: \"${response}\"")
-                            messageManagerSocket.getOutputStream().write((responseToQuestion + "\n").toByteArray())
-                        }
-                    }
-                }
+                processRequest(request)
             }
         }
+    }
+
+    private fun processRequest(request: String) {
+        val (messageType, messageDestination, messageBody) = request.split(" ", limit = 3)
+
+        when(messageType) {
+            // tipul mesajului cunoscut de acest microserviciu este de forma:
+            // intrebare <DESTINATIE_RASPUNS> <CONTINUT_INTREBARE>
+            "intrebare" -> {
+                println("Am primit o intrebare de la $messageDestination: \"${messageBody}\"")
+                var responseToQuestion = respondToQuestion(messageBody)
+                responseToQuestion?.let {
+                    responseToQuestion = "raspuns $messageDestination $it"
+                    println("Trimit raspunsul: \"${request}\"")
+                    messageManagerSocket.getOutputStream().write((responseToQuestion + "\n").toByteArray())
+                }
+            }
+
+            "raspuns" -> {
+                responseQueue.add(messageBody)
+            }
+        }
+    }
+
+    public fun run() {
+        // microserviciul se inscrie in lista de "subscribers" de la MessageManager prin conectarea la acesta
+        subscribeToMessageManager()
+        listenToGUI()
+
+        println("StudentMicroservice se executa pe portul: ${messageManagerSocket.localPort}")
+        println("Se asteapta mesaje...")
+
+        listenToRequests()
     }
 }
 

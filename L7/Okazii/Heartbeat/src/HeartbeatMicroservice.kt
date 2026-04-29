@@ -505,8 +505,23 @@ class HeartbeatMicroservice {
     }
 }
 
+public fun connectToHeartbeat(heartbeatSocket: Socket, sourceSocket: String) {
+    heartbeatSocket.getOutputStream().write("Init:$sourceSocket\n".toByteArray())
+}
+
+public fun respondToPing(heartbeatSocket: Socket, sourceSocket: String) {
+    heartbeatSocket.getOutputStream().write("Response:$sourceSocket\n".toByteArray())
+}
+
+public fun endHeartbeatConnection(heartbeatSocket: Socket, sourceSocket: String) {
+    heartbeatSocket.getOutputStream().write("End:$sourceSocket\n".toByteArray())
+    heartbeatSocket.close()
+}
+
 fun main() {
     val heartbeatMicroservice = HeartbeatMicroservice()
     heartbeatMicroservice.run()
 }
+
+
 

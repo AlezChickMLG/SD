@@ -16,7 +16,7 @@ import kotlin.random.nextInt
 class BidderMicroservice {
     private var auctioneerSocket: Socket
     private var auctionResultObservable: Observable<String>
-    private lateinit var heartbeatSocket: Socket
+    private val heartbeatSocket: Socket = Socket("localhost", HEARTBEAT_PORT)
     private var myIdentity: String = "[BIDDER_NECONECTAT]"
     private var name: String = ""
     private var phone_number: String = ""
@@ -55,7 +55,7 @@ class BidderMicroservice {
             myIdentity = "[${auctioneerSocket.localPort}]"
             addToLog("Identitatea mea: [${myIdentity}]")
 
-            connectToHeartbeat()
+            connectToHeartbeat(heartbeatSocket, "bidderMicroservice-${auctioneerSocket.localPort}")
             listenToHeartbeat()
 
             name = listOf("Alex", "Cosmin", "Matei", "Stefan", "Sebi", "Marcel", "Luca", "Corcodus", "Bogdan", "Mircea")[Random.nextInt(0, 10)] + Random.nextInt(1, 101).toString()
@@ -136,7 +136,7 @@ class BidderMicroservice {
                 onNext = {
                     val messageType = it.split(":").first()
                     if (messageType == "Ping") {
-                        respondToPing()
+                        respondToPing(heartbeatSocket, "bidderMicroservice-${auctioneerSocket.localPort}")
                         println("Am trimis raspuns la pingul heartbeatului")
                     }
                 },
@@ -148,20 +148,6 @@ class BidderMicroservice {
                     addToLog("Heartbeat-ul a fost inchis")
                 }
             )
-    }
-
-    private fun connectToHeartbeat() {
-        heartbeatSocket = Socket("localhost", HEARTBEAT_PORT)
-        heartbeatSocket.getOutputStream().write("Init:bidderMicroservice-${auctioneerSocket.localPort}\n".toByteArray())
-    }
-
-    private fun respondToPing() {
-        heartbeatSocket.getOutputStream().write("Response:bidderMicroservice-${auctioneerSocket.localPort}\n".toByteArray())
-    }
-
-    private fun endHeartbeatConnection() {
-        heartbeatSocket.getOutputStream().write("End:bidderMicroservice-${auctioneerSocket.localPort}\n".toByteArray())
-        heartbeatSocket.close()
     }
 
     private fun bid() {
@@ -208,7 +194,7 @@ class BidderMicroservice {
     fun run() {
         bid()
         waitForResult()
-        endHeartbeatConnection()
+        endHeartbeatConnection(heartbeatSocket, "bidderMicroservice-${auctioneerSocket.localPort}")
     }
 }
 

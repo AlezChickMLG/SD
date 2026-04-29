@@ -14,7 +14,7 @@ import kotlin.system.exitProcess
 class BiddingProcessorMicroservice {
     private var biddingProcessorSocket: ServerSocket
     private lateinit var auctioneerSocket: Socket
-    private lateinit var heartbeatSocket: Socket
+    private val heartbeatSocket: Socket = Socket("localhost", HEARTBEAT_PORT)
     private var receiveProcessedBidsObservable: Observable<String>
     private val subscriptions = CompositeDisposable()
     private val processedBidsQueue: Queue<Message> = LinkedList<Message>()
@@ -43,7 +43,7 @@ class BiddingProcessorMicroservice {
     }
 
     init {
-        connectToHeartbeat()
+        connectToHeartbeat(heartbeatSocket, "biddingProcessorMicroservice")
         listenToHeartbeat()
 
         biddingProcessorSocket = ServerSocket(BIDDING_PROCESSOR_PORT)
@@ -121,7 +121,7 @@ class BiddingProcessorMicroservice {
                 onNext = {
                     val messageType = it.split(":").first()
                     if (messageType == "Ping") {
-                        respondToPing()
+                        respondToPing(heartbeatSocket, "biddingProcessorMicroservice")
                         println("Am trimis raspuns la pingul heartbeatului")
                     }
                 },
@@ -131,20 +131,6 @@ class BiddingProcessorMicroservice {
                 }
             )
         subscriptions.add(listenSubscribe)
-    }
-
-    private fun connectToHeartbeat() {
-        heartbeatSocket = Socket("localhost", HEARTBEAT_PORT)
-        heartbeatSocket.getOutputStream().write("Init:biddingProcessorMicroservice\n".toByteArray())
-    }
-
-    private fun respondToPing() {
-        heartbeatSocket.getOutputStream().write("Response:biddingProcessorMicroservice\n".toByteArray())
-    }
-
-    private fun endHeartbeatConnection() {
-        heartbeatSocket.getOutputStream().write("End:biddingProcessorMicroservice\n".toByteArray())
-        heartbeatSocket.close()
     }
 
     private fun receiveProcessedBids() {
@@ -204,7 +190,7 @@ class BiddingProcessorMicroservice {
 
         // se elibereaza memoria din multimea de Subscriptions
         subscriptions.dispose()
-        endHeartbeatConnection()
+        endHeartbeatConnection(heartbeatSocket, "biddingProcessorMicroservice")
     }
 }
 

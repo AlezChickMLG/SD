@@ -15,12 +15,13 @@ import kotlin.system.exitProcess
 class AuctioneerMicroservice {
     private var auctioneerSocket: ServerSocket
     private lateinit var messageProcessorSocket: Socket
-    private lateinit var heartbeatSocket: Socket
+    private val heartbeatSocket: Socket = Socket("localhost", HEARTBEAT_PORT)
     private var receiveBidsObservable: Observable<String>
     private val subscriptions = CompositeDisposable()
     private val bidQueue: Queue<Message> = LinkedList<Message>()
     private val bidderConnections: MutableList<Socket> = mutableListOf()
     private val exceptionLog: MutableList<String> = mutableListOf()
+    private val timerMicroservice = TimerMicroservice()
 
     companion object Constants {
         const val MESSAGE_PROCESSOR_HOST = "localhost"
@@ -46,7 +47,8 @@ class AuctioneerMicroservice {
     }
 
     init {
-        connectToHeartbeat()
+        timerMicroservice.startTimer()
+        connectToHeartbeat(heartbeatSocket, "auctioneerMicroservice")
         listenToHeartbeat()
 
         auctioneerSocket = ServerSocket(AUCTIONEER_PORT)
@@ -97,7 +99,6 @@ class AuctioneerMicroservice {
                 } catch (e: SocketTimeoutException) {
                     // daca au trecut cele 15 secunde de la pornirea licitatiei, inseamna ca licitatia s-a incheiat
                     // se emite semnalul Complete pentru a incheia fluxul de oferte
-                    startAuctionHeartbeat()
                     emitter.onComplete()
                     break
                 }
@@ -128,34 +129,17 @@ class AuctioneerMicroservice {
                 onNext = {
                     val messageType = it.split(":").first()
                     if (messageType == "Ping") {
-                        respondToPing()
+                        respondToPing(heartbeatSocket, "auctioneerMicroservice")
                         println("Am trimis raspuns la pingul heartbeatului")
                     }
                 },
                 onComplete = {
                     println("Heartbeat-ul a fost inchis")
                     addToLog("Heartbeat-ul a fost inchis")
+                    println("Time: ${timerMicroservice.getTime()}")
                 }
             )
         subscriptions.add(listenSubscribe)
-    }
-
-    private fun connectToHeartbeat() {
-        heartbeatSocket = Socket("localhost", HEARTBEAT_PORT)
-        heartbeatSocket.getOutputStream().write("Init:auctioneerMicroservice\n".toByteArray())
-    }
-
-    private fun respondToPing() {
-        heartbeatSocket.getOutputStream().write("Response:auctioneerMicroservice\n".toByteArray())
-    }
-
-    private fun startAuctionHeartbeat() {
-        heartbeatSocket.getOutputStream().write("Start:\n".toByteArray())
-    }
-
-    private fun endHeartbeatConnection() {
-        heartbeatSocket.getOutputStream().write("End:auctioneerMicroservice\n".toByteArray())
-        heartbeatSocket.close()
     }
 
     private fun receiveBids() {
@@ -177,6 +161,7 @@ class AuctioneerMicroservice {
             onError = {
                 println("Eroare: $it")
                 addToLog(it.toString())
+                println("Time: ${timerMicroservice.getTime()}")
             }
         )
         subscriptions.add(receiveBidsSubscription)
@@ -216,6 +201,7 @@ class AuctioneerMicroservice {
             addToLog("Nu ma pot conecta la MessageProcessor!")
             auctioneerSocket.close()
             log()
+            println("Time: ${timerMicroservice.getTime()}")
             exitProcess(1)
         }
     }
@@ -249,11 +235,13 @@ class AuctioneerMicroservice {
                 }
                 it.close()
             }
+            println("Time: ${timerMicroservice.getTime()}")
         } catch (e: Exception) {
             println("Nu ma pot conecta la BiddingProcessor!")
             addToLog("Nu ma pot conecta la BiddingProcessor!")
             auctioneerSocket.close()
             log()
+            println("Time: ${timerMicroservice.getTime()}")
             exitProcess(1)
         }
 
@@ -263,7 +251,8 @@ class AuctioneerMicroservice {
 
     fun run() {
         receiveBids()
-        endHeartbeatConnection()
+        endHeartbeatConnection(heartbeatSocket, "auctioneerMicroservice")
+        println("Time: ${timerMicroservice.getTime()}")
     }
 }
 

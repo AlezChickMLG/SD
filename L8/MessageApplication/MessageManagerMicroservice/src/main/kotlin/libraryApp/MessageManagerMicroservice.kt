@@ -39,11 +39,12 @@ class MessageManagerMicroservice {
         subscribers.get(student)?.getOutputStream()?.write((message + "\n").toByteArray())
     }
 
-    private fun processInitMessage(bufferReader: BufferedReader, clientConnection: Socket): String {
-        val initMessage = bufferReader.readLine()
-        println("Init message: $initMessage")
-
+    private fun processInitMessage(initMessage: String?, clientConnection: Socket): String {
         try {
+            if (initMessage == null) {
+                throw Exception()
+            }
+
             val (messageType, entityType) = initMessage.split(":")
             if (messageType != "Init")
                 throw IllegalArgumentException("Mesaj ciudat")
@@ -61,6 +62,52 @@ class MessageManagerMicroservice {
         }
     }
 
+    private fun listenToRequests(clientConnection: Socket, entityType: String) {
+        val reader = BufferedReader(InputStreamReader(clientConnection.inputStream))
+
+        while (true) {
+            try {
+                val request = reader.readLine()
+
+                println("Primit mesaj: $request")
+
+                // daca se primeste un mesaj gol (NULL), atunci inseamna ca cealalta parte a socket-ului a fost inchisa
+                if (request == null) {
+                    // deci subscriber-ul respectiv a fost deconectat
+                    println("$entityType a fost deconectat.")
+                    synchronized(subscribers) {
+                        subscribers.remove(entityType)
+                    }
+                    reader.close()
+                    clientConnection.close()
+                    break
+                }
+
+                val (messageType, messageDestination, messageBody) = request.split(" ", limit = 3)
+
+                when (messageType) {
+                    "intrebare" -> {
+                        // tipul mesajului de tip intrebare este de forma:
+                        // intrebare <DESTINATIE_RASPUNS> <CONTINUT_INTREBARE>
+                        when {
+                            entityType == "teacher" -> broadcastMessageToStudents(request)
+                            entityType.startsWith("student") -> sendMessageToTeacher(request)
+                        }
+                    }
+
+                    "raspuns" -> {
+                        when {
+                            entityType.startsWith("student") -> respondToTeacher(request)
+                            entityType == "teacher" -> respondToStudent(messageDestination, request)
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                println("Eroare la listenToRequests: $entityType")
+            }
+        }
+    }
+
     public fun run() {
         // se porneste un socket server TCP pe portul 1500 care asculta pentru conexiuni
         messageManagerSocket = ServerSocket(MESSAGE_MANAGER_PORT)
@@ -74,46 +121,13 @@ class MessageManagerMicroservice {
             // se porneste un thread separat pentru tratarea conexiunii cu clientul
             thread {
                 val bufferReader = BufferedReader(InputStreamReader(clientConnection.inputStream))
+                val initMessage = bufferReader.readLine()
 
                 //procesarea subscriberului prin mesajul initial
-                val entityType = processInitMessage(bufferReader, clientConnection)
+                val entityType = processInitMessage(initMessage, clientConnection)
 
-                while (true) {
-                    // se citeste raspunsul de pe socketul TCP
-                    val receivedMessage = bufferReader.readLine()
-
-                    // daca se primeste un mesaj gol (NULL), atunci inseamna ca cealalta parte a socket-ului a fost inchisa
-                    if (receivedMessage == null) {
-                        // deci subscriber-ul respectiv a fost deconectat
-                        println("Subscriber-ul ${clientConnection.port} a fost deconectat.")
-                        synchronized(subscribers) {
-                            subscribers.remove(entityType)
-                        }
-                        bufferReader.close()
-                        clientConnection.close()
-                        break
-                    }
-
-                    println("Primit mesaj: $receivedMessage")
-                    val (messageType, messageDestination, messageBody) = receivedMessage.split(" ", limit = 3)
-
-                    when (messageType) {
-                        "intrebare" -> {
-                            // tipul mesajului de tip intrebare este de forma:
-                            // intrebare <DESTINATIE_RASPUNS> <CONTINUT_INTREBARE>
-                            when {
-                                entityType == "teacher" -> broadcastMessageToStudents("intrebare teacher $messageBody")
-                                entityType.startsWith("student") -> sendMessageToTeacher("intrebare $entityType $messageBody")
-                            }
-                        }
-                        "raspuns" -> {
-                            when {
-                                entityType.startsWith("student") -> respondToTeacher(messageBody)
-                                entityType == "teacher" -> respondToStudent(messageDestination, messageBody)
-                            }
-                        }
-                    }
-                }
+                if (entityType != "")
+                    listenToRequests(clientConnection, entityType)
             }
         }
     }

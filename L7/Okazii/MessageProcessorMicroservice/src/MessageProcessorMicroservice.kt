@@ -14,7 +14,7 @@ import kotlin.system.exitProcess
 class MessageProcessorMicroservice {
     private var messageProcessorSocket: ServerSocket
     private lateinit var biddingProcessorSocket: Socket
-    private lateinit var heartbeatSocket: Socket
+    private val heartbeatSocket: Socket = Socket("localhost", HEARTBEAT_PORT)
     private var auctioneerConnection:Socket
     private var receiveInQueueObservable: Observable<String>
     private val subscriptions = CompositeDisposable()
@@ -45,7 +45,7 @@ class MessageProcessorMicroservice {
     }
 
     init {
-        connectToHeartbeat()
+        connectToHeartbeat(heartbeatSocket, "messageProcessorMicroservice")
         listenToHeartbeat()
 
         messageProcessorSocket = ServerSocket(MESSAGE_PROCESSOR_PORT)
@@ -117,7 +117,7 @@ class MessageProcessorMicroservice {
                 onNext = {
                     val messageType = it.split(":").first()
                     if (messageType == "Ping") {
-                        respondToPing()
+                        respondToPing(heartbeatSocket, "messageProcessorMicroservice")
                         println("Am trimis raspuns la pingul heartbeatului")
                     }
                 },
@@ -127,20 +127,6 @@ class MessageProcessorMicroservice {
                 }
             )
         subscriptions.add(listenSubscribe)
-    }
-
-    private fun connectToHeartbeat() {
-        heartbeatSocket = Socket("localhost", HEARTBEAT_PORT)
-        heartbeatSocket.getOutputStream().write("Init:messageProcessorMicroservice\n".toByteArray())
-    }
-
-    private fun respondToPing() {
-        heartbeatSocket.getOutputStream().write("Response:messageProcessorMicroservice\n".toByteArray())
-    }
-
-    private fun endHeartbeatConnection() {
-        heartbeatSocket.getOutputStream().write("End:messageProcessorMicroservice\n".toByteArray())
-        heartbeatSocket.close()
     }
 
     private fun receiveAndProcessMessages() {
@@ -248,7 +234,7 @@ class MessageProcessorMicroservice {
 
     fun run() {
         receiveAndProcessMessages()
-        endHeartbeatConnection()
+        endHeartbeatConnection(heartbeatSocket, "messageProcessorMicroservice")
     }
 }
 

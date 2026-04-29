@@ -12,6 +12,9 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="io.reactivex.rxjava3.rxjava" level="project" />
     <orderEntry type="library" name="io.reactivex.rxjava3.rxkotlin" level="project" />
-    <orderEntry type="library" name="MessageLibrary2" level="project" />
+    <orderEntry type="library" name="MessageLibrary" level="project" />
+    <orderEntry type="library" name="Heartbeat" level="project" />
+    <orderEntry type="library" name="Heartbeat" level="project" />
+    <orderEntry type="library" name="TImerMicroservice" level="project" />
   </component>
 </module>
