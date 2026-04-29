@@ -1,5 +1,14 @@
 package libraryApp
 
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.withTimeoutOrNull
 import java.io.BufferedReader
 import java.io.File
 import java.io.InputStreamReader
@@ -7,7 +16,9 @@ import java.lang.Exception
 import java.net.ServerSocket
 import java.net.Socket
 import java.util.concurrent.BlockingQueue
+import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.LinkedBlockingQueue
+import java.util.concurrent.atomic.AtomicInteger
 import kotlin.concurrent.thread
 import kotlin.concurrent.timer
 import kotlin.system.exitProcess
@@ -25,8 +36,11 @@ class StudentMicroservice {
     private lateinit var guiSocket: ServerSocket
     private lateinit var guiClient: Socket
 
+    private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+    private val questionID = AtomicInteger(0)
+
     //response queue
-    private val responseQueue: BlockingQueue<String> = LinkedBlockingQueue()
+    private val responseQueue = ConcurrentHashMap<Int, CompletableDeferred<String>>()
 
     init {
         val databaseLines: List<String> = File("questions_database.txt").readLines()
@@ -64,57 +78,57 @@ class StudentMicroservice {
         messageManagerSocket.getOutputStream().write("Init:student$studentID\n".toByteArray())
     }
 
-    private fun listenToGUI() {
-        thread {
-            val guiPort = 2000 + studentID.toInt()
+     private fun listenToGUI() {
+         val guiPort = 2000 + studentID.toInt()
 
-            guiSocket = ServerSocket(guiPort)
-            println("Am creat un server pe portul $guiPort")
+         guiSocket = ServerSocket(guiPort)
+         println("Am creat un server pe portul $guiPort")
 
-            while (true) {
-                guiClient = guiSocket.accept()
-                //println("S-a conectat un client pe portul: ${guiClient.port}")
+         while (true) {
+             guiClient = guiSocket.accept()
+             //println("S-a conectat un client pe portul: ${guiClient.port}")
 
-                thread {
-                    val reader = BufferedReader(InputStreamReader(guiClient.inputStream))
+             val reader = BufferedReader(InputStreamReader(guiClient.inputStream))
 
-                    while (true) {
-                        val question = reader.readLine()
+             while (true) {
+                 val question = reader.readLine()
 
-                        if (question == null) {
-                            guiClient.close()
-                            //println("S-a terminat conexiunea pe portul: ${guiClient.port}")
-                            break
-                        }
+                 if (question == null) {
+                     println("Conectiunea cu gui a fost inchisa")
+                     guiClient.close()
+                     break
+                 }
 
-                        println("Intrebare de la GUI: $question")
+                 coroutineScope.launch {
+                     println("Intrebare de la GUI: $question")
 
-                        thread {
-                            messageManagerSocket.getOutputStream()
-                                .write("intrebare student$studentID $question\n".toByteArray())
+                     val id = questionID.incrementAndGet()
+                     messageManagerSocket.getOutputStream()
+                         .write("intrebare$id student$studentID $question\n".toByteArray())
 
-                            val currentThread = Thread.currentThread()
+                     if (id > 10)
+                         exitProcess(1)
 
-                            val timerThread = thread {
-                                try {
-                                    Thread.sleep(3000)
-                                    currentThread.interrupt()
-                                } catch (e: Exception) {}
-                            }
+                     val deferred = CompletableDeferred<String>()
 
-                            try {
-                                val response = responseQueue.take()
-                                println("Am primit raspuns la intrebarea $question\n$response")
-                                timerThread.interrupt()
-                            } catch (e: InterruptedException) {
-                                println("Nu am primit raspuns in timp la intrebarea: $question")
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+                     //astept completarea atunci cand primesc raspunsul
+                     responseQueue[id] = deferred
+
+                     val response = withTimeoutOrNull(3000) {
+                         deferred.await()
+                     }
+
+                     if (response == null) {
+                         println("Nu am primit raspuns la timp")
+                     } else {
+                         println("Am primit raspuns la intrebarea: $question\n${response.split(" ").last()}")
+                     }
+
+                     responseQueue.remove(id)
+                 }
+             }
+         }
+     }
 
     private fun subscribeToMessageManager() {
         try {
@@ -144,6 +158,8 @@ class StudentMicroservice {
             // se asteapta intrebari trimise prin intermediarul "MessageManager"
             val request = bufferReader.readLine()
 
+            println("Request de procesat: $request")
+
             if (request == null) {
                 // daca se primeste un mesaj gol (NULL), atunci inseamna ca cealalta parte a socket-ului a fost inchisa
                 println("Microserviciul MessageService (${messageManagerSocket.port}) a fost oprit.")
@@ -153,19 +169,19 @@ class StudentMicroservice {
             }
 
             // se foloseste un thread separat pentru tratarea intrebarii primite
-            thread {
+            coroutineScope.launch {
                 processRequest(request)
             }
         }
     }
 
-    private fun processRequest(request: String) {
+    private suspend fun processRequest(request: String) {
         val (messageType, messageDestination, messageBody) = request.split(" ", limit = 3)
 
-        when(messageType) {
+        when {
             // tipul mesajului cunoscut de acest microserviciu este de forma:
             // intrebare <DESTINATIE_RASPUNS> <CONTINUT_INTREBARE>
-            "intrebare" -> {
+            messageType.startsWith("intrebare") -> {
                 println("Am primit o intrebare de la $messageDestination: \"${messageBody}\"")
                 var responseToQuestion = respondToQuestion(messageBody)
                 responseToQuestion?.let {
@@ -175,8 +191,13 @@ class StudentMicroservice {
                 }
             }
 
-            "raspuns" -> {
-                responseQueue.add(messageBody)
+            messageType.startsWith("raspuns") -> {
+                try {
+                    val question_id = messageType.substring("raspuns".length).toInt()
+                    responseQueue[question_id]?.complete(messageBody)
+                } catch (e: Exception) {
+                    println("Eroare la completarea deferrul-ui raspuns: $e")
+                }
             }
         }
     }
@@ -184,7 +205,9 @@ class StudentMicroservice {
     public fun run() {
         // microserviciul se inscrie in lista de "subscribers" de la MessageManager prin conectarea la acesta
         subscribeToMessageManager()
-        listenToGUI()
+        coroutineScope.launch {
+            listenToGUI()
+        }
 
         println("StudentMicroservice se executa pe portul: ${messageManagerSocket.localPort}")
         println("Se asteapta mesaje...")

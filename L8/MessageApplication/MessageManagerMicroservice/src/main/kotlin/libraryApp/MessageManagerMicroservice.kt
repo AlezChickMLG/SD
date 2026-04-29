@@ -19,6 +19,12 @@ class MessageManagerMicroservice {
         subscribers = hashMapOf()
     }
 
+    private fun listAll() {
+        subscribers.forEach {
+            println(it.key)
+        }
+    }
+
     private fun broadcastMessageToStudents(message: String) {
         subscribers.forEach {
             it.takeIf { it.key.startsWith("student") }
@@ -79,26 +85,34 @@ class MessageManagerMicroservice {
                         subscribers.remove(entityType)
                     }
                     reader.close()
-                    clientConnection.close()
+                      clientConnection.close()
                     break
                 }
 
                 val (messageType, messageDestination, messageBody) = request.split(" ", limit = 3)
 
-                when (messageType) {
-                    "intrebare" -> {
+                when {
+                    messageType.startsWith("intrebare") -> {
                         // tipul mesajului de tip intrebare este de forma:
                         // intrebare <DESTINATIE_RASPUNS> <CONTINUT_INTREBARE>
                         when {
-                            entityType == "teacher" -> broadcastMessageToStudents(request)
-                            entityType.startsWith("student") -> sendMessageToTeacher(request)
+                            entityType == "teacher" -> {
+                                broadcastMessageToStudents(request)
+                            }
+                            entityType.startsWith("student") -> {
+                                sendMessageToTeacher(request)
+                            }
                         }
                     }
 
-                    "raspuns" -> {
+                    messageType.startsWith("raspuns") -> {
                         when {
-                            entityType.startsWith("student") -> respondToTeacher(request)
-                            entityType == "teacher" -> respondToStudent(messageDestination, request)
+                            entityType.startsWith("student") -> {
+                                respondToTeacher(request)
+                            }
+                            entityType == "teacher" -> {
+                                respondToStudent(messageDestination, request)
+                            }
                         }
                     }
                 }

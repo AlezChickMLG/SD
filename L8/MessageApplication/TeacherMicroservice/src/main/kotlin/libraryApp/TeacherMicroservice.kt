@@ -53,19 +53,21 @@ class TeacherMicroservice {
     private fun processRequest(request: String) {
         println("Request received: $request")
         val (messageType, messageDestination, messageBody) = request.split(" ", limit = 3)
-        when (messageType) {
-            "intrebare" -> {
+        when {
+            messageType.startsWith("intrebare") -> {
                 val response = questionDatabase.find {
                     it.first == messageBody
                 }
 
+                val id = messageType.substring("intrebare".length)
+
                 if (response != null) {
                     messageManagerSocket.getOutputStream()
-                        .write("raspuns $messageDestination ${response.second}\n".toByteArray())
+                        .write("raspuns$id $messageDestination ${response.second}\n".toByteArray())
                     println("Am trimis catre $messageDestination raspunsul: ${response.second}")
                 }
             }
-            "raspuns" -> {
+            messageType.startsWith("raspuns") -> {
                 responseQueue.add(request)
             }
         }

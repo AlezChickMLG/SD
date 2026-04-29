@@ -4,37 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7da94b95-67e6-45b5-a2f3-d451a96f3554" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/TImerMicroservice_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/libraries/Heartbeat.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/libraries/TImerMicroservice.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../L7/Okazii/TImerMicroservice/TImerMicroservice.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/AuctioneerMicroservice_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/AuctioneerMicroservice_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/BidderMicroservice_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/BidderMicroservice_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/BiddingProcessorMicroservice_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/BiddingProcessorMicroservice_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/Heartbeat_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/Heartbeat_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/MessageLibrary2_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/MessageLibrary_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/MessageProcessorMicroservice_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/artifacts/MessageProcessorMicroservice_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/.idea/libraries/MessageLibrary2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/libraries/MessageLibrary.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/AuctioneerMicroservice/AuctioneerMicroservice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/AuctioneerMicroservice/AuctioneerMicroservice.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/AuctioneerMicroservice/src/AuctioneerMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/AuctioneerMicroservice/src/AuctioneerMicroservice.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/BidderMicroservice/BidderMicroservice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/BidderMicroservice/BidderMicroservice.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/BidderMicroservice/src/BidderMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/BidderMicroservice/src/BidderMicroservice.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/BiddingProcessorMicroservice/BiddingProcessorMicroservice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/BiddingProcessorMicroservice/BiddingProcessorMicroservice.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/BiddingProcessorMicroservice/src/BiddingProcessorMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/BiddingProcessorMicroservice/src/BiddingProcessorMicroservice.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/Heartbeat/Heartbeat.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/Heartbeat/Heartbeat.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/Heartbeat/src/HeartbeatMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/Heartbeat/src/HeartbeatMicroservice.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/MessageLibrary2/MessageLibrary2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/MessageLibrary/MessageLibrary.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/MessageLibrary2/src/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/MessageLibrary2/src/Main.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/MessageProcessorMicroservice/MessageProcessorMicroservice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/MessageProcessorMicroservice/MessageProcessorMicroservice.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L7/Okazii/MessageProcessorMicroservice/src/MessageProcessorMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L7/Okazii/MessageProcessorMicroservice/src/MessageProcessorMicroservice.kt" afterDir="false" />
+    <list default="true" id="7da94b95-67e6-45b5-a2f3-d451a96f3554" name="Changes" comment="Lab8 full-duplex complet">
+      <change beforePath="$PROJECT_DIR$/../GraphicInterface/TeacherStudentGUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/../GraphicInterface/TeacherStudentGUI.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../StudentMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentMicroservice/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StudentMicroservice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentMicroservice/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../StudentMicroservice/src/main/kotlin/libraryApp/StudentMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentMicroservice/src/main/kotlin/libraryApp/StudentMicroservice.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TeacherMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TeacherMicroservice/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TeacherMicroservice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TeacherMicroservice/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TeacherMicroservice/src/main/kotlin/libraryApp/TeacherMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../TeacherMicroservice/src/main/kotlin/libraryApp/TeacherMicroservice.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -118,6 +97,19 @@
       <option name="presentableId" value="Default" />
       <updated>1777110645888</updated>
     </task>
+    <task id="LOCAL-00001" summary="Lab8 full-duplex complet">
+      <option name="closed" value="true" />
+      <created>1777445451117</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1777445451117</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Lab8 full-duplex complet" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lab8 full-duplex complet" />
   </component>
 </project>

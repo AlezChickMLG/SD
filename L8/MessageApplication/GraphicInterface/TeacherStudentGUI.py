@@ -5,7 +5,8 @@ import socket
 
 HOST = "localhost"
 TEACHER_PORT = 1600
-
+is_connected = False
+student_sock = None
 
 def resolve_question(question_text):
     # creare socket TCP
@@ -29,16 +30,21 @@ def resolve_question(question_text):
     response_widget.insert(END, response_text)
 
 def resolve_student_question(port, question_text):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    global is_connected
+    global student_sock
 
     try:
         #conectare la portul pentru gui al studentului
-        sock.connect((HOST, port))
+        if not is_connected:
+            student_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+            student_sock.connect((HOST, port))
+            is_connected = True
 
         #Trimitere mesaj de verificare
-        sock.send(bytes(question_text + "\n", "utf-8"))
+        student_sock.send(bytes(question_text + "\n", "utf-8"))
     except Exception as e:
-        print("Eroare la conectare: " + str(e))
+        print("Eroare la conectare sau trimitere: " + str(e))
 
     response_widget.insert(END, "Am trimis un mesaj studentului")
 
@@ -54,14 +60,17 @@ def ask_student_question():
     port = student_port.get()
     question_text = student_question.get()
 
-    try:
-        port = int(port)
-        resolve_student_question(port, question_text)
+    if question_text:
+        try:
+            port = int(port)
+            resolve_student_question(port, question_text)
 
-    except ValueError as e:
-        response_widget.insert(END, "[Eroare]: Introdu un port valabil")
+        except ValueError as e:
+            response_widget.insert(END, "[Eroare]: Introdu un port valabil")
 
 if __name__ == '__main__':
+    connected = False
+
     root = Tk()
     root.title("Interactiune profesor-studenti")
 
