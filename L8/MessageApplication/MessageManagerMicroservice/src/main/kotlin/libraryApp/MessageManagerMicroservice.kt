@@ -18,11 +18,14 @@ import kotlin.concurrent.thread
 class MessageManagerMicroservice {
     private val subscribers: HashMap<String, Socket>
     private lateinit var messageManagerSocket: ServerSocket
+    private lateinit var heartbeatSocket: Socket
 
     private val coroutineScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
     private val subscriberMutex = Mutex()
 
     companion object Constants {
+        val HEARTBEAT_HOST = System.getenv("HEARTBEAT_HOST") ?: "localhost"
+        const val HEARTBEAT_PORT = 1900
         const val MESSAGE_MANAGER_PORT = 1500
     }
 
@@ -34,6 +37,14 @@ class MessageManagerMicroservice {
         subscribers.forEach {
             println(it.key)
         }
+    }
+
+    private fun sendInitMessageToHeartbeat() {
+        heartbeatSocket.getOutputStream().write("Init:messageManager\n".toByteArray())
+    }
+
+    private fun connectToHeartbeat() {
+        heartbeatSocket = Socket(HEARTBEAT_HOST, HEARTBEAT_PORT)
     }
 
     private suspend fun broadcastMessageToStudents(message: String) {
@@ -150,6 +161,10 @@ class MessageManagerMicroservice {
     }
 
     public fun run() {
+        //heartbeat
+        connectToHeartbeat()
+        sendInitMessageToHeartbeat()
+
         // se porneste un socket server TCP pe portul 1500 care asculta pentru conexiuni
         messageManagerSocket = ServerSocket(MESSAGE_MANAGER_PORT)
         println("MessageManagerMicroservice se executa pe portul: ${messageManagerSocket.localPort}")

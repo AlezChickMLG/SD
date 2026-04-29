@@ -6,6 +6,9 @@ import socket
 HOST = "localhost"
 TEACHER_PORT = 1600
 
+STUDENT_HOST = ""
+STUDENT_PORT = None
+
 is_teacher_connected = False
 is_connected = False
 
@@ -38,14 +41,18 @@ def resolve_question(question_text):
 def resolve_student_question(port, question_text):
     global is_connected
     global student_sock
+    global STUDENT_PORT
 
     try:
         #conectare la portul pentru gui al studentului
-        if not is_connected:
-            student_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        if not is_connected or port != STUDENT_PORT:
+            if student_sock is not None:
+                student_sock.close()
 
+            student_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             student_sock.connect((HOST, port))
             is_connected = True
+            STUDENT_PORT = port
 
         #Trimitere mesaj de verificare
         student_sock.send(bytes(question_text + "\n", "utf-8"))

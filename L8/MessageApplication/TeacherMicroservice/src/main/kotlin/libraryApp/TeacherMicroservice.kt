@@ -22,6 +22,7 @@ import kotlin.system.exitProcess
 class TeacherMicroservice {
     private lateinit var messageManagerSocket: Socket
     private lateinit var teacherMicroserviceServerSocket: ServerSocket
+    private lateinit var heartbeatSocket: Socket
 
     private lateinit var questionDatabase: MutableList<Pair<String, String>>
 
@@ -35,8 +36,10 @@ class TeacherMicroservice {
         // pentru testare, se foloseste localhost. pentru deploy, server-ul socket (microserviciul MessageManager) se identifica dupa un "hostname"
         // acest hostname poate fi trimis (optional) ca variabila de mediu
         val MESSAGE_MANAGER_HOST = System.getenv("MESSAGE_MANAGER_HOST") ?: "localhost"
+        val HEARTBEAT_HOST = System.getenv("HEARTBEAT_HOST") ?: "localhost"
         const val MESSAGE_MANAGER_PORT = 1500
         const val TEACHER_PORT = 1600
+        const val HEARTBEAT_PORT = 1900
     }
 
     init {
@@ -61,6 +64,14 @@ class TeacherMicroservice {
 
     private fun sendInitMessage() {
         messageManagerSocket.getOutputStream().write("Init:teacher\n".toByteArray())
+    }
+
+    private fun connectToHeartbeat() {
+        heartbeatSocket = Socket(HEARTBEAT_HOST, HEARTBEAT_PORT)
+    }
+
+    private fun sendInitMessageToHeartbeat() {
+        heartbeatSocket.getOutputStream().write("Init:teacher\n".toByteArray())
     }
 
     private fun processRequest(request: String) {
@@ -114,6 +125,10 @@ class TeacherMicroservice {
         // microserviciul se inscrie in lista de "subscribers" de la MessageManager prin conectarea la acesta
         subscribeToMessageManager()
 
+        //heartbeat
+        connectToHeartbeat()
+        sendInitMessageToHeartbeat()
+
         coroutineScope.launch {
             listenToRequests()
         }
@@ -124,43 +139,48 @@ class TeacherMicroservice {
         println("TeacherMicroservice se executa pe portul: ${teacherMicroserviceServerSocket.localPort}")
         println("Se asteapta cereri (intrebari)...")
 
-        val clientConnection = teacherMicroserviceServerSocket.accept()
-        val clientBufferReader = BufferedReader(InputStreamReader(clientConnection.inputStream))
-
         while (true) {
-            // se asteapta conexiuni din partea clientilor ce doresc sa puna o intrebare
-            // (in acest caz, din partea aplicatiei client GUI)
+            val clientConnection = teacherMicroserviceServerSocket.accept()
+            println("S-a conectat GUI-ul")
 
-            val receivedQuestion = clientBufferReader.readLine()
+            val clientBufferReader = BufferedReader(InputStreamReader(clientConnection.inputStream))
 
-            if (receivedQuestion == null) {
-                println("Conexiunea cu GUI a fost inchisa")
-                clientConnection.close()
-                exitProcess(1)
-            }
+            while (true) {
+                // se asteapta conexiuni din partea clientilor ce doresc sa puna o intrebare
+                // (in acest caz, din partea aplicatiei client GUI)
 
-            // se foloseste un thread separat pentru tratarea fiecarei conexiuni client
-            coroutineScope.launch {
-                println("S-a primit o cerere de la gui")
+                val receivedQuestion = clientBufferReader.readLine()
 
-                val id = questionID.incrementAndGet()
-
-                println("Trimit catre MessageManager: ${"intrebare teacher $receivedQuestion\n"}")
-                messageManagerSocket.getOutputStream().write(("intrebare$id teacher $receivedQuestion\n").toByteArray())
-
-                val deferred = CompletableDeferred<String>()
-                responseQueue[id] = deferred
-
-                val response = withTimeoutOrNull(3000) {
-                    deferred.await()
+                if (receivedQuestion == null) {
+                    println("Conexiunea cu GUI a fost inchisa")
+                    clientConnection.close()
+                    break
                 }
 
-                if (response == null)
-                    println("Nu am primit raspuns la intrebarea $id")
-                else
-                    println("Am primit raspuns la intrebarea $receivedQuestion\n$response")
+                // se foloseste un thread separat pentru tratarea fiecarei conexiuni client
+                coroutineScope.launch {
+                    println("S-a primit o cerere de la gui")
 
-                responseQueue.remove(id)
+                    val id = questionID.incrementAndGet()
+
+                    println("Trimit catre MessageManager: ${"intrebare teacher $receivedQuestion\n"}")
+                    messageManagerSocket.getOutputStream()
+                        .write(("intrebare$id teacher $receivedQuestion\n").toByteArray())
+
+                    val deferred = CompletableDeferred<String>()
+                    responseQueue[id] = deferred
+
+                    val response = withTimeoutOrNull(3000) {
+                        deferred.await()
+                    }
+
+                    if (response == null)
+                        println("Nu am primit raspuns la intrebarea $id")
+                    else
+                        println("Am primit raspuns la intrebarea $receivedQuestion\n$response")
+
+                    responseQueue.remove(id)
+                }
             }
         }
     }

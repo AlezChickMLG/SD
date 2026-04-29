@@ -28,6 +28,7 @@ class StudentMicroservice {
     // [<INTREBARE 1, RASPUNS 1>, <INTREBARE 2, RASPUNS 2>, ... ]
     private lateinit var questionDatabase: MutableList<Pair<String, String>>
     private lateinit var messageManagerSocket: Socket
+    private lateinit var heartbeatSocket: Socket
 
     //id-ul studentului
     private lateinit var studentID: Number
@@ -63,7 +64,8 @@ class StudentMicroservice {
             System.getenv("STUDENT_ID").toInt()
         } catch (e: kotlin.Exception) {
             println("Eroare la gasirea variabilei de mediu STUDENT_ID")
-            0
+            print("Student ID:")
+            readln().toInt()
         }
     }
 
@@ -71,11 +73,21 @@ class StudentMicroservice {
         // pentru testare, se foloseste localhost. pentru deploy, server-ul socket (microserviciul MessageManager) se identifica dupa un "hostname"
         // acest hostname poate fi trimis (optional) ca variabila de mediu
         val MESSAGE_MANAGER_HOST = System.getenv("MESSAGE_MANAGER_HOST") ?: "localhost"
+        val HEARTBEAT_HOST = System.getenv("HEARTBEAT_HOST") ?: "localhost"
         const val MESSAGE_MANAGER_PORT = 1500
+        const val HEARTBEAT_PORT = 1900
     }
 
     private fun sendInitMessage() {
         messageManagerSocket.getOutputStream().write("Init:student$studentID\n".toByteArray())
+    }
+
+    private fun connectToHeartbeat() {
+        heartbeatSocket = Socket(HEARTBEAT_HOST, HEARTBEAT_PORT)
+    }
+
+    private fun sendInitMessageToHeartbeat() {
+        heartbeatSocket.getOutputStream().write("Init:student$studentID\n".toByteArray())
     }
 
      private fun listenToGUI() {
@@ -86,6 +98,7 @@ class StudentMicroservice {
 
          while (true) {
              guiClient = guiSocket.accept()
+             println("S-a conectat GUI-ul")
              //println("S-a conectat un client pe portul: ${guiClient.port}")
 
              val reader = BufferedReader(InputStreamReader(guiClient.inputStream))
@@ -96,7 +109,7 @@ class StudentMicroservice {
                  if (question == null) {
                      println("Conectiunea cu GUI a fost inchisa")
                      guiClient.close()
-                     exitProcess(1)
+                     break
                  }
 
                  coroutineScope.launch {
@@ -204,6 +217,11 @@ class StudentMicroservice {
     public fun run() {
         // microserviciul se inscrie in lista de "subscribers" de la MessageManager prin conectarea la acesta
         subscribeToMessageManager()
+
+        //gestionarea heartbeatului
+        connectToHeartbeat()
+        sendInitMessageToHeartbeat()
+
         coroutineScope.launch {
             listenToGUI()
         }
