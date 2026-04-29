@@ -8,6 +8,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
 import java.io.BufferedReader
 import java.io.File
@@ -88,6 +89,36 @@ class StudentMicroservice {
 
     private fun sendInitMessageToHeartbeat() {
         heartbeatSocket.getOutputStream().write("Init:student$studentID\n".toByteArray())
+    }
+
+    private fun listenToHeartbeat() {
+        val reader = BufferedReader(InputStreamReader(heartbeatSocket.inputStream))
+
+        coroutineScope.launch {
+            while (true) {
+                try {
+                    val ping = reader.readLine() ?: withContext(Dispatchers.IO) {
+                        heartbeatSocket.close()
+                        reader.close()
+                        exitProcess(1)
+                    }
+
+                    val (messageType, microservice) = ping.split(":")
+                    if (messageType == "Ping") {
+                        heartbeatSocket.getOutputStream().write("Pong:student$studentID\n".toByteArray())
+                        println("Am raspuns heartbeatului")
+                    }
+
+                } catch (e: java.lang.Exception) {
+                    println("Eroare la procesarea pingului")
+                    withContext(Dispatchers.IO) {
+                        heartbeatSocket.close()
+                        reader.close()
+                        exitProcess(1)
+                    }
+                }
+            }
+        }
     }
 
      private fun listenToGUI() {
@@ -221,6 +252,7 @@ class StudentMicroservice {
         //gestionarea heartbeatului
         connectToHeartbeat()
         sendInitMessageToHeartbeat()
+        listenToHeartbeat()
 
         coroutineScope.launch {
             listenToGUI()

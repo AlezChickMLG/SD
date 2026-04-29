@@ -5,6 +5,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
 import java.io.BufferedReader
 import java.io.File
@@ -74,6 +75,36 @@ class TeacherMicroservice {
         heartbeatSocket.getOutputStream().write("Init:teacher\n".toByteArray())
     }
 
+    private fun listenToHeartbeat() {
+        val reader = BufferedReader(InputStreamReader(heartbeatSocket.inputStream))
+
+        coroutineScope.launch {
+            while (true) {
+                try {
+                    val ping = reader.readLine() ?: withContext(Dispatchers.IO) {
+                        heartbeatSocket.close()
+                        reader.close()
+                        exitProcess(1)
+                    }
+
+                    val (messageType, microservice) = ping.split(":")
+                    if (messageType == "Ping") {
+                        heartbeatSocket.getOutputStream().write("Pong:teacher\n".toByteArray())
+                        println("Am raspuns heartbeatului")
+                    }
+
+                } catch (e: java.lang.Exception) {
+                    println("Eroare la procesarea pingului")
+                    withContext(Dispatchers.IO) {
+                        heartbeatSocket.close()
+                        reader.close()
+                        exitProcess(1)
+                    }
+                }
+            }
+        }
+    }
+
     private fun processRequest(request: String) {
         println("Request received: $request")
         val (messageType, messageDestination, messageBody) = request.split(" ", limit = 3)
@@ -128,6 +159,7 @@ class TeacherMicroservice {
         //heartbeat
         connectToHeartbeat()
         sendInitMessageToHeartbeat()
+        listenToHeartbeat()
 
         coroutineScope.launch {
             listenToRequests()

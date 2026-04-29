@@ -14,6 +14,7 @@ import java.net.InetAddress
 import java.net.ServerSocket
 import java.net.Socket
 import kotlin.concurrent.thread
+import kotlin.system.exitProcess
 
 class MessageManagerMicroservice {
     private val subscribers: HashMap<String, Socket>
@@ -45,6 +46,36 @@ class MessageManagerMicroservice {
 
     private fun connectToHeartbeat() {
         heartbeatSocket = Socket(HEARTBEAT_HOST, HEARTBEAT_PORT)
+    }
+
+    private fun listenToHeartbeat() {
+        val reader = BufferedReader(InputStreamReader(heartbeatSocket.inputStream))
+
+        coroutineScope.launch {
+            while (true) {
+                try {
+                    val ping = reader.readLine() ?: withContext(Dispatchers.IO) {
+                        heartbeatSocket.close()
+                        reader.close()
+                        exitProcess(1)
+                    }
+
+                    val (messageType, microservice) = ping.split(":")
+                    if (messageType == "Ping") {
+                        heartbeatSocket.getOutputStream().write("Pong:messageManager\n".toByteArray())
+                        println("Am raspuns heartbeatului")
+                    }
+
+                } catch (e: java.lang.Exception) {
+                    println("Eroare la procesarea pingului")
+                    withContext(Dispatchers.IO) {
+                        heartbeatSocket.close()
+                        reader.close()
+                        exitProcess(1)
+                    }
+                }
+            }
+        }
     }
 
     private suspend fun broadcastMessageToStudents(message: String) {
@@ -164,6 +195,7 @@ class MessageManagerMicroservice {
         //heartbeat
         connectToHeartbeat()
         sendInitMessageToHeartbeat()
+        listenToHeartbeat()
 
         // se porneste un socket server TCP pe portul 1500 care asculta pentru conexiuni
         messageManagerSocket = ServerSocket(MESSAGE_MANAGER_PORT)
