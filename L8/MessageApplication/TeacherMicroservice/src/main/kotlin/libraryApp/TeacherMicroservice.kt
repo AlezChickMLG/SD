@@ -1,5 +1,11 @@
 package libraryApp
 
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeoutOrNull
 import java.io.BufferedReader
 import java.io.File
 import java.io.InputStream
@@ -7,7 +13,9 @@ import java.io.InputStreamReader
 import java.net.*
 import java.nio.Buffer
 import java.util.concurrent.BlockingQueue
+import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.LinkedBlockingQueue
+import java.util.concurrent.atomic.AtomicInteger
 import kotlin.concurrent.thread
 import kotlin.system.exitProcess
 
@@ -16,7 +24,12 @@ class TeacherMicroservice {
     private lateinit var teacherMicroserviceServerSocket: ServerSocket
 
     private lateinit var questionDatabase: MutableList<Pair<String, String>>
-    private val responseQueue: BlockingQueue<String> = LinkedBlockingQueue()
+
+    private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+    private val questionID = AtomicInteger(0)
+
+    //response queue
+    private val responseQueue = ConcurrentHashMap<Int, CompletableDeferred<String>>()
 
     companion object Constants {
         // pentru testare, se foloseste localhost. pentru deploy, server-ul socket (microserviciul MessageManager) se identifica dupa un "hostname"
@@ -68,7 +81,12 @@ class TeacherMicroservice {
                 }
             }
             messageType.startsWith("raspuns") -> {
-                responseQueue.add(request)
+                try {
+                    val question_id = messageType.substring("raspuns".length).toInt()
+                    responseQueue[question_id]?.complete(messageBody)
+                } catch (e: Exception) {
+                    println("Eroare la completarea deferrul-ui raspuns: $e")
+                }
             }
         }
     }
@@ -96,7 +114,7 @@ class TeacherMicroservice {
         // microserviciul se inscrie in lista de "subscribers" de la MessageManager prin conectarea la acesta
         subscribeToMessageManager()
 
-        thread {
+        coroutineScope.launch {
             listenToRequests()
         }
 
@@ -106,40 +124,43 @@ class TeacherMicroservice {
         println("TeacherMicroservice se executa pe portul: ${teacherMicroserviceServerSocket.localPort}")
         println("Se asteapta cereri (intrebari)...")
 
+        val clientConnection = teacherMicroserviceServerSocket.accept()
+        val clientBufferReader = BufferedReader(InputStreamReader(clientConnection.inputStream))
+
         while (true) {
             // se asteapta conexiuni din partea clientilor ce doresc sa puna o intrebare
             // (in acest caz, din partea aplicatiei client GUI)
-            val clientConnection = teacherMicroserviceServerSocket.accept()
+
+            val receivedQuestion = clientBufferReader.readLine()
+
+            if (receivedQuestion == null) {
+                println("Conexiunea cu GUI a fost inchisa")
+                clientConnection.close()
+                exitProcess(1)
+            }
 
             // se foloseste un thread separat pentru tratarea fiecarei conexiuni client
-            thread {
-                println("S-a primit o cerere de la: ${clientConnection.inetAddress.hostAddress}:${clientConnection.port}")
+            coroutineScope.launch {
+                println("S-a primit o cerere de la gui")
 
-                // se citeste intrebarea dorita
-                val clientBufferReader = BufferedReader(InputStreamReader(clientConnection.inputStream))
-                val receivedQuestion = clientBufferReader.readLine()
+                val id = questionID.incrementAndGet()
 
-                // intrebarea este redirectionata catre microserviciul MessageManager
                 println("Trimit catre MessageManager: ${"intrebare teacher $receivedQuestion\n"}")
-                messageManagerSocket.getOutputStream().write(("intrebare teacher $receivedQuestion\n").toByteArray())
+                messageManagerSocket.getOutputStream().write(("intrebare$id teacher $receivedQuestion\n").toByteArray())
 
-                val worker = Thread.currentThread()
+                val deferred = CompletableDeferred<String>()
+                responseQueue[id] = deferred
 
-                val timerThread = thread {
-                    try {
-                        Thread.sleep(3000)
-                        worker.interrupt()
-                    } catch (e: Exception) {}
+                val response = withTimeoutOrNull(3000) {
+                    deferred.await()
                 }
 
-                try {
-                    println("Astept raspuns la intrebarea: $receivedQuestion...")
-                    val response = responseQueue.take()
-                    println("Am primit raspunsul la intrebarea: $receivedQuestion\n${response.split(" ").last()}")
-                    timerThread.interrupt()
-                } catch (e: InterruptedException) {
-                    println("Nu am primit un raspuns in timp")
-                }
+                if (response == null)
+                    println("Nu am primit raspuns la intrebarea $id")
+                else
+                    println("Am primit raspuns la intrebarea $receivedQuestion\n$response")
+
+                responseQueue.remove(id)
             }
         }
     }

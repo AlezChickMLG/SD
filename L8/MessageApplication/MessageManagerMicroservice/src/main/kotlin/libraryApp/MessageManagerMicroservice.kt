@@ -1,5 +1,13 @@
 package libraryApp
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.withContext
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.InetAddress
@@ -10,6 +18,9 @@ import kotlin.concurrent.thread
 class MessageManagerMicroservice {
     private val subscribers: HashMap<String, Socket>
     private lateinit var messageManagerSocket: ServerSocket
+
+    private val coroutineScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+    private val subscriberMutex = Mutex()
 
     companion object Constants {
         const val MESSAGE_MANAGER_PORT = 1500
@@ -25,27 +36,35 @@ class MessageManagerMicroservice {
         }
     }
 
-    private fun broadcastMessageToStudents(message: String) {
-        subscribers.forEach {
-            it.takeIf { it.key.startsWith("student") }
-                ?.value?.getOutputStream()?.write((message + "\n").toByteArray())
+    private suspend fun broadcastMessageToStudents(message: String) {
+        subscriberMutex.withLock {
+            subscribers.forEach {
+                it.takeIf { it.key.startsWith("student") }
+                    ?.value?.getOutputStream()?.write((message + "\n").toByteArray())
+            }
         }
     }
 
-    private fun sendMessageToTeacher(message: String) {
-        subscribers.get("teacher")
-            ?.getOutputStream()?.write((message + "\n").toByteArray())
+    private suspend fun sendMessageToTeacher(message: String) {
+        subscriberMutex.withLock {
+            subscribers.get("teacher")
+                ?.getOutputStream()?.write((message + "\n").toByteArray())
+        }
     }
 
-    private fun respondToTeacher(message: String) {
-        subscribers.get("teacher")?.getOutputStream()?.write((message + "\n").toByteArray())
+    private suspend fun respondToTeacher(message: String) {
+        subscriberMutex.withLock {
+            subscribers.get("teacher")?.getOutputStream()?.write((message + "\n").toByteArray())
+        }
     }
 
-    private fun respondToStudent(student: String, message: String) {
-        subscribers.get(student)?.getOutputStream()?.write((message + "\n").toByteArray())
+    private suspend fun respondToStudent(student: String, message: String) {
+        subscriberMutex.withLock {
+            subscribers.get(student)?.getOutputStream()?.write((message + "\n").toByteArray())
+        }
     }
 
-    private fun processInitMessage(initMessage: String?, clientConnection: Socket): String {
+    private suspend fun processInitMessage(initMessage: String?, clientConnection: Socket): String {
         try {
             if (initMessage == null) {
                 throw Exception()
@@ -57,7 +76,7 @@ class MessageManagerMicroservice {
 
             println("Subscriber conectat: ${clientConnection.inetAddress.hostAddress}:${clientConnection.port}: $entityType")
 
-            synchronized(subscribers) {
+            subscriberMutex.withLock {
                 subscribers[entityType] = clientConnection
             }
 
@@ -68,12 +87,14 @@ class MessageManagerMicroservice {
         }
     }
 
-    private fun listenToRequests(clientConnection: Socket, entityType: String) {
+    private suspend fun listenToRequests(clientConnection: Socket, entityType: String) {
         val reader = BufferedReader(InputStreamReader(clientConnection.inputStream))
 
         while (true) {
             try {
-                val request = reader.readLine()
+                val request = withContext(Dispatchers.IO) {
+                    reader.readLine()
+                }
 
                 println("Primit mesaj: $request")
 
@@ -81,11 +102,15 @@ class MessageManagerMicroservice {
                 if (request == null) {
                     // deci subscriber-ul respectiv a fost deconectat
                     println("$entityType a fost deconectat.")
-                    synchronized(subscribers) {
+                    subscriberMutex.withLock {
                         subscribers.remove(entityType)
                     }
-                    reader.close()
-                      clientConnection.close()
+                    withContext(Dispatchers.IO) {
+                        reader.close()
+                    }
+                    withContext(Dispatchers.IO) {
+                        clientConnection.close()
+                    }
                     break
                 }
 
@@ -108,9 +133,11 @@ class MessageManagerMicroservice {
                     messageType.startsWith("raspuns") -> {
                         when {
                             entityType.startsWith("student") -> {
+                                delay(1500)
                                 respondToTeacher(request)
                             }
                             entityType == "teacher" -> {
+                                delay(1500)
                                 respondToStudent(messageDestination, request)
                             }
                         }
@@ -133,7 +160,7 @@ class MessageManagerMicroservice {
             val clientConnection = messageManagerSocket.accept()
 
             // se porneste un thread separat pentru tratarea conexiunii cu clientul
-            thread {
+            coroutineScope.launch {
                 val bufferReader = BufferedReader(InputStreamReader(clientConnection.inputStream))
                 val initMessage = bufferReader.readLine()
 

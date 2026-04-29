@@ -94,9 +94,9 @@ class StudentMicroservice {
                  val question = reader.readLine()
 
                  if (question == null) {
-                     println("Conectiunea cu gui a fost inchisa")
+                     println("Conectiunea cu GUI a fost inchisa")
                      guiClient.close()
-                     break
+                     exitProcess(1)
                  }
 
                  coroutineScope.launch {
@@ -105,9 +105,6 @@ class StudentMicroservice {
                      val id = questionID.incrementAndGet()
                      messageManagerSocket.getOutputStream()
                          .write("intrebare$id student$studentID $question\n".toByteArray())
-
-                     if (id > 10)
-                         exitProcess(1)
 
                      val deferred = CompletableDeferred<String>()
 
@@ -119,7 +116,7 @@ class StudentMicroservice {
                      }
 
                      if (response == null) {
-                         println("Nu am primit raspuns la timp")
+                         println("Nu am primit raspuns la intrebarea $id")
                      } else {
                          println("Am primit raspuns la intrebarea: $question\n${response.split(" ").last()}")
                      }
@@ -184,9 +181,11 @@ class StudentMicroservice {
             messageType.startsWith("intrebare") -> {
                 println("Am primit o intrebare de la $messageDestination: \"${messageBody}\"")
                 var responseToQuestion = respondToQuestion(messageBody)
+                val id = messageType.substring("intrebare".length).toInt()
+
                 responseToQuestion?.let {
-                    responseToQuestion = "raspuns $messageDestination $it"
-                    println("Trimit raspunsul: \"${request}\"")
+                    responseToQuestion = "raspuns$id $messageDestination $it"
+                    println("Trimit raspunsul: \"${responseToQuestion}\"")
                     messageManagerSocket.getOutputStream().write((responseToQuestion + "\n").toByteArray())
                 }
             }

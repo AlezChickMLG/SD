@@ -4,16 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ca8cdd22-da75-447d-bd99-7a16f8acffaa" name="Changes" comment="">
+    <list default="true" id="ca8cdd22-da75-447d-bd99-7a16f8acffaa" name="Changes" comment="Lab8 corutine + mesaje multiple">
       <change beforePath="$PROJECT_DIR$/../GraphicInterface/TeacherStudentGUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/../GraphicInterface/TeacherStudentGUI.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MessageManagerMicroservice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MessageManagerMicroservice/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/libraryApp/StudentMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/libraryApp/StudentMicroservice.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TeacherMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TeacherMicroservice/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TeacherMicroservice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TeacherMicroservice/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TeacherMicroservice/src/main/kotlin/libraryApp/TeacherMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../TeacherMicroservice/src/main/kotlin/libraryApp/TeacherMicroservice.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -88,6 +85,19 @@
       <option name="presentableId" value="Default" />
       <updated>1777110466425</updated>
     </task>
+    <task id="LOCAL-00001" summary="Lab8 corutine + mesaje multiple">
+      <option name="closed" value="true" />
+      <created>1777458583967</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1777458583967</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Lab8 corutine + mesaje multiple" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lab8 corutine + mesaje multiple" />
   </component>
 </project>

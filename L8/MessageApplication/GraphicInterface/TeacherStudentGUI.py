@@ -5,22 +5,28 @@ import socket
 
 HOST = "localhost"
 TEACHER_PORT = 1600
+
+is_teacher_connected = False
 is_connected = False
+
 student_sock = None
+teacher_sock = None
 
 def resolve_question(question_text):
-    # creare socket TCP
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
     # incercare de conectare catre microserviciul Teacher
-    try:
-        sock.connect((HOST, TEACHER_PORT))
+    global teacher_sock
+    global is_teacher_connected
 
-        # transmitere intrebare - se deleaga intrebarea catre microserviciu
-        sock.send(bytes(question_text + "\n", "utf-8"))
+    try:
+        if not is_teacher_connected:
+            teacher_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            teacher_sock.connect((HOST, TEACHER_PORT))
+            is_teacher_connected = True
+
+        teacher_sock.send(bytes(question_text + "\n", "utf-8"))
 
         # primire raspuns -> microserviciul Teacher foloseste coregrafia de microservicii pentru a trimite raspunsul inapoi
-        response_text = str(sock.recv(1024), "utf-8")
+        response_text = str(teacher_sock.recv(1024), "utf-8")
 
     except ConnectionError:
         # in cazul unei erori de conexiune, se afiseaza un mesaj

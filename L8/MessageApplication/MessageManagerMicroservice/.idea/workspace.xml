@@ -7,13 +7,10 @@
     <list default="true" id="7da94b95-67e6-45b5-a2f3-d451a96f3554" name="Changes" comment="Lab8 full-duplex complet">
       <change beforePath="$PROJECT_DIR$/../GraphicInterface/TeacherStudentGUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/../GraphicInterface/TeacherStudentGUI.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../StudentMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentMicroservice/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StudentMicroservice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentMicroservice/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../StudentMicroservice/src/main/kotlin/libraryApp/StudentMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentMicroservice/src/main/kotlin/libraryApp/StudentMicroservice.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TeacherMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TeacherMicroservice/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TeacherMicroservice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TeacherMicroservice/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TeacherMicroservice/src/main/kotlin/libraryApp/TeacherMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../TeacherMicroservice/src/main/kotlin/libraryApp/TeacherMicroservice.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
