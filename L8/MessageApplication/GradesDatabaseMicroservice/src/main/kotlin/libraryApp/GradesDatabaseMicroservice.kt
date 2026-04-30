@@ -62,12 +62,41 @@ class GradesDatabaseMicroservice (
                 }
 
                 requestType == "listAll" -> {
-                    println("Toate notele")
                     repository.listAll()
+                }
+
+                requestType == "getAll" -> {
+                    val studentName = stringModel
+
+                    //obtin notele
+                    val gradesMap = repository.getAllGrades(studentName)
+
+                    if (gradesMap == null) {
+                        println("Studentul $studentName nu are note inregistrate")
+                        sendAnswer("getAll:$studentName:Nu are note")
+                        return
+                    }
+
+                    //obtin media
+                    val mean = calculateMean(gradesMap)
+
+                    //trimit rezultatul catre teacher
+                    sendAnswer("getAll:$studentName:$mean")
                 }
             }
         } catch (e: Exception) {
             println("Eroare la procesarea request-ului: $request")
+        }
+    }
+
+    private fun calculateMean(gradesMap: HashMap<String, Int>): Float = (gradesMap.values.sum() / gradesMap.size.toFloat())
+
+    private fun sendAnswer(answer: String) {
+        try {
+            println("Trimit rezultatul: $answer")
+            teacherSocket.getOutputStream().write("$answer\n".toByteArray())
+        } catch (e: Exception) {
+            println("Eroare la trimiterea rezultatului")
         }
     }
 

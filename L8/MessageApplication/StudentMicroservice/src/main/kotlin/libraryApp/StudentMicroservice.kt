@@ -148,7 +148,7 @@ class StudentMicroservice {
 
                      val id = questionID.incrementAndGet()
                      messageManagerSocket.getOutputStream()
-                         .write("intrebare$id student$studentID $question\n".toByteArray())
+                         .write("intrebare$id student$studentID student$studentID $question\n".toByteArray())
 
                      val deferred = CompletableDeferred<String>()
 
@@ -217,7 +217,7 @@ class StudentMicroservice {
     }
 
     private suspend fun processRequest(request: String) {
-        val (messageType, messageDestination, messageBody) = request.split(" ", limit = 3)
+        val (messageType, messageSource, messageDestination, messageBody) = request.split(" ", limit = 4)
 
         when {
             // tipul mesajului cunoscut de acest microserviciu este de forma:

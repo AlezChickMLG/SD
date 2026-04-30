@@ -106,6 +106,23 @@ class MessageManagerMicroservice {
         }
     }
 
+    private fun sendEndMessageToTeacher(student: String) {
+        try {
+            val teacherSocket = subscribers["teacher"]
+
+            if (teacherSocket == null) {
+                println("Teacher este inactiv. Nu pot trimite mesajul de terminare")
+                return
+            }
+
+            teacherSocket.getOutputStream().write("terminare $student $student Gol\n".toByteArray())
+            println("Am trimis mesaj de terminare pentru $student catre teacher")
+
+        } catch (e: Exception) {
+            println("Eroare: Nu pot trimite mesaj de terminare pentru $student")
+        }
+    }
+
     private suspend fun processInitMessage(initMessage: String?, clientConnection: Socket): String {
         try {
             if (initMessage == null) {
@@ -153,6 +170,8 @@ class MessageManagerMicroservice {
                     withContext(Dispatchers.IO) {
                         clientConnection.close()
                     }
+                    if (entityType != "teacher")
+                        sendEndMessageToTeacher(entityType)
                     break
                 }
 

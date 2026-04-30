@@ -90,6 +90,11 @@ class TeacherMicroservice {
         databaseSocket = Socket("localhost", DATABASE_PORT)
     }
 
+    private fun sendMeanRequest(studentName: String) {
+        val request = "getAll:$studentName"
+        databaseQueue.add(request)
+    }
+
     private fun listenToHeartbeat() {
         val reader = BufferedReader(InputStreamReader(heartbeatSocket.inputStream))
 
@@ -120,6 +125,41 @@ class TeacherMicroservice {
         }
     }
 
+    private fun listenToDatabase() {
+        val reader = BufferedReader(InputStreamReader(databaseSocket.inputStream))
+
+        while (true) {
+            val result = reader.readLine()
+
+            if (result == null) {
+                println("Database a fost inchis")
+                databaseSocket.close()
+                break
+            }
+
+            coroutineScope.launch {
+                processDatabaseResult(result)
+            }
+        }
+    }
+
+    private suspend fun processDatabaseResult(result: String) {
+        try {
+            val (messageType, student, result) = result.split(":")
+
+            when {
+                messageType.startsWith("getAll") -> {
+                    if (result.toFloatOrNull() != null)
+                        println("$student are media $result")
+                    else
+                        println("$student nu are inca note")
+                }
+            }
+        } catch (e: Exception) {
+            println("Eroare la procesarea rezultatului: $result")
+        }
+    }
+
     private suspend fun processRequest(request: String) {
         println("Request received: $request")
         val (messageType, messageSource, messageDestination, messageBody) = request.split(" ", limit = 4)
@@ -139,6 +179,7 @@ class TeacherMicroservice {
                     println("Am trimis catre $messageDestination raspunsul: ${response.second}")
                 }
             }
+
             messageType.startsWith("raspuns") -> {
                 try {
                     val question_id = messageType.substring("raspuns".length).toInt()
@@ -147,6 +188,17 @@ class TeacherMicroservice {
                     }
                 } catch (e: Exception) {
                     println("Eroare la adaugarea raspunsului in coada: $e")
+                }
+            }
+
+            messageType.startsWith("terminare") -> {
+                try {
+                    val studentName = messageSource
+                    println("$studentName a fost terminat")
+                    sendMeanRequest(studentName)
+
+                } catch (e: Exception) {
+                    println("Eroare la procesarea mesajului de tip terminare")
                 }
             }
         }
@@ -224,16 +276,29 @@ class TeacherMicroservice {
         subscribeToMessageManager()
 
         //heartbeat
-//        connectToHeartbeat()
-//        sendInitMessageToHeartbeat()
-//        listenToHeartbeat()
+        try {
+            connectToHeartbeat()
+            sendInitMessageToHeartbeat()
+            listenToHeartbeat()
+        } catch (e: Exception) {
+            println("Eroare la conectarea / trimiterea de mesaje catre heartbeat")
+        }
 
         //database
-        connectToDatabase()
+        try {
+            connectToDatabase()
 
-        //trimite cereri catre baza de date
-        coroutineScope.launch {
-            sendRequestsToDatabase()
+            //trimite cereri catre baza de date
+            coroutineScope.launch {
+                sendRequestsToDatabase()
+            }
+
+            //primim rezultatele cerute
+            coroutineScope.launch {
+                listenToDatabase()
+            }
+        } catch (e: Exception) {
+            println("Eroare la conectarea / trimiterea / ascultarea bazei de date")
         }
 
         coroutineScope.launch {
