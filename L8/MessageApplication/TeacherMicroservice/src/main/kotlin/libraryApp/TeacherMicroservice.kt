@@ -4,7 +4,10 @@ import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
 import java.io.BufferedReader
@@ -16,6 +19,7 @@ import java.nio.Buffer
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.LinkedBlockingQueue
+import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.concurrent.thread
 import kotlin.system.exitProcess
@@ -24,6 +28,7 @@ class TeacherMicroservice {
     private lateinit var messageManagerSocket: Socket
     private lateinit var teacherMicroserviceServerSocket: ServerSocket
     private lateinit var heartbeatSocket: Socket
+    private lateinit var databaseSocket: Socket
 
     private lateinit var questionDatabase: MutableList<Pair<String, String>>
 
@@ -31,7 +36,12 @@ class TeacherMicroservice {
     private val questionID = AtomicInteger(0)
 
     //response queue
-    private val responseQueue = ConcurrentHashMap<Int, CompletableDeferred<String>>()
+    private val responseQueue = ConcurrentHashMap<Int, MutableList<String>>()
+    private val responseQueueMutex = Mutex()
+
+    //database queue
+    private val databaseQueue = LinkedBlockingQueue<String>()
+    private val databaseQueueMutex = Mutex()
 
     companion object Constants {
         // pentru testare, se foloseste localhost. pentru deploy, server-ul socket (microserviciul MessageManager) se identifica dupa un "hostname"
@@ -41,6 +51,7 @@ class TeacherMicroservice {
         const val MESSAGE_MANAGER_PORT = 1500
         const val TEACHER_PORT = 1600
         const val HEARTBEAT_PORT = 1900
+        const val DATABASE_PORT = 2100
     }
 
     init {
@@ -75,6 +86,10 @@ class TeacherMicroservice {
         heartbeatSocket.getOutputStream().write("Init:teacher\n".toByteArray())
     }
 
+    private fun connectToDatabase() {
+        databaseSocket = Socket("localhost", DATABASE_PORT)
+    }
+
     private fun listenToHeartbeat() {
         val reader = BufferedReader(InputStreamReader(heartbeatSocket.inputStream))
 
@@ -105,7 +120,7 @@ class TeacherMicroservice {
         }
     }
 
-    private fun processRequest(request: String) {
+    private suspend fun processRequest(request: String) {
         println("Request received: $request")
         val (messageType, messageDestination, messageBody) = request.split(" ", limit = 3)
         when {
@@ -117,18 +132,47 @@ class TeacherMicroservice {
                 val id = messageType.substring("intrebare".length)
 
                 if (response != null) {
-                    messageManagerSocket.getOutputStream()
-                        .write("raspuns$id $messageDestination ${response.second}\n".toByteArray())
+                    withContext(Dispatchers.IO) {
+                        messageManagerSocket.getOutputStream()
+                            .write("raspuns$id $messageDestination ${response.second}\n".toByteArray())
+                    }
                     println("Am trimis catre $messageDestination raspunsul: ${response.second}")
                 }
             }
             messageType.startsWith("raspuns") -> {
                 try {
                     val question_id = messageType.substring("raspuns".length).toInt()
-                    responseQueue[question_id]?.complete(messageBody)
+                    responseQueueMutex.withLock {
+                        responseQueue[question_id]?.add(request)
+                    }
                 } catch (e: Exception) {
-                    println("Eroare la completarea deferrul-ui raspuns: $e")
+                    println("Eroare la adaugarea raspunsului in coada: $e")
                 }
+            }
+        }
+    }
+
+    private suspend fun processResponses(question: String, id: Int) {
+        val responses = responseQueueMutex.withLock {
+            responseQueue[id]
+        }
+
+        if (responses == null) {
+            println("Nimeni nu a raspuns la intrebarea: $question")
+        }
+
+        else {
+            responses.forEach {
+                val (_, studentName, question) = it.split(" ", limit = 3)
+                val addRequest = "add:$studentName | $question | 10"
+
+                databaseQueueMutex.withLock {
+                    databaseQueue.add(addRequest)
+                }
+            }
+
+            databaseQueueMutex.withLock {
+                databaseQueue.add("listAll:None")
             }
         }
     }
@@ -145,10 +189,23 @@ class TeacherMicroservice {
                     break
                 }
 
-                processRequest(request)
+                coroutineScope.launch {
+                    processRequest(request)
+                }
             } catch (e: Exception) {
                 println("Eroare la listenToRequest")
                 break
+            }
+        }
+    }
+
+    private fun sendRequestsToDatabase() {
+        while (true) {
+            val request = databaseQueue.poll(500, TimeUnit.MILLISECONDS)
+
+            if (request != null) {
+                databaseSocket.getOutputStream().write("$request\n".toByteArray())
+                println("Am trimis catre baza de date cererea: $request")
             }
         }
     }
@@ -158,9 +215,17 @@ class TeacherMicroservice {
         subscribeToMessageManager()
 
         //heartbeat
-        connectToHeartbeat()
-        sendInitMessageToHeartbeat()
-        listenToHeartbeat()
+//        connectToHeartbeat()
+//        sendInitMessageToHeartbeat()
+//        listenToHeartbeat()
+
+        //database
+        connectToDatabase()
+
+        //trimite cereri catre baza de date
+        coroutineScope.launch {
+            sendRequestsToDatabase()
+        }
 
         coroutineScope.launch {
             listenToRequests()
@@ -200,17 +265,13 @@ class TeacherMicroservice {
                     messageManagerSocket.getOutputStream()
                         .write(("intrebare$id teacher $receivedQuestion\n").toByteArray())
 
-                    val deferred = CompletableDeferred<String>()
-                    responseQueue[id] = deferred
+                    responseQueue[id] = mutableListOf()
 
-                    val response = withTimeoutOrNull(3000) {
-                        deferred.await()
-                    }
+                    //asteptam sa vina raspunsurile
+                    delay(3000)
 
-                    if (response == null)
-                        println("Nu am primit raspuns la intrebarea $id")
-                    else
-                        println("Am primit raspuns la intrebarea $receivedQuestion\n$response")
+                    //procesam toate raspunsurile
+                    processResponses(receivedQuestion, id)
 
                     responseQueue.remove(id)
                 }

@@ -250,9 +250,9 @@ class StudentMicroservice {
         subscribeToMessageManager()
 
         //gestionarea heartbeatului
-        connectToHeartbeat()
-        sendInitMessageToHeartbeat()
-        listenToHeartbeat()
+//        connectToHeartbeat()
+//        sendInitMessageToHeartbeat()
+//        listenToHeartbeat()
 
         coroutineScope.launch {
             listenToGUI()

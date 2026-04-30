@@ -4,9 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d85707a4-c33f-4f2f-9dcd-95f2d232f89e" name="Changes" comment="Lab8 heartbeat mesaje de initializare">
+    <list default="true" id="d85707a4-c33f-4f2f-9dcd-95f2d232f89e" name="Changes" comment="Lab8 heartbeat functional partial, fara pong">
+      <change afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/.idea/kotlinc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/src/main/kotlin/libraryApp/GradesDatabaseMicroservice.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/src/test/kotlin/libraryApp/HelloTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../L4/SD_Laborator_04/Cheltuieli/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L4/SD_Laborator_04/Cheltuieli/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/libraryApp/HeartbeatMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/libraryApp/HeartbeatMicroservice.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MessageManagerMicroservice/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../StudentMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentMicroservice/.idea/workspace.xml" afterDir="false" />
@@ -88,11 +97,20 @@
       <option name="project" value="LOCAL" />
       <updated>1777474652688</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Lab8 heartbeat functional partial, fara pong">
+      <option name="closed" value="true" />
+      <created>1777539461748</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1777539461748</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Lab8 heartbeat mesaje de initializare" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lab8 heartbeat mesaje de initializare" />
+    <MESSAGE value="Lab8 heartbeat functional partial, fara pong" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lab8 heartbeat functional partial, fara pong" />
   </component>
 </project>
