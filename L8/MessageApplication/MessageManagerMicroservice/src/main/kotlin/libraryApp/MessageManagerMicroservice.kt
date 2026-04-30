@@ -156,7 +156,7 @@ class MessageManagerMicroservice {
                     break
                 }
 
-                val (messageType, messageDestination, messageBody) = request.split(" ", limit = 3)
+                val (messageType, _,  messageDestination, messageBody) = request.split(" ", limit = 4)
 
                 when {
                     messageType.startsWith("intrebare") -> {

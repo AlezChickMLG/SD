@@ -227,10 +227,20 @@ class StudentMicroservice {
                 var responseToQuestion = respondToQuestion(messageBody)
                 val id = messageType.substring("intrebare".length).toInt()
 
-                responseToQuestion?.let {
-                    responseToQuestion = "raspuns$id $messageDestination $it"
+                if (responseToQuestion != null) {
+                    responseToQuestion = "raspuns$id student$studentID $messageDestination $responseToQuestion"
                     println("Trimit raspunsul: \"${responseToQuestion}\"")
-                    messageManagerSocket.getOutputStream().write((responseToQuestion + "\n").toByteArray())
+                    withContext(Dispatchers.IO) {
+                        messageManagerSocket.getOutputStream().write((responseToQuestion + "\n").toByteArray())
+                    }
+                }
+
+                else {
+                    responseToQuestion = "raspuns$id student$studentID $messageDestination Nu stiu"
+                    println("Trimit raspunsul: \"$responseToQuestion\"")
+                    withContext(Dispatchers.IO) {
+                        messageManagerSocket.getOutputStream().write((responseToQuestion + "\n").toByteArray())
+                    }
                 }
             }
 

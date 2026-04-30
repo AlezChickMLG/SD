@@ -122,7 +122,7 @@ class TeacherMicroservice {
 
     private suspend fun processRequest(request: String) {
         println("Request received: $request")
-        val (messageType, messageDestination, messageBody) = request.split(" ", limit = 3)
+        val (messageType, messageSource, messageDestination, messageBody) = request.split(" ", limit = 4)
         when {
             messageType.startsWith("intrebare") -> {
                 val response = questionDatabase.find {
@@ -163,8 +163,13 @@ class TeacherMicroservice {
 
         else {
             responses.forEach {
-                val (_, studentName, question) = it.split(" ", limit = 3)
-                val addRequest = "add:$studentName | $question | 10"
+                val (_, studentName, _, response) = it.split(" ", limit = 4)
+                val grade = if (response != "Nu stiu")
+                    10
+                else
+                    4
+
+                val addRequest = "add:$studentName | $question | $grade"
 
                 databaseQueueMutex.withLock {
                     databaseQueue.add(addRequest)
@@ -174,6 +179,10 @@ class TeacherMicroservice {
             databaseQueueMutex.withLock {
                 databaseQueue.add("listAll:None")
             }
+        }
+
+        responseQueueMutex.withLock {
+            responseQueue.remove(id)
         }
     }
 

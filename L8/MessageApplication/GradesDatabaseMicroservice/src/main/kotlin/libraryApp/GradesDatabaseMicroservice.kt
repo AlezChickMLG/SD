@@ -62,6 +62,7 @@ class GradesDatabaseMicroservice (
                 }
 
                 requestType == "listAll" -> {
+                    println("Toate notele")
                     repository.listAll()
                 }
             }

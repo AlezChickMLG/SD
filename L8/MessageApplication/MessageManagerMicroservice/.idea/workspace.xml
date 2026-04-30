@@ -5,17 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7da94b95-67e6-45b5-a2f3-d451a96f3554" name="Changes" comment="Lab8 full-duplex complet">
-      <change afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/src/main/kotlin/libraryApp/GradesDatabaseMicroservice.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/src/test/kotlin/libraryApp/HelloTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../L4/SD_Laborator_04/Cheltuieli/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../L4/SD_Laborator_04/Cheltuieli/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HeartbeatMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../HeartbeatMicroservice/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GradesDatabaseMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GradesDatabaseMicroservice/src/main/kotlin/libraryApp/GradesDatabaseMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/src/main/kotlin/libraryApp/GradesDatabaseMicroservice.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../StudentMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentMicroservice/.idea/workspace.xml" afterDir="false" />
