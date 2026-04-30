@@ -148,6 +148,7 @@ class TeacherMicroservice {
                 processRequest(request)
             } catch (e: Exception) {
                 println("Eroare la listenToRequest")
+                break
             }
         }
     }

@@ -195,7 +195,7 @@ class MessageManagerMicroservice {
         //heartbeat
         connectToHeartbeat()
         sendInitMessageToHeartbeat()
-        listenToHeartbeat()
+        //listenToHeartbeat()
 
         // se porneste un socket server TCP pe portul 1500 care asculta pentru conexiuni
         messageManagerSocket = ServerSocket(MESSAGE_MANAGER_PORT)

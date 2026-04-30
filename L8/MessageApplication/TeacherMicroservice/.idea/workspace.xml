@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c5ad844-054e-4697-9590-d0b24af2c4c2" name="Changes" comment="Lab8 Infrastructura pentru comunicare full-duplex">
+    <list default="true" id="6c5ad844-054e-4697-9590-d0b24af2c4c2" name="Changes" comment="Lab8 Heartbeat ping-uri functionale, ponguri functionale">
       <change beforePath="$PROJECT_DIR$/../HeartbeatMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../HeartbeatMicroservice/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../HeartbeatMicroservice/src/main/kotlin/libraryApp/HeartbeatMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../HeartbeatMicroservice/src/main/kotlin/libraryApp/HeartbeatMicroservice.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MessageManagerMicroservice/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../StudentMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentMicroservice/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StudentMicroservice/src/main/kotlin/libraryApp/StudentMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentMicroservice/src/main/kotlin/libraryApp/StudentMicroservice.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/libraryApp/TeacherMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/libraryApp/TeacherMicroservice.kt" afterDir="false" />
     </list>
@@ -103,12 +102,21 @@
       <option name="project" value="LOCAL" />
       <updated>1777397954838</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Lab8 Heartbeat ping-uri functionale, ponguri functionale">
+      <option name="closed" value="true" />
+      <created>1777479216875</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1777479216875</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Lab8 Makefile pentru docker logs" />
     <MESSAGE value="Lab8 Infrastructura pentru comunicare full-duplex" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lab8 Infrastructura pentru comunicare full-duplex" />
+    <MESSAGE value="Lab8 Heartbeat ping-uri functionale, ponguri functionale" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lab8 Heartbeat ping-uri functionale, ponguri functionale" />
   </component>
 </project>
