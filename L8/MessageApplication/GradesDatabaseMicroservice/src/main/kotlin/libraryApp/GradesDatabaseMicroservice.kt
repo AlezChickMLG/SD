@@ -102,12 +102,14 @@ class GradesDatabaseMicroservice (
 
     fun run() {
         //punem in loop, daca teacher se deconecteaza, apoi sa poata sa se conecteze inapoi fara restructurari agresive
-        while (true) {
-            println("Astept sa se conecteze teacher...")
-            teacherSocket = gradesDatabaseServer.accept()
+        coroutineScope.launch {
+            while (true) {
+                println("Astept sa se conecteze teacher...")
+                teacherSocket = gradesDatabaseServer.accept()
 
-            println("Teacher s-a conectat")
-            listenToRequests()
+                println("Teacher s-a conectat")
+                listenToRequests()
+            }
         }
     }
 }

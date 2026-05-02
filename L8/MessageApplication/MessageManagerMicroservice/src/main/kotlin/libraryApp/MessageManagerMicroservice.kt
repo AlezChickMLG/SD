@@ -106,9 +106,17 @@ class MessageManagerMicroservice {
         }
     }
 
-    private fun sendEndMessageToTeacher(student: String) {
+    private suspend fun sendMessageToEntity(entity: String, message: String) {
+        subscriberMutex.withLock {
+            subscribers.get(entity)?.getOutputStream()?.write("$message\n".toByteArray())
+        }
+    }
+
+    private suspend fun sendEndMessageToTeacher(student: String) {
         try {
-            val teacherSocket = subscribers["teacher"]
+            val teacherSocket = subscriberMutex.withLock {
+                subscribers["teacher"]
+            }
 
             if (teacherSocket == null) {
                 println("Teacher este inactiv. Nu pot trimite mesajul de terminare")
@@ -146,9 +154,81 @@ class MessageManagerMicroservice {
         }
     }
 
-    private suspend fun listenToRequests(clientConnection: Socket, entityType: String) {
-        val reader = BufferedReader(InputStreamReader(clientConnection.inputStream))
+    private suspend fun processRequest(request: String, entityType: String) {
+        try {
+            if (entityType != "asistent") {
 
+                if (!request.contains(":"))
+                {
+                    val (messageType, _, messageDestination, messageBody) = request.split(" ", limit = 4)
+
+                    when {
+                        messageType.startsWith("intrebare") -> {
+                            // tipul mesajului de tip intrebare este de forma:
+                            // intrebare <DESTINATIE_RASPUNS> <CONTINUT_INTREBARE>
+                            when {
+                                entityType == "teacher" -> {
+                                    broadcastMessageToStudents(request)
+                                }
+
+                                entityType.startsWith("student") -> {
+                                    sendMessageToTeacher(request)
+                                }
+                            }
+                        }
+
+                        messageType.startsWith("raspuns") -> {
+                            when {
+                                entityType.startsWith("student") -> {
+                                    delay(1500)
+                                    respondToTeacher(request)
+                                }
+
+                                entityType == "teacher" -> {
+                                    delay(1500)
+                                    respondToStudent(messageDestination, request)
+                                }
+                            }
+                        }
+                    }
+                }
+
+                else {
+                    val (messageType, studentName, result) = request.split(":")
+                    when {
+                        messageType.startsWith("Verificare") -> {
+                            sendMessageToEntity("asistent", request)
+                            println("Am trimis mesaj de verificare pentru $studentName cu id-ul: $result catre asistent")
+                        }
+                    }
+                }
+            }
+
+            else {
+                val (messageType, studentName, result) = request.split(":")
+
+                when {
+                    messageType.startsWith("Verificare") -> {
+                        if (result == "corect") {
+                            println("$studentName a fost verificat cu succes")
+                        }
+
+                        else if (request == "gresit") {
+                            println("$studentName a esuat verificarea")
+                        }
+
+                        else {
+                            println("Raspuns necunoscut: $result")
+                        }
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            println("Eroare la procesare request-ului: $request trimis de $entityType")
+        }
+    }
+
+    private suspend fun listenToRequests(clientConnection: Socket, reader: BufferedReader, entityType: String) {
         while (true) {
             try {
                 val request = withContext(Dispatchers.IO) {
@@ -175,34 +255,8 @@ class MessageManagerMicroservice {
                     break
                 }
 
-                val (messageType, _,  messageDestination, messageBody) = request.split(" ", limit = 4)
-
-                when {
-                    messageType.startsWith("intrebare") -> {
-                        // tipul mesajului de tip intrebare este de forma:
-                        // intrebare <DESTINATIE_RASPUNS> <CONTINUT_INTREBARE>
-                        when {
-                            entityType == "teacher" -> {
-                                broadcastMessageToStudents(request)
-                            }
-                            entityType.startsWith("student") -> {
-                                sendMessageToTeacher(request)
-                            }
-                        }
-                    }
-
-                    messageType.startsWith("raspuns") -> {
-                        when {
-                            entityType.startsWith("student") -> {
-                                delay(1500)
-                                respondToTeacher(request)
-                            }
-                            entityType == "teacher" -> {
-                                delay(1500)
-                                respondToStudent(messageDestination, request)
-                            }
-                        }
-                    }
+                coroutineScope.launch {
+                    processRequest(request, entityType)
                 }
             } catch (e: Exception) {
                 println("Eroare la listenToRequests: $entityType")
@@ -224,17 +278,19 @@ class MessageManagerMicroservice {
         while (true) {
             // se asteapta conexiuni din partea clientilor subscriberi
             val clientConnection = messageManagerSocket.accept()
+            println("S-a conectat un nou microserviciu")
 
             // se porneste un thread separat pentru tratarea conexiunii cu clientul
             coroutineScope.launch {
                 val bufferReader = BufferedReader(InputStreamReader(clientConnection.inputStream))
                 val initMessage = bufferReader.readLine()
+                println("Init message: $initMessage")
 
                 //procesarea subscriberului prin mesajul initial
                 val entityType = processInitMessage(initMessage, clientConnection)
 
                 if (entityType != "")
-                    listenToRequests(clientConnection, entityType)
+                    listenToRequests(clientConnection, bufferReader, entityType)
             }
         }
     }

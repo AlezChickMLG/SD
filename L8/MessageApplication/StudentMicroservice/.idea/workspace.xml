@@ -5,6 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca8cdd22-da75-447d-bd99-7a16f8acffaa" name="Changes" comment="Lab8 corutine functionale">
+      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/.idea/kotlinc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/src/main/kotlin/libraryApp/AssistantMicroservice.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/src/test/kotlin/libraryApp/HelloTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SupervisorMicroservice/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SupervisorMicroservice/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SupervisorMicroservice/.idea/kotlinc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SupervisorMicroservice/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SupervisorMicroservice/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SupervisorMicroservice/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SupervisorMicroservice/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SupervisorMicroservice/src/main/kotlin/libraryApp/SupervisorMicroservice.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SupervisorMicroservice/src/test/kotlin/libraryApp/HelloTest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../GradesDatabaseMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../GradesDatabaseMicroservice/src/main/kotlin/libraryApp/GradesDatabaseMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/src/main/kotlin/libraryApp/GradesDatabaseMicroservice.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/workspace.xml" afterDir="false" />
@@ -12,7 +30,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/libraryApp/StudentMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/libraryApp/StudentMicroservice.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TeacherMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TeacherMicroservice/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TeacherMicroservice/src/main/kotlin/libraryApp/TeacherMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../TeacherMicroservice/src/main/kotlin/libraryApp/TeacherMicroservice.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +37,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="13" />
+    <option name="cachedIndexableFilesCount" value="14" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">

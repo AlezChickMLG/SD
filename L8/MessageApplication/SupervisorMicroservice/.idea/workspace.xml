@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab71bb33-b4bc-45d3-a5e3-6c03e96149d4" name="Changes" comment="Lab8 Baza de date initializare">
+    <list default="true" id="3ad5eac8-f5fe-4408-9521-30d2525221e8" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/.idea/encodings.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/.idea/kotlinc.xml" afterDir="false" />
@@ -14,19 +14,21 @@
       <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/pom.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/src/main/kotlin/libraryApp/AssistantMicroservice.kt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/src/test/kotlin/libraryApp/HelloTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SupervisorMicroservice/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SupervisorMicroservice/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SupervisorMicroservice/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SupervisorMicroservice/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SupervisorMicroservice/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SupervisorMicroservice/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SupervisorMicroservice/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SupervisorMicroservice/src/main/kotlin/libraryApp/SupervisorMicroservice.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SupervisorMicroservice/src/test/kotlin/libraryApp/HelloTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/libraryApp/GradesDatabaseMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/libraryApp/GradesDatabaseMicroservice.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/libraryApp/SupervisorMicroservice.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/kotlin/libraryApp/HelloTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GradesDatabaseMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GradesDatabaseMicroservice/src/main/kotlin/libraryApp/GradesDatabaseMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/src/main/kotlin/libraryApp/GradesDatabaseMicroservice.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MessageManagerMicroservice/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../StudentMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentMicroservice/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StudentMicroservice/src/main/kotlin/libraryApp/StudentMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentMicroservice/src/main/kotlin/libraryApp/StudentMicroservice.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TeacherMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TeacherMicroservice/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -60,43 +62,34 @@
     &quot;accountId&quot;: &quot;72589f3a-bfb8-48bd-9eac-9380b20786ce&quot;
   }
 }</component>
-  <component name="MavenRunner">
-    <option name="skipTests" value="true" />
-  </component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 1
+  &quot;associatedIndex&quot;: 2
 }</component>
-  <component name="ProjectId" id="3D4TRuW9uFhHlaNMQyWR7ckUIwO" />
+  <component name="ProjectId" id="3D7mDzw5azSkzL2lw8ZKgv7ckab" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.GradesDatabaseMicroservice [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.GradesDatabaseMicroservice [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.GradesDatabaseMicroservice [package].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.GradesDatabaseMicroservice [validate].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
-    ]
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "Maven.SupervisorMicroservice [clean].executor": "Run",
+    "Maven.SupervisorMicroservice [compile].executor": "Run",
+    "Maven.SupervisorMicroservice [package].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -106,25 +99,12 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ab71bb33-b4bc-45d3-a5e3-6c03e96149d4" name="Changes" comment="" />
-      <created>1777540340340</created>
+      <changelist id="3ad5eac8-f5fe-4408-9521-30d2525221e8" name="Changes" comment="" />
+      <created>1777641367526</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1777540340340</updated>
+      <updated>1777641367526</updated>
     </task>
-    <task id="LOCAL-00001" summary="Lab8 Baza de date initializare">
-      <option name="closed" value="true" />
-      <created>1777547105058</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1777547105058</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Lab8 Baza de date initializare" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lab8 Baza de date initializare" />
   </component>
 </project>

@@ -33,6 +33,7 @@ class StudentMicroservice {
 
     //id-ul studentului
     private lateinit var studentID: Number
+    private val assistantID: Int = -1
 
     //server socket pentru gui pe port: 2000 + ID-ul studentului
     private lateinit var guiSocket: ServerSocket
@@ -91,6 +92,10 @@ class StudentMicroservice {
         heartbeatSocket.getOutputStream().write("Init:student$studentID\n".toByteArray())
     }
 
+    private fun sendVerifyMessage() {
+        messageManagerSocket.getOutputStream().write("Verificare:student$studentID:$assistantID\n".toByteArray())
+    }
+
     private fun listenToHeartbeat() {
         val reader = BufferedReader(InputStreamReader(heartbeatSocket.inputStream))
 
@@ -147,8 +152,11 @@ class StudentMicroservice {
                      println("Intrebare de la GUI: $question")
 
                      val id = questionID.incrementAndGet()
+
                      messageManagerSocket.getOutputStream()
                          .write("intrebare$id student$studentID student$studentID $question\n".toByteArray())
+
+                     println("Am trimis catre message manager: intrebare$id student$studentID student$studentID $question")
 
                      val deferred = CompletableDeferred<String>()
 
@@ -175,6 +183,7 @@ class StudentMicroservice {
         try {
             messageManagerSocket = Socket(MESSAGE_MANAGER_HOST, MESSAGE_MANAGER_PORT)
             sendInitMessage()
+            sendVerifyMessage()
             println("M-am conectat la MessageManager!")
         } catch (e: Exception) {
             println("Nu ma pot conecta la MessageManager!")

@@ -4,16 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7da94b95-67e6-45b5-a2f3-d451a96f3554" name="Changes" comment="Lab8 full-duplex complet">
-      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/src/main/kotlin/libraryApp/AssistantMicroservice.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/src/test/kotlin/libraryApp/HelloTest.kt" afterDir="false" />
+    <list default="true" id="77e015cf-f2cd-4c3e-9d6e-7e915f2e5ed0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/libraryApp/AssistantMicroservice.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/kotlin/libraryApp/HelloTest.kt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../SupervisorMicroservice/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../SupervisorMicroservice/.idea/encodings.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../SupervisorMicroservice/.idea/kotlinc.xml" afterDir="false" />
@@ -25,8 +25,8 @@
       <change afterPath="$PROJECT_DIR$/../SupervisorMicroservice/src/test/kotlin/libraryApp/HelloTest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../GradesDatabaseMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../GradesDatabaseMicroservice/src/main/kotlin/libraryApp/GradesDatabaseMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/src/main/kotlin/libraryApp/GradesDatabaseMicroservice.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MessageManagerMicroservice/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../StudentMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentMicroservice/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../StudentMicroservice/src/main/kotlin/libraryApp/StudentMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentMicroservice/src/main/kotlin/libraryApp/StudentMicroservice.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TeacherMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TeacherMicroservice/.idea/workspace.xml" afterDir="false" />
@@ -37,23 +37,10 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="12" />
+    <option name="cachedIndexableFilesCount" value="11" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">
-    <excluded-from-favorite>
-      <branch-storage>
-        <map>
-          <entry type="LOCAL">
-            <value>
-              <list>
-                <branch-info repo="$PROJECT_DIR$/../../.." source="main" />
-              </list>
-            </value>
-          </entry>
-        </map>
-      </branch-storage>
-    </excluded-from-favorite>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -73,21 +60,19 @@
     <urls />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 8
+  &quot;associatedIndex&quot;: 3
 }</component>
-  <component name="ProjectId" id="3CqQVW8z1hnbobIhCJ8hPwVHwbY" />
+  <component name="ProjectId" id="3D7ywTnmDFiOgubw1vtNnV8pOz1" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;Kotlin.MessageManagerMicroserviceKt.executor&quot;: &quot;Debug&quot;,
     &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.MessageManagerMicroservice [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.MessageManagerMicroservice [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.MessageManagerMicroservice [package].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.MessageManagerMicroservice [validate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.AssistantMicroservice [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.AssistantMicroservice [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.AssistantMicroservice [package].executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -95,8 +80,7 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;debugger.stepping&quot;
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
   }
 }</component>
   <component name="SharedIndexes">
@@ -108,50 +92,12 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="7da94b95-67e6-45b5-a2f3-d451a96f3554" name="Changes" comment="" />
-      <created>1777110645888</created>
+      <changelist id="77e015cf-f2cd-4c3e-9d6e-7e915f2e5ed0" name="Changes" comment="" />
+      <created>1777647642465</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1777110645888</updated>
+      <updated>1777647642465</updated>
     </task>
-    <task id="LOCAL-00001" summary="Lab8 full-duplex complet">
-      <option name="closed" value="true" />
-      <created>1777445451117</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1777445451117</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Lab8 full-duplex complet" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lab8 full-duplex complet" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt</url>
-          <line>158</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt</url>
-          <line>237</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt</url>
-          <line>284</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
   </component>
 </project>
