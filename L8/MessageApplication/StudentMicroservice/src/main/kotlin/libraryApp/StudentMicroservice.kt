@@ -33,7 +33,7 @@ class StudentMicroservice {
 
     //id-ul studentului
     private lateinit var studentID: Number
-    private val assistantID: Int = -1
+    private var assistantID: Int = -1
 
     //server socket pentru gui pe port: 2000 + ID-ul studentului
     private lateinit var guiSocket: ServerSocket
@@ -69,6 +69,8 @@ class StudentMicroservice {
             print("Student ID:")
             readln().toInt()
         }
+
+        loadId()
     }
 
     companion object Constants {
@@ -78,6 +80,24 @@ class StudentMicroservice {
         val HEARTBEAT_HOST = System.getenv("HEARTBEAT_HOST") ?: "localhost"
         const val MESSAGE_MANAGER_PORT = 1500
         const val HEARTBEAT_PORT = 1900
+    }
+
+    private fun addId(id: Int) {
+        val file = File("id_database.txt")
+        file.appendText("student$studentID:$id\n")
+        println("Am adaugat in id_database: student$studentID:$id")
+    }
+
+    private fun loadId() {
+        val file = File("id_database.txt")
+        val ids = file.readLines()
+
+        for (line in ids) {
+            if (line.split(":").first() == "student$studentID") {
+                assistantID = line.split(":").last().toInt()
+                println("Am incarcat id-ul: $assistantID")
+            }
+        }
     }
 
     private fun sendInitMessage() {
@@ -226,39 +246,50 @@ class StudentMicroservice {
     }
 
     private suspend fun processRequest(request: String) {
-        val (messageType, messageSource, messageDestination, messageBody) = request.split(" ", limit = 4)
+        if (!request.contains(":")) {
+            val (messageType, messageSource, messageDestination, messageBody) = request.split(" ", limit = 4)
 
-        when {
-            // tipul mesajului cunoscut de acest microserviciu este de forma:
-            // intrebare <DESTINATIE_RASPUNS> <CONTINUT_INTREBARE>
-            messageType.startsWith("intrebare") -> {
-                println("Am primit o intrebare de la $messageDestination: \"${messageBody}\"")
-                var responseToQuestion = respondToQuestion(messageBody)
-                val id = messageType.substring("intrebare".length).toInt()
+            when {
+                // tipul mesajului cunoscut de acest microserviciu este de forma:
+                // intrebare <DESTINATIE_RASPUNS> <CONTINUT_INTREBARE>
+                messageType.startsWith("intrebare") -> {
+                    println("Am primit o intrebare de la $messageDestination: \"${messageBody}\"")
+                    var responseToQuestion = respondToQuestion(messageBody)
+                    val id = messageType.substring("intrebare".length).toInt()
 
-                if (responseToQuestion != null) {
-                    responseToQuestion = "raspuns$id student$studentID $messageDestination $responseToQuestion"
-                    println("Trimit raspunsul: \"${responseToQuestion}\"")
-                    withContext(Dispatchers.IO) {
-                        messageManagerSocket.getOutputStream().write((responseToQuestion + "\n").toByteArray())
+                    if (responseToQuestion != null) {
+                        responseToQuestion = "raspuns$id student$studentID $messageDestination $responseToQuestion"
+                        println("Trimit raspunsul: \"${responseToQuestion}\"")
+                        withContext(Dispatchers.IO) {
+                            messageManagerSocket.getOutputStream().write((responseToQuestion + "\n").toByteArray())
+                        }
+                    } else {
+                        responseToQuestion = "raspuns$id student$studentID $messageDestination Nu stiu"
+                        println("Trimit raspunsul: \"$responseToQuestion\"")
+                        withContext(Dispatchers.IO) {
+                            messageManagerSocket.getOutputStream().write((responseToQuestion + "\n").toByteArray())
+                        }
                     }
                 }
 
-                else {
-                    responseToQuestion = "raspuns$id student$studentID $messageDestination Nu stiu"
-                    println("Trimit raspunsul: \"$responseToQuestion\"")
-                    withContext(Dispatchers.IO) {
-                        messageManagerSocket.getOutputStream().write((responseToQuestion + "\n").toByteArray())
+                messageType.startsWith("raspuns") -> {
+                    try {
+                        val question_id = messageType.substring("raspuns".length).toInt()
+                        responseQueue[question_id]?.complete(messageBody)
+                    } catch (e: Exception) {
+                        println("Eroare la completarea deferrul-ui raspuns: $e")
                     }
                 }
             }
+        }
 
-            messageType.startsWith("raspuns") -> {
-                try {
-                    val question_id = messageType.substring("raspuns".length).toInt()
-                    responseQueue[question_id]?.complete(messageBody)
-                } catch (e: Exception) {
-                    println("Eroare la completarea deferrul-ui raspuns: $e")
+        else {
+            val (messageType, result) = request.split(":")
+
+            when {
+                messageType.startsWith("Inregistrare") -> {
+                    addId(result.toInt())
+                    assistantID = result.toInt()
                 }
             }
         }

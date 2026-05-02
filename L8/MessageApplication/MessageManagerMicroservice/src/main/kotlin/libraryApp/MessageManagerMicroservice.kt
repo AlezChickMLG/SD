@@ -209,17 +209,22 @@ class MessageManagerMicroservice {
 
                 when {
                     messageType.startsWith("Verificare") -> {
-                        if (result == "corect") {
-                            println("$studentName a fost verificat cu succes")
+                        when (result) {
+                            "corect" -> {
+                                println("$studentName a fost verificat cu succes")
+                            }
+                            "gresit" -> {
+                                println("$studentName a esuat verificarea")
+                            }
+                            else -> {
+                                println("Raspuns necunoscut: $result")
+                            }
                         }
+                    }
 
-                        else if (request == "gresit") {
-                            println("$studentName a esuat verificarea")
-                        }
-
-                        else {
-                            println("Raspuns necunoscut: $result")
-                        }
+                    messageType.startsWith("Inregistrare") -> {
+                        respondToStudent(studentName, "Inregistrare:$result")
+                        println("Am trimis lui $studentName id-ul $result")
                     }
                 }
             }

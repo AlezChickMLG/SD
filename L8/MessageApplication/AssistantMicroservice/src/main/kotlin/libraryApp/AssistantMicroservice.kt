@@ -173,6 +173,7 @@ class AssistantMicroservice {
                                     }
 
                                     sendRequestToIdDatabase("add:$studentName | $id")
+                                    sendMessageToMessageManager("Inregistrare:$studentName:$id")
                                 } else {
                                     val check = checkStudentID(studentName, studentID.toInt(), realStudentID)
                                     sendMessageToMessageManager("Verificare:$studentName:${if (check) "corect" else "gresit"}")

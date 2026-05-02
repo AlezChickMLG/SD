@@ -5,30 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ad5eac8-f5fe-4408-9521-30d2525221e8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/src/main/kotlin/libraryApp/AssistantMicroservice.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../AssistantMicroservice/src/test/kotlin/libraryApp/HelloTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/libraryApp/SupervisorMicroservice.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/kotlin/libraryApp/HelloTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../GradesDatabaseMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../GradesDatabaseMicroservice/src/main/kotlin/libraryApp/GradesDatabaseMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/src/main/kotlin/libraryApp/GradesDatabaseMicroservice.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AssistantMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../AssistantMicroservice/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AssistantMicroservice/src/main/kotlin/libraryApp/AssistantMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../AssistantMicroservice/src/main/kotlin/libraryApp/AssistantMicroservice.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MessageManagerMicroservice/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../StudentMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentMicroservice/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../StudentMicroservice/src/main/kotlin/libraryApp/StudentMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentMicroservice/src/main/kotlin/libraryApp/StudentMicroservice.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TeacherMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TeacherMicroservice/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
