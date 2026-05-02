@@ -4,21 +4,64 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.ServerSocket
 import java.net.Socket
+import kotlin.system.exitProcess
 
 class SupervisorMicroservice (
     private val repository: StudentIDRepository
 ) {
     private val idDatabaseServer: ServerSocket = ServerSocket(DATABASE_PORT)
     private lateinit var assistantSocket: Socket
+    private lateinit var heartbeatSocket: Socket
 
     private val coroutineScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
     companion object Constants {
         const val DATABASE_PORT = 2200
+        const val HEARTBEAT_PORT = 1900
+        const val HEARTBEAT_HOST = "localhost"
+    }
+
+    private fun connectToHeartbeat() {
+        heartbeatSocket = Socket(HEARTBEAT_HOST, HEARTBEAT_PORT)
+    }
+
+    private fun sendInitMessageToHeartbeat() {
+        heartbeatSocket.getOutputStream().write("Init:supervisor\n".toByteArray())
+    }
+
+    private fun listenToHeartbeat() {
+        val reader = BufferedReader(InputStreamReader(heartbeatSocket.inputStream))
+
+        coroutineScope.launch {
+            while (true) {
+                try {
+                    val ping = reader.readLine() ?: withContext(Dispatchers.IO) {
+                        heartbeatSocket.close()
+                        reader.close()
+                        exitProcess(1)
+                    }
+
+                    val (messageType, microservice) = ping.split(":")
+                    if (messageType == "Ping") {
+                        heartbeatSocket.getOutputStream().write("Pong:supervisor\n".toByteArray())
+                        //println("Am raspuns heartbeatului")
+                    }
+
+                } catch (e: java.lang.Exception) {
+                    println("Eroare la procesarea pingului")
+                    withContext(Dispatchers.IO) {
+                        heartbeatSocket.close()
+                        reader.close()
+                        exitProcess(1)
+                    }
+                }
+            }
+        }
     }
 
     private fun listenToRequests() {
@@ -97,6 +140,14 @@ class SupervisorMicroservice (
     }
 
     fun run() {
+        try {
+            connectToHeartbeat()
+            sendInitMessageToHeartbeat()
+            listenToHeartbeat()
+        } catch (e: Exception) {
+            println("Nu pot folosi heartbeat")
+        }
+
         //punem in loop, daca teacher se deconecteaza, apoi sa poata sa se conecteze inapoi fara restructurari agresive
         while (true) {
             println("Astept sa se conecteze assistant...")

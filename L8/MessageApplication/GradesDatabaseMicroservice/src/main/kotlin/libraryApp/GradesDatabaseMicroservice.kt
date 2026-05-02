@@ -4,21 +4,64 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.ServerSocket
 import java.net.Socket
+import kotlin.system.exitProcess
 
 class GradesDatabaseMicroservice (
     private val repository: Repository
 ) {
     private val gradesDatabaseServer: ServerSocket = ServerSocket(DATABASE_PORT)
     private lateinit var teacherSocket: Socket
+    private lateinit var heartbeatSocket: Socket
 
     private val coroutineScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
     companion object Constants {
         const val DATABASE_PORT = 2100
+        const val HEARTBEAT_PORT = 1900
+        const val HEARTBEAT_HOST = "localhost"
+    }
+
+    private fun connectToHeartbeat() {
+        heartbeatSocket = Socket(HEARTBEAT_HOST, HEARTBEAT_PORT)
+    }
+
+    private fun sendInitMessageToHeartbeat() {
+        heartbeatSocket.getOutputStream().write("Init:gradesDatabase\n".toByteArray())
+    }
+
+    private fun listenToHeartbeat() {
+        val reader = BufferedReader(InputStreamReader(heartbeatSocket.inputStream))
+
+        coroutineScope.launch {
+            while (true) {
+                try {
+                    val ping = reader.readLine() ?: withContext(Dispatchers.IO) {
+                        heartbeatSocket.close()
+                        reader.close()
+                        exitProcess(1)
+                    }
+
+                    val (messageType, microservice) = ping.split(":")
+                    if (messageType == "Ping") {
+                        heartbeatSocket.getOutputStream().write("Pong:gradesDatabase\n".toByteArray())
+                        //println("Am raspuns heartbeatului")
+                    }
+
+                } catch (e: java.lang.Exception) {
+                    println("Eroare la procesarea pingului")
+                    withContext(Dispatchers.IO) {
+                        heartbeatSocket.close()
+                        reader.close()
+                        exitProcess(1)
+                    }
+                }
+            }
+        }
     }
 
     private fun listenToRequests() {
@@ -100,9 +143,17 @@ class GradesDatabaseMicroservice (
         }
     }
 
-    fun run() {
+    suspend fun run() {
+        try {
+            connectToHeartbeat()
+            sendInitMessageToHeartbeat()
+            listenToHeartbeat()
+        } catch (e: Exception) {
+            println("Nu pot folosi heartbeat")
+        }
+
         //punem in loop, daca teacher se deconecteaza, apoi sa poata sa se conecteze inapoi fara restructurari agresive
-        coroutineScope.launch {
+        val runCoroutine = coroutineScope.launch {
             while (true) {
                 println("Astept sa se conecteze teacher...")
                 teacherSocket = gradesDatabaseServer.accept()
@@ -111,10 +162,12 @@ class GradesDatabaseMicroservice (
                 listenToRequests()
             }
         }
+
+        runCoroutine.join()
     }
 }
 
-fun main(args: Array<String>) {
+suspend fun main(args: Array<String>) {
     val repo = Repository()
     val gradesDatabaseMicroservice = GradesDatabaseMicroservice(repo)
     gradesDatabaseMicroservice.run()

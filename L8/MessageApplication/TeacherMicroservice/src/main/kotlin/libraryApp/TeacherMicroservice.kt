@@ -110,7 +110,7 @@ class TeacherMicroservice {
                     val (messageType, microservice) = ping.split(":")
                     if (messageType == "Ping") {
                         heartbeatSocket.getOutputStream().write("Pong:teacher\n".toByteArray())
-                        println("Am raspuns heartbeatului")
+                        //println("Am raspuns heartbeatului")
                     }
 
                 } catch (e: java.lang.Exception) {

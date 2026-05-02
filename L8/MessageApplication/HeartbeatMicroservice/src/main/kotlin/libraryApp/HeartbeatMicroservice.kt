@@ -56,7 +56,7 @@ class HeartbeatMicroservice {
                 }
             }
 
-            val validPrefixes = listOf("student", "teacher", "messageManager")
+            val validPrefixes = listOf("student", "teacher", "messageManager", "asistent", "gradesDatabase", "supervisor")
             if (validPrefixes.none { microservice.startsWith(it) }) return false
 
             socketMapMutex.withLock {
@@ -74,6 +74,18 @@ class HeartbeatMicroservice {
                     microservice.startsWith("messageManager") -> {
                         restartCommands[microservice] = listOf("java", "-jar", "target/MessageManagerMicroservice-1.0-SNAPSHOT-jar-with-dependencies.jar")
                         directories[microservice] = PARENT_PATH + "MessageManagerMicroservice"
+                    }
+                    microservice.startsWith("asistent") -> {
+                        restartCommands[microservice] = listOf("java", "-jar", "target/AssistantMicroservice-1.0-SNAPSHOT-jar-with-dependencies.jar")
+                        directories[microservice] = PARENT_PATH + "AssistantMicroservice"
+                    }
+                    microservice.startsWith("gradesDatabase") -> {
+                        restartCommands[microservice] = listOf("java", "-jar", "target/GradesDatabaseMicroservice-1.0-SNAPSHOT-jar-with-dependencies.jar")
+                        directories[microservice] = PARENT_PATH + "GradesDatabaseMicroservice"
+                    }
+                    microservice.startsWith("supervisor") -> {
+                        restartCommands[microservice] = listOf("java", "-jar", "target/SupervisorMicroservice-1.0-SNAPSHOT-jar-with-dependencies.jar")
+                        directories[microservice] = PARENT_PATH + "SupervisorMicroservice"
                     }
                 }
             }

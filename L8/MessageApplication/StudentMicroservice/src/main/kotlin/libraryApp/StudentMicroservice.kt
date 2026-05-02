@@ -112,10 +112,6 @@ class StudentMicroservice {
         heartbeatSocket.getOutputStream().write("Init:student$studentID\n".toByteArray())
     }
 
-    private fun sendVerifyMessage() {
-        messageManagerSocket.getOutputStream().write("Verificare:student$studentID:$assistantID\n".toByteArray())
-    }
-
     private fun listenToHeartbeat() {
         val reader = BufferedReader(InputStreamReader(heartbeatSocket.inputStream))
 
@@ -131,7 +127,7 @@ class StudentMicroservice {
                     val (messageType, microservice) = ping.split(":")
                     if (messageType == "Ping") {
                         heartbeatSocket.getOutputStream().write("Pong:student$studentID\n".toByteArray())
-                        println("Am raspuns heartbeatului")
+                        //println("Am raspuns heartbeatului")
                     }
 
                 } catch (e: java.lang.Exception) {
@@ -146,7 +142,12 @@ class StudentMicroservice {
         }
     }
 
-     private fun listenToGUI() {
+    private fun sendVerifyMessage() {
+        messageManagerSocket.getOutputStream().write("Verificare:student$studentID:$assistantID\n".toByteArray())
+    }
+
+
+    private fun listenToGUI() {
          val guiPort = 2000 + studentID.toInt()
 
          guiSocket = ServerSocket(guiPort)
@@ -299,10 +300,14 @@ class StudentMicroservice {
         // microserviciul se inscrie in lista de "subscribers" de la MessageManager prin conectarea la acesta
         subscribeToMessageManager()
 
-        //gestionarea heartbeatului
-//        connectToHeartbeat()
-//        sendInitMessageToHeartbeat()
-//        listenToHeartbeat()
+        //heartbeat
+        try {
+            connectToHeartbeat()
+            sendInitMessageToHeartbeat()
+            listenToHeartbeat()
+        } catch (e: kotlin.Exception) {
+            println("Eroare la conectarea / trimiterea de mesaje catre heartbeat")
+        }
 
         coroutineScope.launch {
             listenToGUI()

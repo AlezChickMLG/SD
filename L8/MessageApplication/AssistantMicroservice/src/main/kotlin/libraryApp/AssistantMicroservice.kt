@@ -8,6 +8,7 @@ import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -35,6 +36,8 @@ class AssistantMicroservice {
         const val MESSAGE_MANAGER_HOST = "localhost"
         const val MESSAGE_MANAGER_PORT = 1500
         const val ID_DATABASE_PORT = 2200
+        const val HEARTBEAT_PORT = 1900
+        const val HEARTBEAT_HOST = "localhost"
     }
 
     private fun subscribeToMessageManager() {
@@ -60,6 +63,44 @@ class AssistantMicroservice {
 
     private fun sendInitMessage() {
         messageManagerSocket.getOutputStream().write("Init:asistent\n".toByteArray())
+    }
+
+    private fun connectToHeartbeat() {
+        heartbeatSocket = Socket(HEARTBEAT_HOST, HEARTBEAT_PORT)
+    }
+
+    private fun sendInitMessageToHeartbeat() {
+        heartbeatSocket.getOutputStream().write("Init:asistent\n".toByteArray())
+    }
+
+    private fun listenToHeartbeat() {
+        val reader = BufferedReader(InputStreamReader(heartbeatSocket.inputStream))
+
+        coroutineScope.launch {
+            while (true) {
+                try {
+                    val ping = reader.readLine() ?: withContext(Dispatchers.IO) {
+                        heartbeatSocket.close()
+                        reader.close()
+                        exitProcess(1)
+                    }
+
+                    val (messageType, microservice) = ping.split(":")
+                    if (messageType == "Ping") {
+                        heartbeatSocket.getOutputStream().write("Pong:asistent\n".toByteArray())
+                        //println("Am raspuns heartbeatului")
+                    }
+
+                } catch (e: java.lang.Exception) {
+                    println("Eroare la procesarea pingului")
+                    withContext(Dispatchers.IO) {
+                        heartbeatSocket.close()
+                        reader.close()
+                        exitProcess(1)
+                    }
+                }
+            }
+        }
     }
 
     private fun listenToDatabase() {
@@ -237,6 +278,14 @@ class AssistantMicroservice {
     suspend fun run() {
         connectToIdDatabase()
         subscribeToMessageManager()
+
+        try {
+            connectToHeartbeat()
+            sendInitMessageToHeartbeat()
+            listenToHeartbeat()
+        } catch (e: Exception) {
+            println("Nu pot folosi heartbeat")
+        }
 
         val listenDatabaseJob = coroutineScope.launch {
             listenToDatabase()

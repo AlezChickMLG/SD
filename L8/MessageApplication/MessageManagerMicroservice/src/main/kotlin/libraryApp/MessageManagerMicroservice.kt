@@ -63,7 +63,7 @@ class MessageManagerMicroservice {
                     val (messageType, microservice) = ping.split(":")
                     if (messageType == "Ping") {
                         heartbeatSocket.getOutputStream().write("Pong:messageManager\n".toByteArray())
-                        println("Am raspuns heartbeatului")
+                        //println("Am raspuns heartbeatului")
                     }
 
                 } catch (e: java.lang.Exception) {
@@ -276,9 +276,14 @@ class MessageManagerMicroservice {
 
     public fun run() {
         //heartbeat
-//        connectToHeartbeat()
-//        sendInitMessageToHeartbeat()
-//        listenToHeartbeat()
+
+        try {
+            connectToHeartbeat()
+            sendInitMessageToHeartbeat()
+            listenToHeartbeat()
+        } catch (e: Exception) {
+            println("Nu pot folosi heartbeat")
+        }
 
         // se porneste un socket server TCP pe portul 1500 care asculta pentru conexiuni
         messageManagerSocket = ServerSocket(MESSAGE_MANAGER_PORT)
