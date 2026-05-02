@@ -6,13 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="3ad5eac8-f5fe-4408-9521-30d2525221e8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../AssistantMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../AssistantMicroservice/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AssistantMicroservice/src/main/kotlin/libraryApp/AssistantMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../AssistantMicroservice/src/main/kotlin/libraryApp/AssistantMicroservice.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GradesDatabaseMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../GradesDatabaseMicroservice/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MessageManagerMicroservice/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../MessageManagerMicroservice/src/main/kotlin/libraryApp/MessageManagerMicroservice.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../StudentMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentMicroservice/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StudentMicroservice/questions_database.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentMicroservice/questions_database0.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../StudentMicroservice/src/main/kotlin/libraryApp/StudentMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentMicroservice/src/main/kotlin/libraryApp/StudentMicroservice.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TeacherMicroservice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TeacherMicroservice/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TeacherMicroservice/src/main/kotlin/libraryApp/TeacherMicroservice.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../TeacherMicroservice/src/main/kotlin/libraryApp/TeacherMicroservice.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

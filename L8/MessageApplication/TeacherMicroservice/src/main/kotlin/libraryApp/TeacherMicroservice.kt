@@ -227,10 +227,6 @@ class TeacherMicroservice {
                     databaseQueue.add(addRequest)
                 }
             }
-
-            databaseQueueMutex.withLock {
-                databaseQueue.add("listAll:None")
-            }
         }
 
         responseQueueMutex.withLock {
@@ -335,9 +331,9 @@ class TeacherMicroservice {
 
                     val id = questionID.incrementAndGet()
 
-                    println("Trimit catre MessageManager: ${"intrebare teacher $receivedQuestion\n"}")
+                    println("Trimit catre MessageManager: ${"intrebare teacher teacher $receivedQuestion\n"}")
                     messageManagerSocket.getOutputStream()
-                        .write(("intrebare$id teacher $receivedQuestion\n").toByteArray())
+                        .write(("intrebare$id teacher teacher $receivedQuestion\n").toByteArray())
 
                     responseQueue[id] = mutableListOf()
 

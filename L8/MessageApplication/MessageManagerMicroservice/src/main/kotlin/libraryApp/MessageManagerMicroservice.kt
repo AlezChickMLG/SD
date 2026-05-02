@@ -215,6 +215,10 @@ class MessageManagerMicroservice {
                             }
                             "gresit" -> {
                                 println("$studentName a esuat verificarea")
+                                println("Inchid conexiunea cu $studentName")
+                                subscriberMutex.withLock {
+                                    subscribers[studentName]?.close()
+                                }
                             }
                             else -> {
                                 println("Raspuns necunoscut: $result")
@@ -265,6 +269,7 @@ class MessageManagerMicroservice {
                 }
             } catch (e: Exception) {
                 println("Eroare la listenToRequests: $entityType")
+                break
             }
         }
     }

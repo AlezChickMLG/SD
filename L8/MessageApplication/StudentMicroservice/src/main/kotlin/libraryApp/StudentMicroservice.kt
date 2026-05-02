@@ -46,7 +46,15 @@ class StudentMicroservice {
     private val responseQueue = ConcurrentHashMap<Int, CompletableDeferred<String>>()
 
     init {
-        val databaseLines: List<String> = File("questions_database.txt").readLines()
+        studentID = try {
+            System.getenv("STUDENT_ID").toInt()
+        } catch (e: kotlin.Exception) {
+            println("Eroare la gasirea variabilei de mediu STUDENT_ID")
+            print("Student ID:")
+            readln().toInt()
+        }
+
+        val databaseLines: List<String> = File("questions_database$studentID.txt").readLines()
         questionDatabase = mutableListOf()
 
         /*
@@ -60,14 +68,6 @@ class StudentMicroservice {
          */
         for (i in 0..(databaseLines.size - 1) step 2) {
             questionDatabase.add(Pair(databaseLines[i], databaseLines[i + 1]))
-        }
-
-        studentID = try {
-            System.getenv("STUDENT_ID").toInt()
-        } catch (e: kotlin.Exception) {
-            println("Eroare la gasirea variabilei de mediu STUDENT_ID")
-            print("Student ID:")
-            readln().toInt()
         }
 
         loadId()
